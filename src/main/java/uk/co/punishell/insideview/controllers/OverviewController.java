@@ -11,6 +11,6 @@ public class OverviewController {
     @RequestMapping("/")
     public String getOverviewWebsite(){
 
-        return "query";
+        return "index";
     }
 }
