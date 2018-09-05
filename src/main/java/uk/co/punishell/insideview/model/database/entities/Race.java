@@ -16,8 +16,8 @@ public class Race implements Serializable {
     private Date date;
     private String country;
     private String city;
-    private String TrackLength;
-    private String TrackType;
+    private String trackLength;
+    private String trackType;
     private LocalTime time;
 
     @OneToMany (mappedBy = "race")
@@ -30,8 +30,8 @@ public class Race implements Serializable {
         this.date = date;
         this.country = country;
         this.city = city;
-        TrackLength = trackLength;
-        TrackType = trackType;
+        this.trackLength = trackLength;
+        this.trackType = trackType;
         this.time = time;
     }
 
@@ -39,8 +39,8 @@ public class Race implements Serializable {
         this.date = date;
         this.country = country;
         this.city = city;
-        TrackLength = trackLength;
-        TrackType = trackType;
+        this.trackLength = trackLength;
+        this.trackType = trackType;
         this.time = time;
         this.runners = runners;
     }
@@ -86,19 +86,19 @@ public class Race implements Serializable {
     }
 
     public String getTrackLength() {
-        return TrackLength;
+        return trackLength;
     }
 
     public void setTrackLength(String trackLength) {
-        TrackLength = trackLength;
+        this.trackLength = trackLength;
     }
 
     public String getTrackType() {
-        return TrackType;
+        return trackType;
     }
 
     public void setTrackType(String trackType) {
-        TrackType = trackType;
+        this.trackType = trackType;
     }
 
     public LocalTime getTime() {

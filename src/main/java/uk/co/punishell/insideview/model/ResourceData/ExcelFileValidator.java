@@ -40,17 +40,20 @@ public class ExcelFileValidator implements FileValidator{
 
         Sheet sheet = workbook.getSheetAt(dataFormat.getDefaultSheetNumber());
 
-        // Get first row as it contains colums headers
+        // Get first
         Row headerRow = sheet.getRow(0);
 
+        // Iterate through cells in first row
+        int cellIteration = 0;
         for (String header : dataFormat.getDefaultDataColumnsHeaders()) {
 
-            int cellIteration = 0;
             if (!headerRow.getCell(cellIteration).getStringCellValue().contains(header)) {
                 return false;
             } else {
                 result = true;
             }
+
+            cellIteration++;
         }
         return result;
     }
