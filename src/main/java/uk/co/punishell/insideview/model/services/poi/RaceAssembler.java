@@ -1,17 +1,12 @@
 package uk.co.punishell.insideview.model.services.poi;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.ResourceData.DataFormat;
 import uk.co.punishell.insideview.model.database.entities.Race;
 
 import java.io.File;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,31 +38,15 @@ public class RaceAssembler {
         return new Race(date, country, city, tackLength, trackType, time);
     }
 
-    private Workbook getWorkbook(File file) {
-
-        Workbook workbook;
-
-        try {
-            workbook = WorkbookFactory.create(file);
-        } catch (IOException | InvalidFormatException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        return workbook;
-    }
-
-    private Sheet getSheet(Workbook workbook) {
-
-        return workbook.getSheetAt(dataFormat.getDefaultSheetNumber());
-    }
-
     private Date getDate(File file) {
 
+        // Expected name of the file is YYYMMdd.xlsx what justifies this date format
+        // No need for support of other data formats as potential changes relay on a external vendor
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
         Date date = null;
         try {
+            // get first 8 characters of the file name and parse as a date
             date = dateFormat.parse(file.getName().substring(0, 8));
         } catch (ParseException e) {
             e.printStackTrace();
