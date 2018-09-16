@@ -5,12 +5,13 @@ import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 
 @Service
-public class HorseAssembler {
+public class XLSXHorseAssembler {
 
-    HorseDataReader horseDataReader;
+    XLSXHorseDataReader xlsxHorseDataReader;
 
     public Horse getHorse(Row row) {
 
-        return new Horse(horseDataReader.getHorseName(row));
+        return new Horse(xlsxHorseDataReader.getHorseName(row));
     }
+
 }

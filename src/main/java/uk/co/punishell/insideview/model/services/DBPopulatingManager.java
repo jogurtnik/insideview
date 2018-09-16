@@ -13,11 +13,13 @@ import java.io.IOException;
 @Component
 public class DBPopulatingManager {
 
+    DBPopulator dbPopulator;
     private FileValidator validator;
 
     @Autowired
-    public DBPopulatingManager(FileValidator validator) {
+    public DBPopulatingManager(DBPopulator dbPopulator, FileValidator validator) {
 
+        this.dbPopulator = dbPopulator;
         this.validator = validator;
     }
 
@@ -27,18 +29,16 @@ public class DBPopulatingManager {
      */
     private boolean populateDB(File file) throws IOException, InvalidFormatException {
 
-        boolean result;
-
         if (validator.isValidFile(file)) {
-            result = true;
+
+            dbPopulator.populate(file);
+
+            return true;
+
         } else {
             return false;
         }
-
-        Workbook wb = WorkbookFactory.create(file);
-
-
-        return result;
     }
+
 
 }

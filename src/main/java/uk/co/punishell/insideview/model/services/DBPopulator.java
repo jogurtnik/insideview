@@ -7,5 +7,5 @@ import java.io.IOException;
 
 public interface DBPopulator {
 
-    void populate(File file);
+    void populate(File file) throws IOException, InvalidFormatException;
 }

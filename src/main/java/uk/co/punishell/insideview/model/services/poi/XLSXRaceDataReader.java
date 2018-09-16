@@ -10,7 +10,7 @@ import java.time.LocalTime;
  */
 
 @Service
-public class RaceDataReader {
+public class XLSXRaceDataReader {
 
     public String getCountry(Row row) {
 

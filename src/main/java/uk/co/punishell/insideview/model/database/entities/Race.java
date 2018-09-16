@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -21,7 +22,7 @@ public class Race implements Serializable {
     private LocalTime time;
 
     @OneToMany (mappedBy = "race")
-    private Set<Runner> runners;
+    private Set<Runner> runners = new HashSet<>();
 
     public Race() {
     }

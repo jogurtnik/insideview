@@ -9,7 +9,7 @@ import uk.co.punishell.insideview.model.database.entities.Horse;
  */
 
 @Service
-public class RunnerDataReader {
+public class XLSXRunnerDataReader {
 
     public Horse getHorse(Row row) {
 
