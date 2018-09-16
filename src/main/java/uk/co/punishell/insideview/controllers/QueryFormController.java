@@ -4,13 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class OverviewController {
+public class QueryFormController {
 
-    public OverviewController(){}
+    public QueryFormController(){}
 
     @RequestMapping("/")
-    public String getOverviewWebsite(){
+    public String getQueryFormWebsite(){
 
-        return "index";
+        return "query_form";
     }
+
 }

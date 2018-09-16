@@ -13,14 +13,12 @@ import uk.co.punishell.insideview.model.services.DBPopulator;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
 
 @Service
-public class XLSXDBPopulator implements DBPopulator {
+public class DataAssemlber {
 
 
     XLSXRaceAssembler xlsxRaceAssembler;
@@ -29,25 +27,24 @@ public class XLSXDBPopulator implements DBPopulator {
 
 
     @Autowired
-    public XLSXDBPopulator(XLSXRaceAssembler xlsxRaceAssembler, XLSXRunnerAssembler xlsxRunnerAssembler, DataFormat dataFormat) {
+    public DataAssemlber(XLSXRaceAssembler xlsxRaceAssembler, XLSXRunnerAssembler xlsxRunnerAssembler, DataFormat dataFormat) {
 
         this.xlsxRunnerAssembler = xlsxRunnerAssembler;
         this.xlsxRaceAssembler = xlsxRaceAssembler;
         this.dataFormat = dataFormat;
     }
 
-    @Override
-    public void populate(File file) throws IOException, InvalidFormatException {
+    public Set<Race> getRaces(File file) throws IOException, InvalidFormatException {
 
         Set<Race> races = new HashSet<>();
         final Race[] newRace = {new Race()};
 
         // Initialize objects for row interation
         final Integer[] firstRowExcluder = {new Integer(0)};
-        String city = "city";
-        String trackLength = "trackLength";
-        String trackType = "trackType";
-        LocalTime time = LocalTime.parse("00:00");
+        final String[] city = {"city"};
+        final String[] trackLength = {"trackLength"};
+        final String[] trackType = {"trackType"};
+        final LocalTime[] time = {LocalTime.parse("00:00")};
 
         WorkbookFactory.create(file)
                 .getSheetAt(dataFormat.getDefaultSheetNumber())
@@ -65,7 +62,13 @@ public class XLSXDBPopulator implements DBPopulator {
 
                     Runner runner = xlsxRunnerAssembler.getRunner(cells);
 
-                    if (race.getCity() != city && race.getTrackLength() != trackLength && race.getTrackType() != trackType && race.getTime() != time) {
+                    if (race.getCity() != city[0] && race.getTrackLength() != trackLength[0] && race.getTrackType() != trackType[0] && race.getTime() != time[0]) {
+
+                        //update unique data of current race
+                        city[0] = race.getCity();
+                        trackLength[0] = race.getTrackLength();
+                        trackType[0] = race.getTrackType();
+                        time[0] = race.getTime();
 
                         newRace[0] = race;
                         runner.setRace(race);
@@ -83,7 +86,7 @@ public class XLSXDBPopulator implements DBPopulator {
             }
         });
 
-
+        return races;
     }
 
 

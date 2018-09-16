@@ -1,11 +1,10 @@
 package uk.co.punishell.insideview.model.services;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import uk.co.punishell.insideview.model.database.entities.Race;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.Set;
 
 public interface DBPopulator {
 
-    void populate(File file) throws IOException, InvalidFormatException;
+    void populate(Set<Race> races);
 }
