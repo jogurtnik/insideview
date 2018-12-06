@@ -7,15 +7,15 @@ import uk.co.punishell.insideview.model.services.FileUploader;
 
 
 @Controller
-public class FileUploadController {
+public class DatabaseManagementController {
 
     FileUploader fileUploader;
 
-    public FileUploadController(FileUploader fileUploader) {
+    public DatabaseManagementController(FileUploader fileUploader) {
         this.fileUploader = fileUploader;
     }
 
-    @GetMapping("/database_management")
+    @GetMapping(value={"/database_management", "/database_management.html"})
     public String getDatabaseManagementWebsite(Model model) {
 
         model.addAttribute("fileUploader", fileUploader);

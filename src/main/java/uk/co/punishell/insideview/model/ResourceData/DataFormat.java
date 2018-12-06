@@ -2,9 +2,9 @@ package uk.co.punishell.insideview.model.ResourceData;
 
 public interface DataFormat {
 
-    void setCustomDataColumsHeaders(String[] dataFormat);
+    void setCustomDataColumnsHeaders(String[] dataFormat);
 
-    String [] getCustomDataColumsHeaders();
+    String [] getCustomDataColumnsHeaders();
 
     String[] getDefaultDataColumnsHeaders();
 

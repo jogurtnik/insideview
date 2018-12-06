@@ -1,12 +1,10 @@
 package uk.co.punishell.insideview.model.services;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.ResourceData.FileValidator;
-import uk.co.punishell.insideview.model.services.poi.DataAssemlber;
+import uk.co.punishell.insideview.model.services.poi.DataAssembler;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,11 +13,11 @@ import java.io.IOException;
 public class DBPopulatingManager {
 
     DBPopulator dbPopulator;
-    DataAssemlber dataAssemlber;
+    DataAssembler dataAssemlber;
     private FileValidator validator;
 
     @Autowired
-    public DBPopulatingManager(DBPopulator dbPopulator, DataAssemlber dataAssemlber, FileValidator validator) {
+    public DBPopulatingManager(DBPopulator dbPopulator, DataAssembler dataAssemlber, FileValidator validator) {
 
         this.dbPopulator = dbPopulator;
         this.dataAssemlber = dataAssemlber;

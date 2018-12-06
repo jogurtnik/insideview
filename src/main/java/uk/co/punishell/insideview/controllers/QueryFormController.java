@@ -8,7 +8,7 @@ public class QueryFormController {
 
     public QueryFormController(){}
 
-    @RequestMapping("/")
+    @RequestMapping(value={"/", "/query_form", "/query_form.html"})
     public String getQueryFormWebsite(){
 
         return "query_form";
