@@ -2,16 +2,14 @@ package uk.co.punishell.insideview.model.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import uk.co.punishell.insideview.model.services.messages.FileUploadMessage;
 
 import java.io.File;
 
 @Service
 public class FileUploader {
 
-    DBPopulatingManager dbPopulatingManager;
+    private DBPopulatingManager dbPopulatingManager;
     private File file;
 
     public FileUploader(DBPopulatingManager dbPopulatingManager) {
@@ -27,7 +25,7 @@ public class FileUploader {
     }
 
     @PostMapping("/uploadFile")
-    public String handleFileUpload(@ModelAttribute FileUploadMessage fileUploadMessage, Model model) {
+    public String handleFileUpload( Model model) {
 
         /*try {
             dbPopulatingManager.populateDB(file);
