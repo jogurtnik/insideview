@@ -2,7 +2,7 @@ package uk.co.punishell.insideview.model.services;
 
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.io.File;
 
@@ -24,8 +24,8 @@ public class FileUploader {
         this.file = file;
     }
 
-    @PostMapping("/uploadFile")
-    public String handleFileUpload( Model model) {
+    @RequestMapping(value = "/uploadFile", params = {"save"})
+    public String uploadFile( Model model) {
 
         /*try {
             dbPopulatingManager.populateDB(file);
@@ -38,6 +38,12 @@ public class FileUploader {
         model.addAttribute("uploadMessage", "Your upload was successful!");
 
         return "redirect:/upload_result";
+    }
+
+    @RequestMapping("uploadResult")
+    public String uploadResult () {
+
+        return "upload_result";
     }
 
 
