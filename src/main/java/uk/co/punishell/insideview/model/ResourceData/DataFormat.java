@@ -1,8 +1,12 @@
 package uk.co.punishell.insideview.model.ResourceData;
 
-public abstract class DataFormat {
+public interface DataFormat {
 
-    protected DataFormat() {
-    }
+    void setCustomDataColumnsHeaders(String[] dataFormat);
 
+    String [] getCustomDataColumnsHeaders();
+
+    String[] getDefaultDataColumnsHeaders();
+
+    int getDefaultSheetNumber();
 }
