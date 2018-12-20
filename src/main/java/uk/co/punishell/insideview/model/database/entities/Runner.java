@@ -44,8 +44,8 @@ public class Runner implements Serializable {
 
     private int cpr;
     private int nptips;
-    private int naps;
     private int stars;
+    private int naps;
 
     public Runner() {
     }
@@ -54,6 +54,41 @@ public class Runner implements Serializable {
         this.race = race;
         this.horse = horse;
         this.status = status;
+    }
+
+    public Runner(Horse horse, boolean status, double price9, double price10, double price11,
+                  double mov9to11, double price60, double mov60, double price30, double mov30,
+                  double price15, double mov15, double price5, double mov5, double price3, double mov3,
+                  double price2, double mov2, double price1, double mov1, double mean, double mov3to1,
+                  boolean winner, boolean placed, int cpr, int nptips, int stars, int naps) {
+        this.horse = horse;
+        this.status = status;
+        this.price9 = price9;
+        this.price10 = price10;
+        this.price11 = price11;
+        this.mov9to11 = mov9to11;
+        this.price60 = price60;
+        this.mov60 = mov60;
+        this.price30 = price30;
+        this.mov30 = mov30;
+        this.price15 = price15;
+        this.mov15 = mov15;
+        this.price5 = price5;
+        this.mov5 = mov5;
+        this.price3 = price3;
+        this.mov3 = mov3;
+        this.price2 = price2;
+        this.mov2 = mov2;
+        this.price1 = price1;
+        this.mov1 = mov1;
+        this.mean = mean;
+        this.mov3to1 = mov3to1;
+        this.winner = winner;
+        this.placed = placed;
+        this.cpr = cpr;
+        this.nptips = nptips;
+        this.stars = stars;
+        this.naps = naps;
     }
 
     public Race getRace() { return race; }

@@ -4,6 +4,6 @@ import java.io.File;
 
 public interface FileValidator {
 
-    boolean isValidFile(File file, DataFormat dataFormat);
+    boolean isValidFile(File file);
 
 }
