@@ -33,20 +33,6 @@ public class DatabaseManagementController {
         return "database_management";
     }
 
-/*    @PostMapping("/uploadFile")
-    public String uploadFile(@RequestParam("file") MultipartFile file) {
-
-        try {
-            dbPopulatingManager.populateDB(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
-        }
-
-        return "redirect:/database_management";
-    }*/
-
     @PostMapping("/uploadFile")
     public String uploadFileHandler(@RequestParam("file") MultipartFile file) {
 
@@ -76,8 +62,7 @@ public class DatabaseManagementController {
                 return "redirect:/database_management";
 
             } catch (Exception e) {
-                logger.info("CONTROLLER WYJEBAL EXCEPTION");
-                logger.info(e.getMessage());
+                e.printStackTrace();
                 return "redirect:/";
             }
         } else {
