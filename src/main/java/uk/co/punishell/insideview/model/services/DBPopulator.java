@@ -2,9 +2,9 @@ package uk.co.punishell.insideview.model.services;
 
 import uk.co.punishell.insideview.model.database.entities.Race;
 
-import java.util.Set;
+import java.util.List;
 
 public interface DBPopulator {
 
-    void populate(Set<Race> races);
+    void populate(List<Race> races);
 }

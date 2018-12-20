@@ -24,7 +24,7 @@ public class FileUploader {
         this.file = file;
     }
 
-    @RequestMapping(value = "/uploadFile", params = {"save"})
+    @RequestMapping(value = "/uploadFile")
     public String uploadFile( Model model) {
 
         /*try {

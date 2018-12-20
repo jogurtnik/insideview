@@ -1,19 +1,18 @@
 package uk.co.punishell.insideview.model.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.database.entities.Race;
-import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.HorseRepository;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
 
-import java.time.LocalTime;
-import java.util.Date;
-import java.util.Set;
-import java.util.function.Consumer;
-
+import java.util.List;
 @Service
 public class DBPopulatorImpl implements DBPopulator {
+
+    private static final Logger logger = LoggerFactory.getLogger(DBPopulatorImpl.class);
 
     RaceRepository raceRepository;
     RunnerRepository runnerRepository;
@@ -26,7 +25,7 @@ public class DBPopulatorImpl implements DBPopulator {
     }
 
     @Override
-    public void populate(Set<Race> races) {
-
+    public void populate(List<Race> races) {
+        // TODO
     }
 }

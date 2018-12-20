@@ -3,25 +3,24 @@ package uk.co.punishell.insideview.model.services.poi;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.ResourceData.DataFormat;
 import uk.co.punishell.insideview.model.database.entities.Race;
-import uk.co.punishell.insideview.model.database.entities.Runner;
-import uk.co.punishell.insideview.model.services.DBPopulator;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.LocalTime;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 @Service
 public class DataAssembler {
 
+    private static final Logger logger = LoggerFactory.getLogger(DataAssembler.class);
 
     XLSXRaceAssembler xlsxRaceAssembler;
     XLSXRunnerAssembler xlsxRunnerAssembler;
@@ -39,9 +38,11 @@ public class DataAssembler {
 
     public List<Race> getRaces(File file) throws IOException, InvalidFormatException {
 
+        logger.info("Inside DataAssembler");
+
         // Races are stored in LinkedList to maintain the order of iteration compatible with order of adding
         // new elements to the LinkedList
-        List<Race> races = new LinkedList<>();
+        List<Race> races = new LinkedList();
 
         // Two-dimensional array to store row index for the start and the end of the race rows
         int[][] raceStartStopIndexes = new int[50][2];
@@ -64,35 +65,59 @@ public class DataAssembler {
             Row row = iterator.next();
             Race race = xlsxRaceAssembler.getRace(file, row);
 
-            if (!races.contains(race)) {
+            // if Race is not in the races LinkedList add it to it and set current rowIndex value as a starting point
+            // else set current rowIndex value as ending point of the race rows
+            if (!this.checkIfContains(races, race)) {
 
                 races.add(race);
                 raceStartStopIndexes[races.size()-1][0] = rowIndex;
-
             } else {
 
                 raceStartStopIndexes[races.size()-1][1] = rowIndex;
             }
 
+            // post-increment value of rowIndex before next iteration
             rowIndex++;
         }
 
         // Iterate through races LinkedList and set Runners for each race
-        for (int raceIndex = 0; raceIndex <= races.size(); raceIndex++) {
+        for (int raceIndex = 0; raceIndex < races.size(); raceIndex++) {
 
             // Iterate through rows from starting to ending row index of the race
             for (int positionMarker = raceStartStopIndexes[raceIndex][0];
                  positionMarker <= raceStartStopIndexes[raceIndex][1];
                  positionMarker++) {
 
-                 races.get(raceIndex)
-                         .getRunners()
-                         .add(xlsxRunnerAssembler.getRunner(sheet.getRow(positionMarker)));
+                races.get(raceIndex).getRunners().add(xlsxRunnerAssembler.getRunner(sheet.getRow(positionMarker)));
             }
-
         }
 
         return races;
     }
 
+    private boolean checkIfContains(List<Race> racesList, Race race) {
+
+        if (racesList.isEmpty()) {
+            return false;
+        } else {
+
+            Iterator<Race> itr = racesList.iterator();
+
+            while (itr.hasNext()) {
+
+                Race checkRace = itr.next();
+
+                if (checkRace.getCountry().contains(race.getCountry()) &&
+                    checkRace.getCity().contains(race.getCity()) &&
+                    checkRace.getTime().equals(race.getTime()) &&
+                    checkRace.getTrackType().contains(race.getTrackType()) &&
+                    checkRace.getTrackLength().contains(race.getTrackLength())) {
+
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
 }
