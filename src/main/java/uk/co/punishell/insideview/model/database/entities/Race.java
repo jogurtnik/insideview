@@ -1,18 +1,19 @@
 package uk.co.punishell.insideview.model.database.entities;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+@Setter
+@Getter
 @Entity
-public class Race implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+public class Race extends BaseEntity {
 
     private Date date;
     private String country;
@@ -44,83 +45,5 @@ public class Race implements Serializable {
         this.trackType = trackType;
         this.time = time;
         this.runners = runners;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId(){
-        return id;
-    }
-
-    public void setRunners(Set<Runner> runners) {
-        this.runners = runners;
-    }
-
-    public Set<Runner> getRunners() {
-        return runners;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getTrackLength() {
-        return trackLength;
-    }
-
-    public void setTrackLength(String trackLength) {
-        this.trackLength = trackLength;
-    }
-
-    public String getTrackType() {
-        return trackType;
-    }
-
-    public void setTrackType(String trackType) {
-        this.trackType = trackType;
-    }
-
-    public LocalTime getTime() {
-        return time;
-    }
-
-    public void setTime(LocalTime time) {
-        this.time = time;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Race race = (Race) o;
-        return id != null ? id.equals(race.id) : race.id == null;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return id != null ? id.hashCode() : 0;
     }
 }
