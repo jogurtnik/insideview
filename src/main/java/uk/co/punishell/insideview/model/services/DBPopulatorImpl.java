@@ -26,6 +26,16 @@ public class DBPopulatorImpl implements DBPopulator {
 
     @Override
     public void populate(List<Race> races) {
-        // TODO
+
+        /*for (Race race : races) {
+
+            raceRepository.save(race);
+
+            for (Runner runner : race.getRunners()) {
+
+                runnerRepository.save(runner);
+                horseRepository.save(runner.getHorse());
+            }
+        }*/
     }
 }
