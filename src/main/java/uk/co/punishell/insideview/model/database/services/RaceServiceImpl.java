@@ -3,7 +3,10 @@ package uk.co.punishell.insideview.model.database.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import uk.co.punishell.insideview.model.converters.RaceCommandToRace;
+import uk.co.punishell.insideview.model.converters.RaceToRaceCommand;
 import uk.co.punishell.insideview.model.database.entities.Race;
+import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
 
 import java.util.HashSet;
@@ -16,11 +19,20 @@ import java.util.Set;
 public class RaceServiceImpl implements RaceService {
 
     private final RaceRepository raceRepository;
+    private final RunnerService runnerService;
+    private final RaceToRaceCommand raceToRaceCommand;
+    private final RaceCommandToRace raceCommandToRace;
 
     @Autowired
-    public RaceServiceImpl(RaceRepository raceRepository) {
+    public RaceServiceImpl(RaceRepository raceRepository,
+                           RunnerService runnerService,
+                           RaceToRaceCommand raceToRaceCommand,
+                           RaceCommandToRace raceCommandToRace) {
 
         this.raceRepository = raceRepository;
+        this.runnerService = runnerService;
+        this.raceToRaceCommand = raceToRaceCommand;
+        this.raceCommandToRace = raceCommandToRace;
     }
 
     @Override
@@ -50,23 +62,33 @@ public class RaceServiceImpl implements RaceService {
 
         Race savedRace = null;
 
-        Set<Race> races = new HashSet<>();
-        raceRepository.findAll().iterator().forEachRemaining(races::add);
+        Set<Race> races = this.getRaces();
 
-        for (Race foundRace : races) {
+        if (!races.isEmpty()) {
 
-            // Check first if race already exists in the database
-            if (race.getDate() == foundRace.getDate() &&
-                race.getCountry() == foundRace.getCountry() &&
-                race.getTime() == foundRace.getTime() &&
-                race.getTrackLength() == foundRace.getTrackLength() &&
-                race.getTrackType() == foundRace.getTrackType()) {
+            for (Race foundRace : races) {
 
-                throw new RuntimeException("Race already exists in the database!");
+                // Check first if race already exists in the database
+                if (race.getDate() == foundRace.getDate() &&
+                        race.getCountry() == foundRace.getCountry() &&
+                        race.getTime() == foundRace.getTime() &&
+                        race.getTrackLength() == foundRace.getTrackLength() &&
+                        race.getTrackType() == foundRace.getTrackType()) {
+
+                    log.info("Race already exists in the database!");
+                    return foundRace;
+                }
             }
+
         }
 
-        savedRace = raceRepository.save(race);
+        Set<Runner> savedRunners = runnerService.saveAll(race.getRunners());
+
+        savedRace = raceRepository.save(raceCommandToRace.convert(raceToRaceCommand.convert(race)));
+
+        savedRace.setRunners(savedRunners);
+
+        log.info("NEW RACE ID: " + savedRace.getId());
 
         return savedRace;
     }
@@ -76,7 +98,7 @@ public class RaceServiceImpl implements RaceService {
 
         Set<Race> savedRaces = new HashSet<>();
 
-        races.stream().forEach(race -> savedRaces.add(race));
+        races.stream().forEach(race -> savedRaces.add(this.save(race)));
 
         return savedRaces;
     }

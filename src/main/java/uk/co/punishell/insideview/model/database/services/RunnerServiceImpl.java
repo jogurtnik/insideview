@@ -2,6 +2,9 @@ package uk.co.punishell.insideview.model.database.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import uk.co.punishell.insideview.model.converters.RunnerCommandToRunner;
+import uk.co.punishell.insideview.model.converters.RunnerToRunnerCommand;
+import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
 
@@ -14,10 +17,19 @@ import java.util.Set;
 public class RunnerServiceImpl implements RunnerService {
 
     private final RunnerRepository runnerRepository;
+    private final HorseService horseService;
+    private final RunnerToRunnerCommand runnerToRunnerCommand;
+    private final RunnerCommandToRunner runnerCommandToRunner;
 
-    public RunnerServiceImpl(RunnerRepository runnerRepository) {
+    public RunnerServiceImpl(RunnerRepository runnerRepository,
+                             HorseService horseService,
+                             RunnerToRunnerCommand runnerToRunnerCommand,
+                             RunnerCommandToRunner runnerCommandToRunner) {
 
         this.runnerRepository = runnerRepository;
+        this.horseService = horseService;
+        this.runnerToRunnerCommand = runnerToRunnerCommand;
+        this.runnerCommandToRunner = runnerCommandToRunner;
     }
 
     @Override
@@ -47,7 +59,13 @@ public class RunnerServiceImpl implements RunnerService {
     @Override
     public Runner save(Runner runner) {
 
-        Runner savedRunner = runnerRepository.save(runner);
+        Runner savedRunner = runnerRepository.save(runnerCommandToRunner.convert(runnerToRunnerCommand.convert(runner)));
+
+        Horse savedHorse = horseService.save(runner.getHorse());
+
+        savedRunner.setHorse(savedHorse);
+
+        log.info("NEW RUNNER ID: " + savedRunner.getId());
 
         return savedRunner;
     }
@@ -57,7 +75,7 @@ public class RunnerServiceImpl implements RunnerService {
 
         Set<Runner> savedRunners = new HashSet<>();
 
-        runners.stream().forEach(runner -> savedRunners.add(runner));
+        runners.stream().forEach(runner -> savedRunners.add(this.save(runner)));
 
         return savedRunners;
     }

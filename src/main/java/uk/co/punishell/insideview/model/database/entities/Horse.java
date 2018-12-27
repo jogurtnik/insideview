@@ -15,7 +15,7 @@ public class Horse extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "horse")
-    private Set<Runner> runner;
+    private Set<Runner> runners;
 
     public Horse() {
     }

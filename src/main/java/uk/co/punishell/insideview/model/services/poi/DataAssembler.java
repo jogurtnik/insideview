@@ -1,5 +1,6 @@
 package uk.co.punishell.insideview.model.services.poi;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -17,6 +18,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+@Slf4j
 @Service
 public class DataAssembler {
 
@@ -38,7 +40,7 @@ public class DataAssembler {
 
     public List<Race> getRaces(File file) throws IOException, InvalidFormatException {
 
-        logger.info("Inside DataAssembler");
+        log.debug("Inside DataAssembler");
 
         // Races are stored in LinkedList to maintain the order of iteration compatible with order of adding
         // new elements to the LinkedList

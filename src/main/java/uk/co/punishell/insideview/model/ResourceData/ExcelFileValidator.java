@@ -1,6 +1,5 @@
 package uk.co.punishell.insideview.model.ResourceData;
 
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -38,9 +37,6 @@ public class ExcelFileValidator implements FileValidator{
         try {
             this.workbook = WorkbookFactory.create(file);
         } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        } catch (InvalidFormatException e) {
             e.printStackTrace();
             return false;
         }

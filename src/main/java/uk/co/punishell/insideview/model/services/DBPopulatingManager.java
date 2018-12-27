@@ -1,8 +1,7 @@
 package uk.co.punishell.insideview.model.services;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.ResourceData.FileValidator;
@@ -11,10 +10,9 @@ import uk.co.punishell.insideview.model.services.poi.DataAssembler;
 import java.io.File;
 import java.io.IOException;
 
+@Slf4j
 @Component
 public class DBPopulatingManager {
-
-    private static final Logger logger = LoggerFactory.getLogger(DBPopulatingManager.class);
 
     DBPopulator dbPopulator;
     DataAssembler dataAssemlber;
@@ -36,11 +34,11 @@ public class DBPopulatingManager {
 
         if (validator.isValidFile(file)) {
 
-            logger.info("Uploaded file is VALID.");
+            log.info("Uploaded file is VALID.");
             dbPopulator.populate(dataAssemlber.getRaces(file));
 
         } else {
-            logger.info("Uploaded file is INVALID.");
+            log.info("Uploaded file is INVALID.");
             return;
         }
     }
