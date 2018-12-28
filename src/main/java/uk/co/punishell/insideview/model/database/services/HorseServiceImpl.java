@@ -46,7 +46,13 @@ public class HorseServiceImpl implements HorseService {
     @Override
     public Horse save(Horse horse) {
 
-        Horse savedHorse = null;
+        // update entity if it already has an ID
+        if (horse.getId() != null) {
+
+            return horseRepository.save(horse);
+        }
+
+        Horse savedHorse;
 
         Set<Horse> horses = new HashSet<>();
         horseRepository.findAll().iterator().forEachRemaining(horses::add);
@@ -54,7 +60,7 @@ public class HorseServiceImpl implements HorseService {
         // Check if horse already exists in the database
         for (Horse foundHorse : horses) {
 
-            if(horse.getName().equalsIgnoreCase(foundHorse.getName())) {
+            if (horse.getName().equalsIgnoreCase(foundHorse.getName())) {
 
                 log.info("Horse already exists in database with name: " + foundHorse.getName());
                 return foundHorse;

@@ -67,6 +67,9 @@ public class RunnerServiceImpl implements RunnerService {
 
         savedHorse.getRunners().add(savedRunner);
 
+        //update Horse entity
+        horseService.save(savedHorse);
+
         log.info("NEW RUNNER ID: " + savedRunner.getId());
 
         return savedRunner;
