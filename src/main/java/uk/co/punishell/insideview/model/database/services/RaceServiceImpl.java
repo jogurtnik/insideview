@@ -60,8 +60,6 @@ public class RaceServiceImpl implements RaceService {
     @Override
     public Race save(Race race) {
 
-        Race savedRace = null;
-
         Set<Race> races = this.getRaces();
 
         if (!races.isEmpty()) {
@@ -69,28 +67,24 @@ public class RaceServiceImpl implements RaceService {
             for (Race foundRace : races) {
 
                 // Check first if race already exists in the database
-                if (race.getDate() == foundRace.getDate() &&
-                        race.getCountry() == foundRace.getCountry() &&
-                        race.getTime() == foundRace.getTime() &&
-                        race.getTrackLength() == foundRace.getTrackLength() &&
-                        race.getTrackType() == foundRace.getTrackType()) {
+                if (    race.getDate().compareTo(foundRace.getDate()) == 0 &&
+                        race.getCountry().equalsIgnoreCase(foundRace.getCountry())  &&
+                        race.getTime().equals(foundRace.getTime()) &&
+                        race.getTrackLength().equalsIgnoreCase(foundRace.getTrackLength()) &&
+                        race.getTrackType().equalsIgnoreCase(foundRace.getTrackType())) {
 
-                    log.info("Race already exists in the database!");
+                    log.info("Race already exists in the database with ID: " + foundRace.getId());
+
                     return foundRace;
                 }
             }
 
+            return saveAndSetRelations(race);
+
+        } else {
+
+            return saveAndSetRelations(race);
         }
-
-        Set<Runner> savedRunners = runnerService.saveAll(race.getRunners());
-
-        savedRace = raceRepository.save(raceCommandToRace.convert(raceToRaceCommand.convert(race)));
-
-        savedRace.setRunners(savedRunners);
-
-        log.info("NEW RACE ID: " + savedRace.getId());
-
-        return savedRace;
     }
 
     @Override
@@ -113,5 +107,19 @@ public class RaceServiceImpl implements RaceService {
     public void deleteById(Long id) {
 
         raceRepository.deleteById(id);
+    }
+
+    private Race saveAndSetRelations(Race race) {
+
+        Race savedRace = raceRepository.save(raceCommandToRace.convert(raceToRaceCommand.convert(race)));
+        Set<Runner> savedRunners = runnerService.saveAll(race.getRunners());
+
+        savedRace.setRunners(savedRunners);
+
+        savedRunners.iterator().forEachRemaining(runner -> runner.setRace(savedRace));
+
+        log.info("NEW RACE ID: " + savedRace.getId());
+
+        return savedRace;
     }
 }

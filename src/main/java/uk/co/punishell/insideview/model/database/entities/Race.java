@@ -3,6 +3,7 @@ package uk.co.punishell.insideview.model.database.entities;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.time.LocalTime;
@@ -22,7 +23,7 @@ public class Race extends BaseEntity {
     private String trackType;
     private LocalTime time;
 
-    @OneToMany (mappedBy = "race")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "race")
     private Set<Runner> runners = new HashSet<>();
 
     public Race() {

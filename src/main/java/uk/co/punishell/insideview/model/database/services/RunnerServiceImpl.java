@@ -59,11 +59,13 @@ public class RunnerServiceImpl implements RunnerService {
     @Override
     public Runner save(Runner runner) {
 
-        Runner savedRunner = runnerRepository.save(runnerCommandToRunner.convert(runnerToRunnerCommand.convert(runner)));
-
         Horse savedHorse = horseService.save(runner.getHorse());
 
-        savedRunner.setHorse(savedHorse);
+        runner.setHorse(savedHorse);
+
+        Runner savedRunner = runnerRepository.save(runner);
+
+        savedHorse.getRunners().add(savedRunner);
 
         log.info("NEW RUNNER ID: " + savedRunner.getId());
 

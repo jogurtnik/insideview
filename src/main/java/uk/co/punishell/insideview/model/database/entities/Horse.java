@@ -4,7 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -15,7 +18,7 @@ public class Horse extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "horse")
-    private Set<Runner> runners;
+    private Set<Runner> runners = new HashSet<>();
 
     public Horse() {
     }

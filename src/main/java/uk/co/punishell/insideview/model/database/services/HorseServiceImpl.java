@@ -63,6 +63,8 @@ public class HorseServiceImpl implements HorseService {
 
         savedHorse = horseRepository.save(horse);
 
+        log.info("NEW HORSE ID: " + savedHorse.getId());
+
         return savedHorse;
     }
 

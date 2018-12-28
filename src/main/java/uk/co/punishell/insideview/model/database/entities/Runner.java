@@ -2,8 +2,12 @@ package uk.co.punishell.insideview.model.database.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Setter
@@ -11,10 +15,14 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Runner extends BaseEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "race_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Race race;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "horse_id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Horse horse;
 
     private boolean status;
