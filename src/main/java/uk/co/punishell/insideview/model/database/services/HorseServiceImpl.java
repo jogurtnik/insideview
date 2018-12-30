@@ -3,6 +3,7 @@ package uk.co.punishell.insideview.model.database.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.repositories.HorseRepository;
 
@@ -44,6 +45,7 @@ public class HorseServiceImpl implements HorseService {
     }
 
     @Override
+    @Transactional
     public Horse save(Horse horse) {
 
         // update entity if it already has an ID

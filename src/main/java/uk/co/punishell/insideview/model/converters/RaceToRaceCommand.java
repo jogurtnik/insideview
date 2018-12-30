@@ -1,14 +1,26 @@
 package uk.co.punishell.insideview.model.converters;
 
 import lombok.Synchronized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.commands.RaceCommand;
+import uk.co.punishell.insideview.model.commands.RunnerCommand;
 import uk.co.punishell.insideview.model.database.entities.Race;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Component
 public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
+
+    RunnerToRunnerCommand runnerToRunnerCommand;
+
+    @Autowired
+    public RaceToRaceCommand(RunnerToRunnerCommand runnerToRunnerCommand) {
+        this.runnerToRunnerCommand = runnerToRunnerCommand;
+    }
 
     @Synchronized
     @Nullable
@@ -20,13 +32,20 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
         }
 
         final RaceCommand raceCommand = new RaceCommand();
+
+        List<RunnerCommand> runners = new LinkedList<>();
+        source
+                .getRunners()
+                .iterator()
+                .forEachRemaining(runner -> runners.add(runnerToRunnerCommand.convert(runner)));
+        raceCommand.setRunners(runners);
+
         raceCommand.setId(source.getId());
         raceCommand.setDate(source.getDate());
         raceCommand.setCountry(source.getCountry());
         raceCommand.setCity(source.getCity());
         raceCommand.setTrackLength(source.getTrackLength());
         raceCommand.setTrackType(source.getTrackType());
-        raceCommand.setTime(source.getTime());
 
         return raceCommand;
     }

@@ -1,6 +1,7 @@
 package uk.co.punishell.insideview.model.converters;
 
 import lombok.Synchronized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,14 @@ import uk.co.punishell.insideview.model.database.entities.Runner;
 
 @Component
 public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
+
+    HorseToHorseCommand horseToHorseCommand;
+
+    @Autowired
+    public RunnerToRunnerCommand(HorseToHorseCommand horseToHorseCommand) {
+        super();
+        this.horseToHorseCommand = horseToHorseCommand;
+    }
 
     @Synchronized
     @Nullable
@@ -21,6 +30,7 @@ public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
 
         final RunnerCommand runnerCommand = new RunnerCommand();
         runnerCommand.setId(source.getId());
+        runnerCommand.setHorseName(source.getHorse().getName());
         runnerCommand.setStatus(source.isStatus());
         runnerCommand.setPrice9(source.getPrice9());
         runnerCommand.setPrice10(source.getPrice10());

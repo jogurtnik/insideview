@@ -25,7 +25,6 @@ public class RaceCommandToRace implements Converter<RaceCommand, Race> {
         race.setDate(source.getDate());
         race.setCountry(source.getCountry());
         race.setCity(source.getCity());
-        race.setTime(source.getTime());
         race.setTrackLength(source.getTrackLength());
         race.setTrackType(source.getTrackType());
         race.setRunners(new HashSet<>());

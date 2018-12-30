@@ -8,6 +8,7 @@ import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -57,6 +58,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
+    @Transactional
     public Runner save(Runner runner) {
 
         Horse savedHorse = horseService.save(runner.getHorse());
@@ -76,6 +78,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
+    @Transactional
     public Set<Runner> saveAll(Set<Runner> runners) {
 
         Set<Runner> savedRunners = new HashSet<>();

@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -18,5 +18,6 @@ public class RaceCommand {
     private String city;
     private String trackLength;
     private String trackType;
-    private LocalTime time;
+
+    private List<RunnerCommand> runners;
 }

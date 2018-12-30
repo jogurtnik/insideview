@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../../static/images/favicon.ico" type="image/ico"
+          th:href="@{/images/favicon.ico}"/>
+
+    <title>Inside View</title>
+
+    <!-- Bootstrap -->
+    <link href="../../static/vendors/css/bootstrap.min.css" rel="stylesheet"
+          th:href="@{/vendors/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link href="../../static/vendors/css/font-awesome.min.css" rel="stylesheet"
+          th:href="@{/vendors/css/font-awesome.min.css}"/>
+
+    <link href="../../static/css/animate.min.css" rel="stylesheet"
+          th:href="@{/css/animate.min.css}"/>
+
+    <!-- Custom Theme Style -->
+    <link href="../../static/build/css/custom.min.css" rel="stylesheet"
+          th:href="@{/build/css/custom.min.css}"/>
+    <link href="../../static/css/icheck/flat/green.css" rel="stylesheet"
+          th:href="@{/css/icheck/flat/green.css}"/>
+</head>
+<body class="nav-md">
+
+<!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.commands.QueryFormDataCommand"*/-->
+<!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
+<!--/*@thymesVar id="races" type="java.util.List"*/-->
+<!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
+<!--/*@thymesVar id="runners" type="java.util.List"*/-->
+<div class="container body">
+
+    <div class="main_container">
+
+        <div th:replace="fragments/navigation :: leftNavigationMenu"></div>
+
+        <div th:replace="fragments/navigation :: topNavigationMenu"></div>
+
+        <div class="right_col" role="main">
+
+            <div class="page-title">
+                <div class="title_left">
+                    <h3>Query</h3>
+                </div>
+            </div>
+
+            <div th:fragment="queryForm">
+            <form class="form-horizontal form-label-left"
+            th:object="${queryFormData}"
+            th:action="@{performQuery}"
+            method="post">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="x_panel">
+
+                        <div class="x_title">
+                            <div class="col-md-6">
+                                <h2>Race settings</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <!--<div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-since">Date since: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <p><input id="date-since" class="form-control col-md-6 col-xs-12" type="date"
+                                                          th:field="${queryFormData.dateSince}" /></p>
+                                            </div>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-to">Date to: <span class="required">*</span></label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <p><input id="date-to" class="form-control col-md-6 col-xs-12" type="date"
+                                                          th:field="${queryFormData.dateTo}"/></p>
+                                            </div>
+                                    </div>-->
+                                    <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="country">Country: </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select id="country" class="form-control" th:field="${queryFormData.country}">
+                                                    <option
+                                                            th:each="country : ${queryFormData.countries}"
+                                                            th:value="${country}"
+                                                            th:text="${country}" >Select country</option>
+                                                </select>
+                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackLength">Track length: </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select id="trackLength" class="form-control" th:field="${queryFormData.trackLength}">
+                                                    <option
+                                                            th:each="trackLength : ${queryFormData.trackLengths}"
+                                                            th:value="${trackLength}"
+                                                            th:text="${trackLength}" >Select track length</option>
+                                                </select>
+                                            </div>
+                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackType">Track type: </label>
+                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                <select id="trackType" class="form-control" th:field="${queryFormData.trackType}">
+                                                    <option
+                                                            th:each="trackType : ${queryFormData.trackTypes}"
+                                                            th:value="${trackType}"
+                                                            th:text="${trackType}" >Select track type</option>
+                                                </select>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="fiveStarsCount">Five stars: </label>
+                                        <div id="fiveStarsCount">
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMin">MIN</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="fiveStarsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       th:field="${queryFormData.fiveStarsCountMin}"/>
+                                            </div>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMax">MIN</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="fiveStarsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       th:field="${queryFormData.fiveStarsCountMax}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnersCount">Runners: </label>
+                                        <div id="runnersCount">
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMin">MIN</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="runnersCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       th:field="${queryFormData.runnersCountMin}"/>
+                                            </div>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMax">MAX</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="runnersCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       th:field="${queryFormData.runnersCountMax}"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12 col-xs-12">
+
+                    <div class="x_panel">
+
+                        <div class="x_title">
+                            <div class="col-md-6">
+                                <h2>Runner settings</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov1">Mov1: </label>
+                                    <div id="mov1">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Min">MIN</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="mov1Min" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.mov1Min}"/>
+                                        </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Max">MAX</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="mov1Max" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.mov1Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mean">Mean: </label>
+                                    <div id="mean">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMin">MIN</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="meanMin" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.meanMin}"/>
+                                        </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMax">MAX</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="meanMax" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.meanMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov3to1">Mov3to1: </label>
+                                    <div id="mov3to1">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Min">MIN</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="mov3to1Min" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.mov3to1Min}"/>
+                                        </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Max">MAX</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="mov3to1Max" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
+                                                   th:field="${queryFormData.mov3to1Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsCount">NPTips: </label>
+                                    <div id="nptipsCount">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMin">MIN</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="nptipsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${queryFormData.nptipsCountMin}"
+                                                   th:value="${queryFormData.nptipsCountMin}"/>
+                                        </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMax">MAX</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="nptipsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${queryFormData.nptipsCountMax}"/>
+                                        </div>
+                                    </div>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsPerRace">per race: </label>
+                                    <div id="nptipsPerRace">
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMin">MIN</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="nptipsPerRaceMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${queryFormData.nptipsPerRaceMin}"/>
+                                        </div>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMax">MAX</label>
+                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <input id="nptipsPerRaceMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${queryFormData.nptipsPerRaceMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlace">Favourite place: </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="favouritePlace" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               th:field="${queryFormData.favouritePlace}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnerStars">Stars: </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="runnerStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               th:field="${queryFormData.runnerStars}"/>
+                                    </div>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlaceAmongStars">Fav place among stars: </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="favouritePlaceAmongStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               th:field="${queryFormData.favouritePlaceAmongStars}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="well" style="overflow: auto">
+                                        <button type="submit" class="btn btn-success">Run querry</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </form>
+        </div>
+
+            <div th:fragment="queryResult">
+            <div class="row" th:if="${not #lists.isEmpty(races)}">
+
+                <div class="col-md-12 col-sm-12- col-xs-12">
+
+                    <div class="x_panel">
+
+                        <div class="x_title">
+                            <div class="col-md-6">
+                                <h2>Query result</h2>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="nav navbar-right panel_toolbox">
+                                    <li>
+                                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                    </li>
+                                    <li>
+                                        <a class="close-link"><i class="fa fa-close"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="x_content">
+                            <div th:each="race : ${races}">
+                            <div class="row">
+                                <table id="datatable-keytable" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Runner</th>
+                                            <th>Mov1</th>
+                                            <th>Mean</th>
+                                            <th>321</th>
+                                            <th>Stars</th>
+                                            <th>NPTips</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <div th:each="runner : ${race.runners}">
+                                        <tr>
+                                            <td th:text="${runner.horseName}">Aaron Lad</td>
+                                            <td th:text="${runner.mov1}">1.62</td>
+                                            <td th:text="${runner.mean}">0.84</td>
+                                            <td th:text="${runner.mov3to1}">1.61</td>
+                                            <td th:text="${runner.stars}">5</td>
+                                            <td th:text="${runner.nptips}">5.1</td>
+                                        </tr>
+                                    </div>
+                                    </tbody>
+                                </table>
+                                <div class="clearfix"></div>
+                            </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- jQuery -->
+<script src="../../static/vendors/js/jquery.min.js"
+        th:src="@{/vendors/js/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script src="../../static/vendors/js/bootstrap.min.js"
+        th:src="@{/vendors/js/bootstrap.min.js}"></script>
+<!-- Custom Theme Scripts -->
+<script src="../../static/build/js/custom.min.js"
+        th:src="@{/build/js/custom.min.js}"></script>
+
+</body>
+</html>

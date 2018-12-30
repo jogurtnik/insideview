@@ -11,6 +11,8 @@ public class RunnerCommand {
 
     private Long id;
 
+    private String horseName;
+
     private boolean status;
 
     private double price9;

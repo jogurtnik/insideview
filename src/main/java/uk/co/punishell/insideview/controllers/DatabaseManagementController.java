@@ -27,13 +27,13 @@ public class DatabaseManagementController {
         this.dbPopulatingManager = dbPopulatingManager;
     }
 
-    @GetMapping(value={"/database_management", "/database_management.html"})
+    @GetMapping(value={"/databaseManagement"})
     public String getDatabaseManagementWebsite() {
 
-        return "database_management";
+        return "databaseManagement";
     }
 
-    @PostMapping("/uploadFile")
+    @PostMapping({"/uploadFile", "uploadFile"})
     public String uploadFileHandler(@RequestParam("file") MultipartFile file) {
 
         if (!file.isEmpty()) {
@@ -59,7 +59,7 @@ public class DatabaseManagementController {
 
                 dbPopulatingManager.populateDB(serverFile);
 
-                return "redirect:/database_management";
+                return "redirect:/databaseManagement";
 
             } catch (Exception e) {
                 e.printStackTrace();
