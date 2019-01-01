@@ -41,8 +41,6 @@ public class RunnerCommandToRunner implements Converter<RunnerCommand, Runner> {
         runner.setMov1(source.getMov1());
         runner.setMean(source.getMean());
         runner.setMov3to1(source.getMov3to1());
-        runner.setWinner(source.isWinner());
-        runner.setPlaced(source.isPlaced());
         runner.setCpr(source.getCpr());
         runner.setNptips(source.getNptips());
         runner.setStars(source.getStars());

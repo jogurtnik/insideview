@@ -36,8 +36,7 @@ public class RunnerCommand {
     private double mean;
     private double mov3to1;
 
-    private boolean winner;
-    private boolean placed;
+    private String result;
 
     private int cpr;
     private int nptips;

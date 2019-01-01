@@ -42,6 +42,7 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
 
         raceCommand.setId(source.getId());
         raceCommand.setDate(source.getDate());
+        raceCommand.setTime(source.getTime());
         raceCommand.setCountry(source.getCountry());
         raceCommand.setCity(source.getCity());
         raceCommand.setTrackLength(source.getTrackLength());
