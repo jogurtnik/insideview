@@ -3,15 +3,16 @@ package uk.co.punishell.insideview.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import uk.co.punishell.insideview.model.commands.QueryFormDataCommand;
 import uk.co.punishell.insideview.model.commands.RaceCommand;
 import uk.co.punishell.insideview.model.converters.RaceToRaceCommand;
 import uk.co.punishell.insideview.model.database.services.QueryConversionService;
 import uk.co.punishell.insideview.model.database.services.RaceService;
 
+import javax.servlet.http.HttpSession;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,17 +31,19 @@ public class QueryFormController {
         this.raceService = raceService;
     }
 
-    @RequestMapping({"query", "/query", "query.html"})
+    @GetMapping({"query", "/query", "query.html"})
     public String getQueryForm(Model model) {
 
 
         model.addAttribute("queryFormData", new QueryFormDataCommand());
 
+
+
         return "query";
     }
 
     @PostMapping("performQuery")
-    public String performQuery(@ModelAttribute QueryFormDataCommand queryFormDataCommand, Model model) {
+    public String performQuery(@ModelAttribute QueryFormDataCommand queryFormDataCommand, HttpSession session) {
 
         List<RaceCommand> races = new LinkedList<>();
 
@@ -49,8 +52,8 @@ public class QueryFormController {
         log.debug("RaceCommand list size: " + races.size());
         log.debug("RunnerCommand list size of first RaceCommand: " + ((LinkedList<RaceCommand>) races).getFirst().getRunners().size());
 
-        model.addAttribute("races", races);
-        model.addAttribute("queryFormData", queryFormDataCommand);
+        session.setAttribute("races", races);
+        session.setAttribute("queryFormData", queryFormDataCommand);
 
         return "redirect:/query";
     }

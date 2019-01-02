@@ -114,6 +114,7 @@ public class RaceServiceImpl implements RaceService {
 
     private Race saveAndSetRelations(Race race) {
 
+        // convert and de-convert to command object to save entity without reference to an unsaved object
         Race savedRace = raceRepository.save(raceCommandToRace.convert(raceToRaceCommand.convert(race)));
         Set<Runner> savedRunners = runnerService.saveAll(race.getRunners());
 

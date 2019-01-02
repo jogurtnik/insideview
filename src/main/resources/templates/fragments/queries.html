@@ -46,8 +46,10 @@
 
 <!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.commands.QueryFormDataCommand"*/-->
 <!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
+<!--/*@thymesVar id="currentRace" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
 <!--/*@thymesVar id="races" type="java.util.List"*/-->
 <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
+<!--/*@thymesVar id="currentRunner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
 <!--/*@thymesVar id="runners" type="java.util.List"*/-->
 <div class="container body">
 
@@ -309,8 +311,8 @@
             </form>
         </div>
 
-            <div th:fragment="queryResult (races)">
-            <th:block th:each="race : ${races}">
+            <div th:fragment="queryResult">
+            <th:block th:each="currentRace : ${session.races}">
             <div class="row">
 
                 <div class="col-md-12 col-sm-12- col-xs-12">
@@ -319,7 +321,10 @@
 
                         <div class="x_title">
                             <div class="col-md-6">
-                                <h2 th:text="${race.country}">Race - Country, City, Time</h2>
+                                <h2 th:text="'Race ' + ${(currentRaceStat.index) + 1} + ' - ' + ${currentRace.country} +
+                                    ', ' + ${currentRace.time.toString()} + ' | ' + ${currentRace.trackType} + ' | ' + ${currentRace.trackLength}">
+                                    Race - Country, City, Time
+                                </h2>
                             </div>
                             <div class="col-md-6">
                                 <ul class="nav navbar-right panel_toolbox">
@@ -355,23 +360,20 @@
                                     </thead>
 
                                     <tbody>
-                                    <th:block th:each="runner : ${race.runners}">
+                                    <th:block th:each="currentRunner : ${currentRace.runners}">
                                         <tr>
-                                            <td th:text="${runner.horseName}">Storm Ahead</td>
-                                            <td th:text="${runner.price3}">4.20</td>
-                                            <td th:text="${runner.mov3}">-1.35</td>
-                                            <td th:text="${runner.price2}">4.2</td>
-                                            <td th:text="${runner.mov2}">-1.35</td>
-                                            <td th:text="${runner.price1}">4.35</td>
-                                            <td th:text="${runner.mov1}">-1.62</td>
-                                            <td th:text="${runner.mean}">-1.32</td>
-                                            <td th:text="${runner.mov3to1}">0.23</td>
-                                            <td th:text="${runner.stars}">0</td>
-                                            <td th:if="${runner.?[stars == 1]}">
-                                                <i></i>
-                                            </td>
-                                            <td th:text="${runner.nptips}">7</td>
-                                            <td th:text="${runner.result}">P</td>
+                                            <td th:text="${currentRunner.horseName}">Storm Ahead</td>
+                                            <td th:text="${currentRunner.price3}">4.20</td>
+                                            <td th:text="${currentRunner.mov3}">-1.35</td>
+                                            <td th:text="${currentRunner.price2}">4.2</td>
+                                            <td th:text="${currentRunner.mov2}">-1.35</td>
+                                            <td th:text="${currentRunner.price1}">4.35</td>
+                                            <td th:text="${currentRunner.mov1}">-1.62</td>
+                                            <td th:text="${currentRunner.mean}">-1.32</td>
+                                            <td th:text="${currentRunner.mov3to1}">0.23</td>
+                                            <td th:text="${currentRunner.stars}">0</td>
+                                            <td th:text="${currentRunner.nptips}">7</td>
+                                            <td th:text="${currentRunner.result}">P</td>
                                         </tr>
                                         <tr th:remove="all">
                                             <td>Pastime</td>
@@ -388,20 +390,6 @@
                                             <td> </td>
                                         </tr>
                                     </th:block>
-                                    <tr>
-                                        <td>Pastime</td>
-                                        <td>4.40</td>
-                                        <td>4.63</td>
-                                        <td>4.30</td>
-                                        <td>4.75</td>
-                                        <td>4.40</td>
-                                        <td>4.63</td>
-                                        <td>4.50</td>
-                                        <td>0.00</td>
-                                        <td>5</td>
-                                        <td>0</td>
-                                        <td> </td>
-                                    </tr>
                                     </tbody>
                                 </table>
                                 <div class="clearfix"></div>
@@ -412,13 +400,14 @@
                 </div>
             </div>
             </th:block>
+
+            </div>
             </div>
 
         </div>
 
     </div>
 
-</div>
 
 <!-- Bootstrap -->
 <script src="../../static/vendors/js/bootstrap.min.js"
@@ -428,9 +417,12 @@
         th:src="@{/build/js/custom.min.js}"></script>
 
 <!-- Datatables-->
-<script src="../../static/js/datatables/jquery.dataTables.min.js"></script>
-<script src="../../static/js/datatables/dataTables.bootstrap.js"></script>
-<script src="../../static/js/datatables/dataTables.fixedHeader.min.js"></script>
+<script src="../../static/js/datatables/jquery.dataTables.min.js"
+        th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+<script src="../../static/js/datatables/dataTables.bootstrap.js"
+        th:src="@{/js/datatables/dataTables.bootstrap.js}"></script>
+<script src="../../static/js/datatables/dataTables.fixedHeader.min.js"
+        th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
 
 </body>
 </html>
