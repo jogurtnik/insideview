@@ -341,7 +341,9 @@
 
                         <div class="x_content">
                             <div class="row">
-                                <table id="datatable-fixed-header" class="table table-striped table-bordered">
+                                <table id="datatable-fixed-header"
+                                       th:id="'datatable-fixed-header' + ${currentRaceStat.count}"
+                                       class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Runner</th>
@@ -423,6 +425,26 @@
         th:src="@{/js/datatables/dataTables.bootstrap.js}"></script>
 <script src="../../static/js/datatables/dataTables.fixedHeader.min.js"
         th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
+
+<th:block th:fragment="datatablesScript">
+    <th:block th:if="${not #lists.isEmpty(session.races)}"
+              th:each="race : ${session.races}">
+
+    <script type="text/javascript"
+            th:inline="javascript">
+
+        $(document).ready(function() {
+
+            var tableId = /*[('\"#datatable-fixed-header' + ${raceStat.count} + '\"')]*/ "#datatable-fixed-header";
+
+            $(tableId).DataTable({
+                fixedHeader: true
+            });
+        });
+
+    </script>
+    </th:block>
+</th:block>
 
 </body>
 </html>
