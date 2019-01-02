@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head">
+
+<head>
+    <th:block th:fragment="headCommon">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -24,6 +26,9 @@
     <!-- Custom Theme Style -->
     <link href="../../static/build/css/custom.min.css" rel="stylesheet"
         th:href="@{/build/css/custom.min.css}"/>
+    <link href="../../static/css/icheck/flat/green.css" rel="stylesheet"
+          th:href="@{/css/icheck/flat/green.css}"/>
+    </th:block>
 </head>
 <body class="nav-md">
 
@@ -151,18 +156,13 @@
 
     </div>
 
-    <div th:fragment="scripts">
-
-    <!-- jQuery -->
-    <script src="../../static/vendors/js/jquery.min.js"
-            th:src="@{/vendors/js/jquery.min.js}"></script>
+    <th:block th:fragment="scriptsCommon">
     <!-- Bootstrap -->
     <script src="../../static/vendors/js/bootstrap.min.js"
             th:src="@{/vendors/js/bootstrap.min.js}"></script>
     <!-- Custom Theme Scripts -->
     <script src="../../static/build/js/custom.min.js"
             th:src="@{/build/js/custom.min.js}"></script>
-
-    </div>
+    </th:block>
 </body>
 </html>

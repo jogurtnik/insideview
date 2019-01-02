@@ -1,45 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../static/images/favicon.ico" type="image/ico"
-          th:href="@{/images/favicon.ico}"/>
 
-    <title>Inside View</title>
-
-    <!-- Bootstrap -->
-    <link href="../static/vendors/css/bootstrap.min.css" rel="stylesheet"
-          th:href="@{/vendors/css/bootstrap.min.css}"/>
-    <!-- Font Awesome -->
-    <link href="../static/vendors/css/font-awesome.min.css" rel="stylesheet"
-          th:href="@{/vendors/css/font-awesome.min.css}"/>
-
-    <link href="../static/css/animate.min.css" rel="stylesheet"
-          th:href="@{/css/animate.min.css}"/>
-
-    <!-- Custom Theme Style -->
-    <link href="../static/build/css/custom.min.css" rel="stylesheet"
-          th:href="@{/build/css/custom.min.css}"/>
-    <link href="../static/css/icheck/flat/green.css" rel="stylesheet"
-          th:href="@{/css/icheck/flat/green.css}"/>
-
-    <!-- Datatables Styles -->
-    <link href="../static/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"
-          th:href="@{/js/datatables/jquery.dataTables.min.css}"/>
-    <link href="../static/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"
-          th:href="@{/js/datatables/fixedHeader.bootstrap.min.css}"/>
-    <link href="../static/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"
-          th:href="@{/js/datatables/responsive.bootstrap.min.css}"/>
-    <link href="../static/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"
-          th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
-
-    <!-- jQuery -->
-    <script src="../static/vendors/js/jquery.min.js"
-            th:src="@{/vendors/js/jquery.min.js}"></script>
+    <th:block th:replace="fragments/navigation :: headCommon"></th:block>
+    <th:block th:replace="fragments/queries :: headDatatables"></th:block>
 
 </head>
 <body class="nav-md">
@@ -75,21 +39,10 @@
     </div>
 
 </div>
-<!-- Bootstrap -->
-<script src="../static/vendors/js/bootstrap.min.js"
-        th:src="@{/vendors/js/bootstrap.min.js}"></script>
-<!-- Custom Theme Scripts -->
-<script src="../static/build/js/custom.min.js"
-        th:src="@{/build/js/custom.min.js}"></script>
+<th:block th:replace="fragments/navigation :: sctiptsCommon"></th:block>
 
-<!-- Datatables-->
-<script src="../static/js/datatables/jquery.dataTables.min.js"
-        th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
-<script src="../static/js/datatables/dataTables.bootstrap.js"
-        th:src="@{/js/datatables/dataTables.bootstrap.js}"></script>
-<script src="../static/js/datatables/dataTables.fixedHeader.min.js"
-        th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
 
-<th:block th:replace="fragments/queries :: datatablesScript"></th:block>
+<th:block th:if="${session.races != null}"
+          th:replace="fragments/queries :: scriptsDatatables"></th:block>
 </body>
 </html>
