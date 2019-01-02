@@ -21,13 +21,6 @@
 </head>
 <body class="nav-md">
 
-<!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.commands.QueryFormDataCommand"*/-->
-<!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
-<!--/*@thymesVar id="currentRace" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
-<!--/*@thymesVar id="races" type="java.util.List"*/-->
-<!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
-<!--/*@thymesVar id="currentRunner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
-<!--/*@thymesVar id="runners" type="java.util.List"*/-->
 <div class="container body">
 
     <div class="main_container">
@@ -45,6 +38,10 @@
             </div>
 
             <div th:fragment="queryForm">
+
+                <!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.commands.QueryFormDataCommand"*/-->
+                <!--/*@thymesVar id="country" type="java.lang.String"*/-->
+
             <form class="form-horizontal form-label-left"
             th:object="${queryFormData}"
             th:action="@{performQuery}"
@@ -289,7 +286,13 @@
         </div>
 
             <div th:fragment="queryResult">
-            <th:block th:each="currentRace : ${session.races}">
+
+                <!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
+                <!--/*@thymesVar id="races" type="java.util.List"*/-->
+                <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
+                <!--/*@thymesVar id="runners" type="java.util.List"*/-->
+
+            <th:block th:each="race : ${session.races}">
             <div class="row">
 
                 <div class="col-md-12 col-sm-12- col-xs-12">
@@ -298,8 +301,8 @@
 
                         <div class="x_title">
                             <div class="col-md-6">
-                                <h2 th:text="'Race ' + ${(currentRaceStat.index) + 1} + ' - ' + ${currentRace.country} +
-                                    ', ' + ${currentRace.time.toString()} + ' | ' + ${currentRace.trackType} + ' | ' + ${currentRace.trackLength}">
+                                <h2 th:text="'Race ' + ${raceStat.count} + ' - ' + ${race.country} +
+                                    ', ' + ${race.time.toString()} + ' | ' + ${race.trackType} + ' | ' + ${race.trackLength}">
                                     Race - Country, City, Time
                                 </h2>
                             </div>
@@ -319,7 +322,7 @@
                         <div class="x_content">
                             <div class="row">
                                 <table id="datatable-fixed-header"
-                                       th:id="'datatable-fixed-header' + ${currentRaceStat.count}"
+                                       th:id="'datatable-fixed-header' + ${raceStat.count}"
                                        class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
@@ -339,20 +342,48 @@
                                     </thead>
 
                                     <tbody>
-                                    <th:block th:each="currentRunner : ${currentRace.runners}">
+                                    <th:block th:each="runner : ${race.runners}">
                                         <tr>
-                                            <td th:text="${currentRunner.horseName}">Storm Ahead</td>
-                                            <td th:text="${currentRunner.price3}">4.20</td>
-                                            <td th:text="${currentRunner.mov3}">-1.35</td>
-                                            <td th:text="${currentRunner.price2}">4.2</td>
-                                            <td th:text="${currentRunner.mov2}">-1.35</td>
-                                            <td th:text="${currentRunner.price1}">4.35</td>
-                                            <td th:text="${currentRunner.mov1}">-1.62</td>
-                                            <td th:text="${currentRunner.mean}">-1.32</td>
-                                            <td th:text="${currentRunner.mov3to1}">0.23</td>
-                                            <td th:text="${currentRunner.stars}">0</td>
-                                            <td th:text="${currentRunner.nptips}">7</td>
-                                            <td th:text="${currentRunner.result}">P</td>
+                                            <td th:text="${runner.horseName}">Storm Ahead</td>
+                                            <td th:text="${runner.price3}">4.20</td>
+                                            <td th:text="${runner.mov3}">-1.35</td>
+                                            <td th:text="${runner.price2}">4.2</td>
+                                            <td th:text="${runner.mov2}">-1.35</td>
+                                            <td th:text="${runner.price1}">4.35</td>
+                                            <td th:text="${runner.mov1}">-1.62</td>
+                                            <td th:text="${runner.mean}">-1.32</td>
+                                            <td th:text="${runner.mov3to1}">0.23</td>
+                                            <td th:text="${runner.stars}">
+                                                <th:block th:if="${runner.stars == 0}" th:text="'0'">
+                                                    0
+                                                </th:block>
+                                                <th:block th:if="${runner.stars == 1}">
+                                                    <i class="fa fa-star"></i>
+                                                </th:block>
+                                                <th:block th:if="${runner.stars == 2}">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </th:block>
+                                                <th:block th:if="${runner.stars == 3}">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </th:block>
+                                                <th:block th:if="${runner.stars == 4}">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </th:block>
+                                                <th:block th:if="${runner.stars == 5}">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                </th:block>
+                                            </td>
+                                            <td th:text="${runner.nptips}">7</td>
+                                            <td th:text="${runner.result}">P</td>
                                         </tr>
                                         <tr th:remove="all">
                                             <td>Pastime</td>

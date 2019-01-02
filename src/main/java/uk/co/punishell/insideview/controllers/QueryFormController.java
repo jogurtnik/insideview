@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import uk.co.punishell.insideview.model.commands.QueryFormDataCommand;
 import uk.co.punishell.insideview.model.commands.RaceCommand;
 import uk.co.punishell.insideview.model.converters.RaceToRaceCommand;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@SessionAttributes("queryFormData")
 public class QueryFormController {
 
     QueryConversionService queryConversionService;
@@ -29,21 +31,20 @@ public class QueryFormController {
         this.queryConversionService = queryConversionService;
         this.raceToRaceCommand = raceToRaceCommand;
         this.raceService = raceService;
+
+        log.debug("Inside QueryFormController contructor...");
     }
 
     @GetMapping({"query", "/query", "query.html"})
     public String getQueryForm(Model model) {
 
-
-        model.addAttribute("queryFormData", new QueryFormDataCommand());
-
-
+        log.debug("Inside getQueryForm method...");
 
         return "query";
     }
 
     @PostMapping("performQuery")
-    public String performQuery(@ModelAttribute QueryFormDataCommand queryFormDataCommand, HttpSession session) {
+    public String performQuery(@ModelAttribute("queryFormData") QueryFormDataCommand queryFormDataCommand, HttpSession session) {
 
         List<RaceCommand> races = new LinkedList<>();
 
@@ -56,5 +57,10 @@ public class QueryFormController {
         session.setAttribute("queryFormData", queryFormDataCommand);
 
         return "redirect:/query";
+    }
+
+    @ModelAttribute("queryFormData")
+    public QueryFormDataCommand getQueryFormDataCommand(){
+        return new QueryFormDataCommand();
     }
 }
