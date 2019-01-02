@@ -1,7 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="fragments/navigation :: headCommon"></th:block>
+    <th:block th:replace="fragments/navigation :: headCommon">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="../../static/images/favicon.ico" type="image/ico"
+              th:href="@{/images/favicon.ico}"/>
+
+        <title>Inside View</title>
+
+        <!-- Bootstrap -->
+        <link href="../../static/vendors/css/bootstrap.min.css" rel="stylesheet"
+              th:href="@{/vendors/css/bootstrap.min.css}"/>
+        <!-- Font Awesome -->
+        <link href="../../static/vendors/css/font-awesome.min.css" rel="stylesheet"
+              th:href="@{/vendors/css/font-awesome.min.css}"/>
+
+        <link href="../../static/css/animate.min.css" rel="stylesheet"
+              th:href="@{/css/animate.min.css}"/>
+
+        <!-- Custom Theme Style -->
+        <link href="../../static/build/css/custom.min.css" rel="stylesheet"
+              th:href="@{/build/css/custom.min.css}"/>
+        <link href="../../static/css/icheck/flat/green.css" rel="stylesheet"
+              th:href="@{/css/icheck/flat/green.css}"/>
+    </th:block>
 
     <th:block th:fragment="headDatatables">
     <!-- Datatables Styles -->
@@ -353,8 +379,8 @@
                                             <td th:text="${runner.mov1}">-1.62</td>
                                             <td th:text="${runner.mean}">-1.32</td>
                                             <td th:text="${runner.mov3to1}">0.23</td>
-                                            <td th:text="${runner.stars}">
-                                                <th:block th:if="${runner.stars == 0}" th:text="'0'">
+                                            <td>
+                                                <th:block th:if="${runner.stars == 0}" th:text="''">
                                                     0
                                                 </th:block>
                                                 <th:block th:if="${runner.stars == 1}">
@@ -376,6 +402,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </th:block>
                                                 <th:block th:if="${runner.stars == 5}">
+                                                    <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
                                                     <i class="fa fa-star"></i>
