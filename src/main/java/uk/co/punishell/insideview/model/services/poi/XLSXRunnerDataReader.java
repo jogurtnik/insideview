@@ -2,7 +2,7 @@ package uk.co.punishell.insideview.model.services.poi;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
-import uk.co.punishell.insideview.model.services.NullValueResolver;
+import uk.co.punishell.insideview.model.services.util.NullValueResolver;
 
 /*
  * This class obtains properties of the runner from MS Office Excel spreadsheet

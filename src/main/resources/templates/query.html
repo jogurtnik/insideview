@@ -7,10 +7,10 @@
 
 </head>
 <body class="nav-md">
-<!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.commands.QueryFormDataCommand"*/-->
-<!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.commands.RaceCommand"*/-->
+<!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.services.web.commands.guiCommands.QueryFormDataCommand"*/-->
+<!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand"*/-->
 <!--/*@thymesVar id="races" type="java.util.List"*/-->
-<!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.commands.RunnerCommand"*/-->
+<!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.services.web.commands.entityCommands.RunnerCommand"*/-->
 <!--/*@thymesVar id="runners" type="java.util.List"*/-->
 <div class="container body">
 
@@ -30,7 +30,7 @@
 
             <div th:replace="fragments/queries :: queryForm"></div>
 
-            <div  th:if="${session.races != null}">
+            <div  th:if="${session.queryFormResult != null}">
                 <div th:replace="fragments/queries :: queryResult"></div>
             </div>
 

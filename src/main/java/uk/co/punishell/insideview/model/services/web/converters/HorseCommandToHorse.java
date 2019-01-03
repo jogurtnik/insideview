@@ -1,11 +1,11 @@
-package uk.co.punishell.insideview.model.converters;
+package uk.co.punishell.insideview.model.services.web.converters;
 
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import uk.co.punishell.insideview.model.commands.HorseCommand;
 import uk.co.punishell.insideview.model.database.entities.Horse;
+import uk.co.punishell.insideview.model.services.web.commands.entityCommands.HorseCommand;
 
 import java.util.HashSet;
 

@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services;
+package uk.co.punishell.insideview.model.services.util;
 
 import uk.co.punishell.insideview.model.database.entities.Race;
 

@@ -4,11 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import uk.co.punishell.insideview.model.converters.RaceCommandToRace;
-import uk.co.punishell.insideview.model.converters.RaceToRaceCommand;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
+import uk.co.punishell.insideview.model.services.web.converters.RaceCommandToRace;
+import uk.co.punishell.insideview.model.services.web.converters.RaceToRaceCommand;
 
 import java.util.HashSet;
 import java.util.List;

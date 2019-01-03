@@ -2,11 +2,11 @@ package uk.co.punishell.insideview.model.database.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import uk.co.punishell.insideview.model.converters.RunnerCommandToRunner;
-import uk.co.punishell.insideview.model.converters.RunnerToRunnerCommand;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
+import uk.co.punishell.insideview.model.services.web.converters.RunnerCommandToRunner;
+import uk.co.punishell.insideview.model.services.web.converters.RunnerToRunnerCommand;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;

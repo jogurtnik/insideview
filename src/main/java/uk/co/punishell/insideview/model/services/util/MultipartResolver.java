@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services;
+package uk.co.punishell.insideview.model.services.util;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;

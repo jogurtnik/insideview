@@ -1,13 +1,13 @@
-package uk.co.punishell.insideview.model.converters;
+package uk.co.punishell.insideview.model.services.web.converters;
 
 import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
-import uk.co.punishell.insideview.model.commands.RaceCommand;
-import uk.co.punishell.insideview.model.commands.RunnerCommand;
 import uk.co.punishell.insideview.model.database.entities.Race;
+import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RunnerCommand;
 
 import java.util.LinkedList;
 import java.util.List;

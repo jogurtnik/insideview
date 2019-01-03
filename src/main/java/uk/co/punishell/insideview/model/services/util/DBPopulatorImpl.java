@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services;
+package uk.co.punishell.insideview.model.services.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
