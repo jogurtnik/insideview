@@ -3,14 +3,20 @@ package uk.co.punishell.insideview.model.commands;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Setter
 @Getter
 @NoArgsConstructor
 public class QueryFormDataCommand {
 
-    /*private Date dateSince;
-    private Date dateTo;*/
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date dateSince = new Date();
+
+    @DateTimeFormat (pattern="yyyy-MM-dd")
+    private Date dateTo = new Date();
 
     private String country;
     private String[] countries = {"UK", "IRL", "FRA", "USA"};

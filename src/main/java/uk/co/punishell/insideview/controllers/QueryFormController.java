@@ -2,7 +2,6 @@ package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,14 +30,10 @@ public class QueryFormController {
         this.queryConversionService = queryConversionService;
         this.raceToRaceCommand = raceToRaceCommand;
         this.raceService = raceService;
-
-        log.debug("Inside QueryFormController contructor...");
     }
 
     @GetMapping({"query", "/query", "query.html"})
-    public String getQueryForm(Model model) {
-
-        log.debug("Inside getQueryForm method...");
+    public String getQueryForm() {
 
         return "query";
     }
@@ -50,8 +45,7 @@ public class QueryFormController {
 
         raceService.getRaces().iterator().forEachRemaining(race -> races.add(raceToRaceCommand.convert(race)));
 
-        log.debug("RaceCommand list size: " + races.size());
-        log.debug("RunnerCommand list size of first RaceCommand: " + ((LinkedList<RaceCommand>) races).getFirst().getRunners().size());
+        log.debug("QueryFormDataComman dateSince value: " + queryFormDataCommand.getDateSince().toString());
 
         session.setAttribute("races", races);
         session.setAttribute("queryFormData", queryFormDataCommand);
