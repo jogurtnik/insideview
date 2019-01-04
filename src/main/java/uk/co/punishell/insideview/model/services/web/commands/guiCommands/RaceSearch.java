@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
-public class QueryFormDataCommand {
+public class RaceSearch {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateSince = new Date();
