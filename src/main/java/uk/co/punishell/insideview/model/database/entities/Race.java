@@ -5,9 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Setter
 @Getter
@@ -22,8 +20,11 @@ public class Race extends BaseEntity {
     private Date date;
     private String country;
     private String city;
-    private String trackLength;
-    private String trackType;
+    private double trackLength;
+
+    @Embedded
+    private List<RaceType> raceTypes = new LinkedList<>();
+
     private LocalTime time;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "race")
@@ -33,22 +34,22 @@ public class Race extends BaseEntity {
     }
 
     public Race(Date date, String country, String city,
-                String trackLength, String trackType, LocalTime time) {
+                double trackLength, List<RaceType> raceTypes, LocalTime time) {
         this.date = date;
         this.country = country;
         this.city = city;
         this.trackLength = trackLength;
-        this.trackType = trackType;
+        this.raceTypes = raceTypes;
         this.time = time;
     }
 
     public Race(Date date, String country, String city,
-                String trackLength, String trackType, LocalTime time, Set<Runner> runners) {
+                double trackLength, List<RaceType> raceTypes, LocalTime time, Set<Runner> runners) {
         this.date = date;
         this.country = country;
         this.city = city;
         this.trackLength = trackLength;
-        this.trackType = trackType;
+        this.raceTypes = raceTypes;
         this.time = time;
         this.runners = runners;
     }

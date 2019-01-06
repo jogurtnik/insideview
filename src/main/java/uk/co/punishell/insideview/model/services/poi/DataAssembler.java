@@ -112,8 +112,7 @@ public class DataAssembler {
                 if (checkRace.getCountry().contains(race.getCountry()) &&
                     checkRace.getCity().contains(race.getCity()) &&
                     checkRace.getTime().equals(race.getTime()) &&
-                    checkRace.getTrackType().contains(race.getTrackType()) &&
-                    checkRace.getTrackLength().contains(race.getTrackLength())) {
+                    checkRace.getTrackLength() == race.getTrackLength()) {
 
                     return true;
                 }

@@ -3,8 +3,6 @@ package uk.co.punishell.insideview.model.services.web.forms;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.config.ConfigurableBeanFactory;
-import org.springframework.context.annotation.Scope;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -12,7 +10,6 @@ import java.util.Date;
 @Setter
 @Getter
 @NoArgsConstructor
-@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 public class QueryFormData {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")

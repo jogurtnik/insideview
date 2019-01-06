@@ -72,8 +72,7 @@ public class RaceServiceImpl implements RaceService {
                 if (    race.getDate().compareTo(foundRace.getDate()) == 0 &&
                         race.getCountry().equalsIgnoreCase(foundRace.getCountry())  &&
                         race.getTime().equals(foundRace.getTime()) &&
-                        race.getTrackLength().equalsIgnoreCase(foundRace.getTrackLength()) &&
-                        race.getTrackType().equalsIgnoreCase(foundRace.getTrackType())) {
+                        race.getTrackLength() == foundRace.getTrackLength()) {
 
                     log.info("Race already exists in the database with ID: " + foundRace.getId());
 

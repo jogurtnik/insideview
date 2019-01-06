@@ -17,10 +17,10 @@ public class RaceCommand {
     private Long id = 1L;
     private Date date;
     private LocalTime time;
-    private String country = "";
-    private String city = "";
-    private String trackLength = "";
-    private String trackType = "";
+    private String country;
+    private String city;
+    private double trackLength;
+    private List<RaceTypeCommand> raceTypes = new LinkedList<>();
 
     private List<RunnerCommand> runners = new LinkedList<>();
 }

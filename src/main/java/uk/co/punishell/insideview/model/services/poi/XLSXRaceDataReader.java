@@ -1,14 +1,20 @@
 package uk.co.punishell.insideview.model.services.poi;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
+import uk.co.punishell.insideview.model.database.entities.RaceType;
+import uk.co.punishell.insideview.model.database.entities.RaceTypeGroup;
 
 import java.time.LocalTime;
+import java.util.LinkedList;
+import java.util.List;
 
 /*
  * This class obtains properties of the race from MS Office Excel spreadsheet
  */
 
+@Slf4j
 @Service
 public class XLSXRaceDataReader {
 
@@ -24,13 +30,30 @@ public class XLSXRaceDataReader {
         return row.getCell(1).getStringCellValue();
     }
 
-    public String getTrackLength(Row row) {
+    public double getTrackLength(Row row) {
         return extractTrackLength(row.getCell(2).getStringCellValue());
     }
 
-    public String getTrackType(Row row) {
+    public List<RaceType> getRaceType(Row row) {
 
-        return extractTrackType(row.getCell(2).getStringCellValue());
+        String[] raceTypesStrings = extractTrackTypes(row.getCell(2).getStringCellValue());
+
+        List<RaceType> raceTypes = new LinkedList<>();
+
+        for (String raceTypeString : raceTypesStrings) {
+
+            raceTypes.add(new RaceType(raceTypeString));
+
+            // TODO set race type group
+            if (raceTypeString.equalsIgnoreCase("nov")) {
+                ((LinkedList<RaceType>) raceTypes).getLast().setRaceTypeGroup(RaceTypeGroup.HORSE);
+            } else if (raceTypeString.equalsIgnoreCase("mdn")) {
+                ((LinkedList<RaceType>) raceTypes).getLast().setRaceTypeGroup(RaceTypeGroup.HORSE);
+            }
+        }
+
+
+        return raceTypes;
     }
 
     public LocalTime getTime(Row row) {
@@ -38,7 +61,9 @@ public class XLSXRaceDataReader {
         return LocalTime.parse(row.getCell(3).getStringCellValue());
     }
 
-    private String extractTrackLength(String distance) {
+    private double extractTrackLength(String distance) {
+
+        double trackLength;
 
         StringBuilder sb = new StringBuilder();
         char[] c = distance.toCharArray();
@@ -47,31 +72,88 @@ public class XLSXRaceDataReader {
             if (x != ' ') {
                 sb.append(x);
             } else {
-                return sb.toString();
+
+                if (sb.toString().toCharArray().length == 2) {
+
+                    if (sb.toString().toCharArray()[1] == 'm') {
+
+                        distance = sb.toString();
+                        sb = new StringBuilder();
+                        sb.append(distance.toCharArray()[0]);
+                        distance = sb.toString();
+
+                        trackLength = Double.parseDouble(distance);
+
+                        log.debug("(M) Track length: " + trackLength);
+
+                        return trackLength;
+
+                    } else if (sb.toString().toCharArray()[1] == 'f') {
+
+                        distance = sb.toString();
+                        sb = new StringBuilder();
+                        sb.append(distance.toCharArray()[0]);
+                        distance = sb.toString();
+
+                        double one = 1.0;
+                        double eight = 8.0;
+                        trackLength = (one / eight) * Double.parseDouble(distance);
+
+                        log.debug("(F) Track length: " + trackLength);
+
+                        return trackLength;
+
+                    } else {
+
+                        return 0;
+                    }
+
+                } else if (sb.toString().toCharArray().length == 4) {
+
+                    distance = sb.toString();
+                    sb = new StringBuilder();
+                    sb.append(distance.toCharArray()[0]);
+
+                    double miles = Double.parseDouble(sb.toString());
+
+                    sb.deleteCharAt(0);
+                    sb.append(distance.toCharArray()[2]);
+
+                    double one = 1.0;
+                    double eight = 8.0;
+                    double furlongs = (one / eight) * Double.parseDouble(sb.toString());
+
+                    trackLength = miles + furlongs;
+
+                    log.debug("(4) Track length: " + trackLength);
+
+                    return  trackLength;
+
+                } else return 0;
             }
         }
 
-        return null;
+        return 0;
     }
 
-    private String extractTrackType(String distance) {
+    private String[] extractTrackTypes(String distance) {
 
         StringBuilder sb = new StringBuilder();
-        char[] c = distance.toCharArray();
 
-        for (int i = 0; i < c.length; i++) {
+        String[] trackTypesTemp = distance.split(" ");
 
-            if (c[i] == ' ') {
+        String[] trackTypes = new String[trackTypesTemp.length - 1];
 
-                for (int j = i + 1; j < c.length; j++) {
+        for (int i = 0; i < trackTypesTemp.length; i++) {
 
-                    sb.append(c[j]);
-                }
+            // skip first since it contains info about race track length
+            if (i != 0) {
 
-                return sb.toString();
+                trackTypes[i - 1] = trackTypesTemp[i];
             }
+
         }
 
-        return null;
+        return trackTypes;
     }
 }

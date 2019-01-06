@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.services.web.commands.entityCommands.HorseCommand;
 
-import java.util.HashSet;
-
 @Component
 public class HorseCommandToHorse implements Converter<HorseCommand, Horse> {
 
@@ -22,8 +20,8 @@ public class HorseCommandToHorse implements Converter<HorseCommand, Horse> {
         }
 
         final Horse horse = new Horse();
+        horse.setId(source.getId());
         horse.setName(source.getName());
-        horse.setRunners(new HashSet<>());
 
         return horse;
     }

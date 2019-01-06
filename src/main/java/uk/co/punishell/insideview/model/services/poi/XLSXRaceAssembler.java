@@ -5,14 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.ResourceData.DataFormat;
 import uk.co.punishell.insideview.model.database.entities.Race;
-import uk.co.punishell.insideview.model.database.entities.Runner;
+import uk.co.punishell.insideview.model.database.entities.RaceType;
 
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class XLSXRaceAssembler {
@@ -32,12 +33,11 @@ public class XLSXRaceAssembler {
         Date date = this.getDate(file);
         String country = xlsxRaceDataReader.getCountry(row);
         String city = xlsxRaceDataReader.getCity(row);
-        String tackLength = xlsxRaceDataReader.getTrackLength(row);
-        String trackType = xlsxRaceDataReader.getTrackType(row);
+        double trackLength = xlsxRaceDataReader.getTrackLength(row);
+        List<RaceType> raceTypes = xlsxRaceDataReader.getRaceType(row);
         LocalTime time = xlsxRaceDataReader.getTime(row);
-        Set<Runner> runners = new HashSet<>();
 
-        return new Race(date, country, city, tackLength, trackType, time, runners);
+        return new Race(date, country, city, trackLength, raceTypes, time);
     }
 
     private Date getDate(File file) {
