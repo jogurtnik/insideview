@@ -3,9 +3,7 @@ package uk.co.punishell.insideview.model.database.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.Date;
 import java.util.HashSet;
@@ -14,6 +12,11 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
+@NamedEntityGraph(name = "graph.Race.runners",
+                  attributeNodes = @NamedAttributeNode(value = "runners",
+                                                       subgraph = "runners"),
+                  subgraphs = @NamedSubgraph(name = "runners",
+                                             attributeNodes = @NamedAttributeNode("horse")))
 public class Race extends BaseEntity {
 
     private Date date;
@@ -29,7 +32,8 @@ public class Race extends BaseEntity {
     public Race() {
     }
 
-    public Race(Date date, String country, String city, String trackLength, String trackType, LocalTime time) {
+    public Race(Date date, String country, String city,
+                String trackLength, String trackType, LocalTime time) {
         this.date = date;
         this.country = country;
         this.city = city;
@@ -38,7 +42,8 @@ public class Race extends BaseEntity {
         this.time = time;
     }
 
-    public Race(Date date, String country, String city, String trackLength, String trackType, LocalTime time, Set<Runner> runners) {
+    public Race(Date date, String country, String city,
+                String trackLength, String trackType, LocalTime time, Set<Runner> runners) {
         this.date = date;
         this.country = country;
         this.city = city;
