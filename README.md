@@ -12,7 +12,7 @@ Please see belog the list of used technologies. List might not be up to date due
 - Spring Boot, Spring Security and Spring Data;
 - Thymeleaf, HTML, CSS and JS: rendering the application GUI;
 - Apache POI: reading excel files as initial datasource;
-- JPA 2.0 Criteria API and Static Metamodel API: generating dynamic queries;
+- Hibernate JPA 2 Metamodel Generator;
 - JUnit 4: unit and integration testing;
 - https://github.com/puikinsh/gentelella.git: free Bootstrap 3 Admin Template;
 - CircleCI: continuous integration and delivery system;
