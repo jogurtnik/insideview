@@ -6,7 +6,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -15,12 +14,12 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Runner extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "race_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Race race;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "horse_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Horse horse;

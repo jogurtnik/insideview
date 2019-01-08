@@ -29,6 +29,7 @@ public class RaceCommandToRace implements Converter<RaceCommand, Race> {
         }
 
         final Race race = new Race();
+        race.setId(source.getId());
         race.setDate(source.getDate());
         race.setTime(source.getTime());
         race.setCountry(source.getCountry());

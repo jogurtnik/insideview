@@ -24,9 +24,7 @@ public class Race extends BaseEntity {
 
     @ElementCollection(targetClass = RaceType.class)
     @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "id", column = @Column(name = "raceType_id"))
-    })
+    @AttributeOverride(name = "id", column = @Column(name = "raceType_id"))
     private List<RaceType> raceTypes = new LinkedList<>();
 
     private LocalTime time;

@@ -8,10 +8,6 @@ import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.RaceType;
 import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RunnerCommand;
-
-import java.util.LinkedList;
-import java.util.List;
 
 @Component
 public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
@@ -36,13 +32,10 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
         }
 
         final RaceCommand raceCommand = new RaceCommand();
-
-        List<RunnerCommand> runners = new LinkedList<>();
         source
                 .getRunners()
                 .iterator()
-                .forEachRemaining(runner -> runners.add(runnerToRunnerCommand.convert(runner)));
-        raceCommand.setRunners(runners);
+                .forEachRemaining(runner -> raceCommand.getRunners().add(runnerToRunnerCommand.convert(runner)));
 
         raceCommand.setId(source.getId());
         raceCommand.setDate(source.getDate());

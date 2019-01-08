@@ -30,7 +30,7 @@ public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
 
         final RunnerCommand runnerCommand = new RunnerCommand();
         runnerCommand.setId(source.getId());
-        runnerCommand.setHorseName(source.getHorse().getName());
+        runnerCommand.setHorse(horseToHorseCommand.convert(source.getHorse()));
         runnerCommand.setStatus(source.isStatus());
         runnerCommand.setPrice9(source.getPrice9());
         runnerCommand.setPrice10(source.getPrice10());

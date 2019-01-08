@@ -10,6 +10,12 @@ import uk.co.punishell.insideview.model.services.web.commands.entityCommands.Run
 @Component
 public class RunnerCommandToRunner implements Converter<RunnerCommand, Runner> {
 
+    private HorseCommandToHorse horseCommandToHorse;
+
+    public RunnerCommandToRunner(HorseCommandToHorse horseCommandToHorse) {
+        this.horseCommandToHorse = horseCommandToHorse;
+    }
+
     @Synchronized
     @Nullable
     @Override
@@ -20,6 +26,8 @@ public class RunnerCommandToRunner implements Converter<RunnerCommand, Runner> {
         }
 
         final Runner runner = new Runner();
+        runner.setId(source.getId());
+        runner.setHorse(horseCommandToHorse.convert(source.getHorse()));
         runner.setStatus(source.isStatus());
         runner.setPrice9(source.getPrice9());
         runner.setPrice10(source.getPrice10());
@@ -41,6 +49,27 @@ public class RunnerCommandToRunner implements Converter<RunnerCommand, Runner> {
         runner.setMov1(source.getMov1());
         runner.setMean(source.getMean());
         runner.setMov3to1(source.getMov3to1());
+
+        if (source.getResult() != null) {
+
+            if (source.getResult().equalsIgnoreCase("W")) {
+
+                runner.setWinner(true);
+                runner.setPlaced(true);
+
+            } else if (source.getResult().equalsIgnoreCase("P")) {
+
+                runner.setWinner(false);
+                runner.setPlaced(true);
+
+            } else {
+
+                runner.setWinner(false);
+                runner.setPlaced(false);
+
+            }
+        }
+
         runner.setCpr(source.getCpr());
         runner.setNptips(source.getNptips());
         runner.setStars(source.getStars());

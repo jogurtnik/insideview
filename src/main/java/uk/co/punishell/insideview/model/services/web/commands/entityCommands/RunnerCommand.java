@@ -11,7 +11,7 @@ public class RunnerCommand {
 
     private Long id;
 
-    private String horseName;
+    private HorseCommand horse;
 
     private boolean status;
 
