@@ -10,7 +10,7 @@ import javax.persistence.Enumerated;
 @Setter
 @Getter
 @Embeddable
-public class RaceType {
+public class RaceType extends EmbeddedBaseEntity{
 
     private String name;
 
@@ -21,10 +21,5 @@ public class RaceType {
 
     public RaceType(String name) {
         this.name = name;
-    }
-
-    public RaceType(String name, RaceTypeGroup raceTypeGroupp) {
-        this.name = name;
-        this.raceTypeGroup = raceTypeGroup;
     }
 }

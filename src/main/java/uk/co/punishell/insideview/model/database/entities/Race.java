@@ -22,7 +22,11 @@ public class Race extends BaseEntity {
     private String city;
     private double trackLength;
 
+    @ElementCollection(targetClass = RaceType.class)
     @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "id", column = @Column(name = "raceType_id"))
+    })
     private List<RaceType> raceTypes = new LinkedList<>();
 
     private LocalTime time;

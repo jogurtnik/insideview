@@ -11,7 +11,7 @@ import uk.co.punishell.insideview.model.services.web.commands.entityCommands.Run
 @Component
 public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
 
-    HorseToHorseCommand horseToHorseCommand;
+    private HorseToHorseCommand horseToHorseCommand;
 
     @Autowired
     public RunnerToRunnerCommand(HorseToHorseCommand horseToHorseCommand) {
