@@ -1,5 +1,6 @@
 package uk.co.punishell.insideview.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,9 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-
+@Slf4j
 @Controller
 public class DatabaseManagementController {
-
-    private static final Logger logger = LoggerFactory.getLogger(DatabaseManagementController.class);
 
     DBPopulatingManager dbPopulatingManager;
 
@@ -54,7 +53,7 @@ public class DatabaseManagementController {
                 stream.write(bytes);
                 stream.close();
 
-                logger.info("Server File Location="
+                log.info("Server File Location="
                         + serverFile.getAbsolutePath());
 
                 dbPopulatingManager.populateDB(serverFile);

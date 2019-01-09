@@ -84,8 +84,6 @@ public class XLSXRaceDataReader {
 
                         trackLength = Double.parseDouble(distance);
 
-                        log.debug("(M) Track length: " + trackLength);
-
                         return trackLength;
 
                     } else if (sb.toString().toCharArray()[1] == 'f') {
@@ -98,8 +96,6 @@ public class XLSXRaceDataReader {
                         double one = 1.0;
                         double eight = 8.0;
                         trackLength = (one / eight) * Double.parseDouble(distance);
-
-                        log.debug("(F) Track length: " + trackLength);
 
                         return trackLength;
 
@@ -124,8 +120,6 @@ public class XLSXRaceDataReader {
                     double furlongs = (one / eight) * Double.parseDouble(sb.toString());
 
                     trackLength = miles + furlongs;
-
-                    log.debug("(4) Track length: " + trackLength);
 
                     return  trackLength;
 

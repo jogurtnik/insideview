@@ -18,9 +18,9 @@ import javax.servlet.http.HttpSession;
 @SessionAttributes("queryFormData")
 public class QueryFormController {
 
-    QueryFormConversionService queryFormConversionService;
+    private QueryFormConversionService queryFormConversionService;
 
-    QueryFormResult queryFormResult;
+    private QueryFormResult queryFormResult;
 
     @Autowired
     public QueryFormController(QueryFormConversionService queryFormConversionService) {
