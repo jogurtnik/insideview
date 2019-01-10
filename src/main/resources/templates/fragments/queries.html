@@ -65,10 +65,10 @@
 
             <div th:fragment="queryForm">
 
-                <!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.model.services.web.forms.QueryFormData"*/-->
+                <!--/*@thymesVar id="raceSearch" type="uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch"*/-->
 
             <form class="form-horizontal form-label-left"
-            th:object="${queryFormData}"
+            th:object="${session.raceSearch}"
             th:action="@{performQuery}"
             th:method="POST">
             <div class="row">
@@ -100,75 +100,71 @@
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-since">Date since: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <p><input id="date-since" class="form-control col-md-6 col-xs-12" type="date"
-                                                          th:field="${queryFormData.dateSince}"
+                                                          th:field="${raceSearch.dateSince}"
                                                           th:type="date"/></p>
                                             </div>
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-to">Date to: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <p><input id="date-to" class="form-control col-md-6 col-xs-12" type="date"
-                                                          th:field="${queryFormData.dateTo}"/></p>
+                                                          th:field="${raceSearch.dateTo}"/></p>
                                             </div>
                                     </div>
                                     <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="country">Country: </label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select id="country" class="form-control" th:field="${queryFormData.country}">
+                                                <select id="country" class="form-control"
+                                                        th:field="${raceSearch.country}">
                                                     <option
-                                                            th:each="country : ${queryFormData.countries}"
+                                                            th:each="country : ${raceSearch.countries}"
                                                             th:value="${country}"
                                                             th:text="${country}" >Select country</option>
                                                 </select>
                                             </div>
                                     </div>
                                     <div class="form-group">
-                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackLength">Track length: </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select id="trackLength" class="form-control" th:field="${queryFormData.trackLength}">
-                                                    <option
-                                                            th:each="trackLength : ${queryFormData.trackLengths}"
-                                                            th:value="${trackLength}"
-                                                            th:text="${trackLength}" >Select track length</option>
-                                                </select>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackLength">Track length: </label>
+                                        <div id="trackLength">
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="trackLengthMin">min</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="trackLengthMin" class="form-control col-md-2 col-xs-12" type="number" placeholder="min"
+                                                       th:field="${raceSearch.trackLengthMin}"/>
                                             </div>
-                                            <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackType">Track type: </label>
-                                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                                <select id="trackType" class="form-control" th:field="${queryFormData.trackType}">
-                                                    <option
-                                                            th:each="trackType : ${queryFormData.trackTypes}"
-                                                            th:value="${trackType}"
-                                                            th:text="${trackType}" >Select track type</option>
-                                                </select>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="trackLengthMax">max</label>
+                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                                <input id="trackLengthMax" class="form-control col-md-2 col-xs-12" type="number" placeholder="max"
+                                                       th:field="${raceSearch.trackLengthMax}"/>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="fiveStarsCount">Five stars count: </label>
                                         <div id="fiveStarsCount">
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMin">MIN</label>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMin">min</label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="fiveStarsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                       th:field="${queryFormData.fiveStarsCountMin}"/>
+                                                       th:field="${raceSearch.fiveStarsCountMin}"/>
                                             </div>
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMax">MIN</label>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMax">max</label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="fiveStarsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                       th:field="${queryFormData.fiveStarsCountMax}"/>
+                                                       th:field="${raceSearch.fiveStarsCountMax}"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnersCount">Runners count: </label>
                                         <div id="runnersCount">
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMin">MIN</label>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMin">min</label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="runnersCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                       th:field="${queryFormData.runnersCountMin}"/>
+                                                       th:field="${raceSearch.runnersCountMin}"/>
                                             </div>
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMax">MAX</label>
+                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMax">max</label>
                                             <div class="col-md-2 col-sm-2 col-xs-12">
                                                 <input id="runnersCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                       th:field="${queryFormData.runnersCountMax}"/>
+                                                       th:field="${raceSearch.runnersCountMax}"/>
                                             </div>
                                         </div>
                                     </div>
@@ -206,45 +202,45 @@
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov1">Mov1: </label>
                                     <div id="mov1">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Min">MIN</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Min">min</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="mov1Min" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.mov1Min}"/>
+                                            <input id="mov1Min" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${raceSearch.mov1Min}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Max">MAX</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Max">max</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="mov1Max" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.mov1Max}"/>
+                                            <input id="mov1Max" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${raceSearch.mov1Max}"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mean">Mean: </label>
                                     <div id="mean">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMin">MIN</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMin">min</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="meanMin" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.meanMin}"/>
+                                                   th:field="${raceSearch.meanMin}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMax">MAX</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMax">max</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="meanMax" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.meanMax}"/>
+                                                   th:field="${raceSearch.meanMax}"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov3to1">Mov3to1: </label>
                                     <div id="mov3to1">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Min">MIN</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Min">min</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="mov3to1Min" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.mov3to1Min}"/>
+                                                   th:field="${raceSearch.mov3to1Min}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Max">MAX</label>
+                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Max">max</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="mov3to1Max" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${queryFormData.mov3to1Max}"/>
+                                                   th:field="${raceSearch.mov3to1Max}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -254,13 +250,13 @@
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMin">MIN</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="nptipsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${queryFormData.nptipsCountMin}"
-                                                   th:value="${queryFormData.nptipsCountMin}"/>
+                                                   th:field="${raceSearch.nptipsCountMin}"
+                                                   th:value="${raceSearch.nptipsCountMin}"/>
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMax">MAX</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="nptipsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${queryFormData.nptipsCountMax}"/>
+                                                   th:field="${raceSearch.nptipsCountMax}"/>
                                         </div>
                                     </div>
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsPerRace">per race: </label>
@@ -268,12 +264,12 @@
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMin">MIN</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="nptipsPerRaceMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${queryFormData.nptipsPerRaceMin}"/>
+                                                   th:field="${raceSearch.nptipsPerRaceMin}"/>
                                         </div>
                                         <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMax">MAX</label>
                                         <div class="col-md-2 col-sm-2 col-xs-12">
                                             <input id="nptipsPerRaceMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${queryFormData.nptipsPerRaceMax}"/>
+                                                   th:field="${raceSearch.nptipsPerRaceMax}"/>
                                         </div>
                                     </div>
                                 </div>
@@ -283,19 +279,19 @@
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlace">Favourite place: </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="favouritePlace" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${queryFormData.favouritePlace}"/>
+                                               th:field="${raceSearch.favouritePlace}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnerStars">Stars: </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="runnerStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${queryFormData.runnerStars}"/>
+                                               th:field="${raceSearch.runnerStars}"/>
                                     </div>
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlaceAmongStars">Fav place among stars: </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <input id="favouritePlaceAmongStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${queryFormData.favouritePlaceAmongStars}"/>
+                                               th:field="${raceSearch.favouritePlaceAmongStars}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -330,7 +326,7 @@
                         <div class="x_title">
                             <div class="col-md-6">
                                 <h2 th:text="'Race ' + ${raceStat.count} + ' - ' + ${race.country} +
-                                    ', ' + ${race.time.toString()} + ' | ' + ${race.trackType} + ' | ' + ${race.trackLength}">
+                                    ', ' + ${race.time.toString()}  + ' | ' + ${race.trackLength} + ' (miles)'">
                                     Race - Country, City, Time
                                 </h2>
                             </div>
@@ -372,7 +368,7 @@
                                     <tbody>
                                     <th:block th:each="runner : ${race.runners}">
                                         <tr>
-                                            <td th:text="${runner.horseName}">Storm Ahead</td>
+                                            <td th:text="${runner.horse.getName()}">Storm Ahead</td>
                                             <td th:text="${runner.price3}">4.20</td>
                                             <td th:text="${runner.mov3}">-1.35</td>
                                             <td th:text="${runner.price2}">4.2</td>
@@ -466,8 +462,10 @@
     <script src="../../static/js/datatables/dataTables.fixedHeader.min.js"
             th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
 
-    <th:block th:if="${not #lists.isEmpty(session.races)}"
-              th:each="race : ${session.races}">
+
+    <th:block th:if="${session.queryFormResult != null}">
+    <th:block th:if="${not #lists.isEmpty(session.queryFormResult.races)}"
+              th:each="race : ${session.queryFormResult.races}">
 
     <script type="text/javascript"
             th:inline="javascript">
@@ -482,6 +480,7 @@
         });
 
     </script>
+    </th:block>
     </th:block>
 </th:block>
 

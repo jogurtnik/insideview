@@ -15,6 +15,7 @@ public class RaceSpecification implements Specification<Race> {
 
     QueryFormData criteria;
 
+    @SuppressWarnings("unchecked")
     @Override
     public Predicate toPredicate(Root<Race> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 

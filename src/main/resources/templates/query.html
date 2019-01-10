@@ -42,7 +42,7 @@
 <th:block th:replace="fragments/navigation :: scriptsCommon"></th:block>
 
 
-<th:block th:if="${session.races != null}"
+<th:block th:if="${session.queryFormResult != null}"
           th:replace="fragments/queries :: scriptsDatatables"></th:block>
 </body>
 </html>

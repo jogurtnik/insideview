@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceTypeCommand;
 
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -19,13 +21,13 @@ public class RaceSearch {
     private Date dateTo = new Date();
 
     private String country;
-    private String[] countries = {"UK", "IRL", "FRA", "USA"};
+    private String[] countries = {"UK", "IE"};
 
-    private String trackLength;
-    private String[] trackLengths = {"4F", "5F", "6F", "7F"};
+    private double trackLengthMin;
+    private double trackLengthMax;
 
-    private String trackType;
-    private String[] trackTypes = {"Hcap", "Hcap Hrd", "Nov Stks", "Mdn Stks", "Stks", "Mdn", "Grp 3"};
+    private List<RaceTypeCommand> raceTypes;
+    private List<String> selectedRaceTypes;
 
     private double price9Min;
     private double price9Max;

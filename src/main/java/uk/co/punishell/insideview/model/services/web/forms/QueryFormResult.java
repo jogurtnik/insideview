@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Setter
@@ -12,5 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class QueryFormResult {
 
-    private List<RaceCommand> races;
+    private List<RaceCommand> races = new LinkedList<>();
 }
