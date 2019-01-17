@@ -2,7 +2,7 @@ package uk.co.punishell.insideview.model.database.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
 import uk.co.punishell.insideview.model.database.entities.Race;
-import uk.co.punishell.insideview.model.services.web.forms.QueryFormData;
+import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -13,7 +13,11 @@ import java.util.List;
 
 public class RaceSpecification implements Specification<Race> {
 
-    QueryFormData criteria;
+    RaceSearch criteria;
+
+    public RaceSpecification(RaceSearch criteria) {
+        this.criteria = criteria;
+    }
 
     @SuppressWarnings("unchecked")
     @Override

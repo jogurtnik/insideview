@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class RaceSearch {
+public class RaceSearch extends Criteria {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dateSince = new Date();
