@@ -41,6 +41,8 @@
 </div>
 <th:block th:replace="fragments/navigation :: scriptsCommon"></th:block>
 
+<th:block th:replace="fragments/queries :: scriptsQueryForm"></th:block>
+
 
 <th:block th:if="${session.queryFormResult != null}"
           th:replace="fragments/queries :: scriptsDatatables"></th:block>

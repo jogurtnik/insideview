@@ -68,22 +68,22 @@ public class RaceServiceImpl implements RaceService {
 
             for (Race foundRace : races) {
 
-                if (raceRepository.findByDateAndCityAndCountryAndTimeAndTrackLength(race.getDate(),
+                /*if (raceRepository.findByDateAndCityAndCountryAndTimeAndTrackLength(race.getDate(),
                         race.getCity(), race.getCountry(), race.getTime(), race.getTrackLength()) != null) {
 
                     log.info("Race already exists in the database with ID: " + foundRace.getId());
 
                     return foundRace;
-                }
+                }*/
 
                 // Check first if race already exists in the database
-                /*if (    race.getDate().compareTo(foundRace.getDate()) == 0 &&
+                if (    race.getDate().compareTo(foundRace.getDate()) == 0 &&
                         race.getCountry().equalsIgnoreCase(foundRace.getCountry())  &&
                         race.getTime().equals(foundRace.getTime()) &&
                         race.getTrackLength() == foundRace.getTrackLength()) {
 
 
-                }*/
+                }
             }
 
             return saveAndSetRelations(race);

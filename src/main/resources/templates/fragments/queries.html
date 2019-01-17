@@ -40,6 +40,10 @@
     <link href="../../static/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"
         th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
 
+    <!-- select2 -->
+    <link href="../../static/css/select/select2.min.css" rel="stylesheet"
+        th:href="@{/css/select/select2.min.css}">
+
     <!-- jQuery -->
     <script src="../../static/vendors/js/jquery.min.js"
             th:src="@{/vendors/js/jquery.min.js}"></script>
@@ -103,6 +107,8 @@
                                                           th:field="${raceSearch.dateSince}"
                                                           th:type="date"/></p>
                                             </div>
+                                    </div>
+                                    <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-to">Date to: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <p><input id="date-to" class="form-control col-md-6 col-xs-12" type="date"
@@ -124,16 +130,27 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="trackLength">Track length: </label>
                                         <div id="trackLength">
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="trackLengthMin">min</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input id="trackLengthMin" class="form-control col-md-2 col-xs-12" type="number" placeholder="min"
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                                <input id="trackLengthMin" class="form-control col-md-2 col-xs-12" type="number" step="0.125" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="minimum"
                                                        th:field="${raceSearch.trackLengthMin}"/>
                                             </div>
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="trackLengthMax">max</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
-                                                <input id="trackLengthMax" class="form-control col-md-2 col-xs-12" type="number" placeholder="max"
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
+                                                <input id="trackLengthMax" class="form-control col-md-2 col-xs-12" type="number" step="0.125" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="maximum"
                                                        th:field="${raceSearch.trackLengthMax}"/>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceType">Race type: </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select id="raceType" class="select2_multiple form-control" multiple="multiple"
+                                                th:field="${raceSearch.selectedRaceTypes}">
+                                            <option th:each="type : ${raceSearch.raceTypes}"
+                                                    th:value="${type.name}"
+                                                    th:text="${type.name}">Choose option</option>
+                                        </select>
                                         </div>
                                     </div>
                                 </div>
@@ -141,14 +158,14 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="fiveStarsCount">Five stars count: </label>
                                         <div id="fiveStarsCount">
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMin">min</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="fiveStarsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="minimum"
                                                        th:field="${raceSearch.fiveStarsCountMin}"/>
                                             </div>
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="fiveStarsCountMax">max</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="fiveStarsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="maximum"
                                                        th:field="${raceSearch.fiveStarsCountMax}"/>
                                             </div>
                                         </div>
@@ -156,14 +173,14 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnersCount">Runners count: </label>
                                         <div id="runnersCount">
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMin">min</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="runnersCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="minimum"
                                                        th:field="${raceSearch.runnersCountMin}"/>
                                             </div>
-                                            <label class="control-label col-md-1 col-sm-1 col-xs-12" for="runnersCountMax">max</label>
-                                            <div class="col-md-2 col-sm-2 col-xs-12">
+                                            <div class="col-md-3 col-sm-3 col-xs-12">
                                                 <input id="runnersCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                       data-toggle="tooltip" data-placement="top" title="maximum"
                                                        th:field="${raceSearch.runnersCountMax}"/>
                                             </div>
                                         </div>
@@ -198,106 +215,486 @@
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov1">Mov1: </label>
-                                    <div id="mov1">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Min">min</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="mov1Min" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.mov1Min}"/>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price9">Price at 9:</label>
+                                    <div id="price9">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price9Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price9Min}"
+                                                   th:value="${raceSearch.price9Min}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov1Max">max</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="mov1Max" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.mov1Max}"/>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price9Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price9Max}"
+                                                   th:value="${raceSearch.price9Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price10">Price at 10:</label>
+                                    <div id="price10">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price10Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price10Min}"
+                                                   th:value="${raceSearch.price10Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price10Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price10Max}"
+                                                   th:value="${raceSearch.price10Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price11">Price at 11:</label>
+                                    <div id="price11">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price11Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price11Min}"
+                                                   th:value="${raceSearch.price11Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price11Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price11Max}"
+                                                   th:value="${raceSearch.price11Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov9to11"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 9-11">Mov 9-11:</label>
+                                    <div id="mov9to11">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov9to11Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov9to11Min}"
+                                                   th:value="${raceSearch.mov9to11Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov9to11Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov9to11Max}"
+                                                   th:value="${raceSearch.mov9to11Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price60">Price at 60:</label>
+                                    <div id="price60">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price60Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price60Min}"
+                                                   th:value="${raceSearch.price60Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price60Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price60Max}"
+                                                   th:value="${raceSearch.price60Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov60"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 60">Mov 60:</label>
+                                    <div id="mov60">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov60Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov60Min}"
+                                                   th:value="${raceSearch.mov60Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov60Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov60Max}"
+                                                   th:value="${raceSearch.mov60Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price30">Price at 30:</label>
+                                    <div id="price30">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price30Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price30Min}"
+                                                   th:value="${raceSearch.price30Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price30Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price30Max}"
+                                                   th:value="${raceSearch.price30Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov30"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 30">Mov 30:</label>
+                                    <div id="mov30">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov30Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov30Min}"
+                                                   th:value="${raceSearch.mov30Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov30Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov30Max}"
+                                                   th:value="${raceSearch.mov30Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price15">Price at 15:</label>
+                                    <div id="price15">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price15Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price15Min}"
+                                                   th:value="${raceSearch.price15Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price15Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price15Max}"
+                                                   th:value="${raceSearch.price15Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov15"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 15">Mov 15:</label>
+                                    <div id="mov15">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov15Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov15Min}"
+                                                   th:value="${raceSearch.mov15Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov15Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov15Max}"
+                                                   th:value="${raceSearch.mov15Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price5">Price at 5:</label>
+                                    <div id="price5">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price5Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price5Min}"
+                                                   th:value="${raceSearch.price5Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price5Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price5Max}"
+                                                   th:value="${raceSearch.price5Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov5"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 5">Mov 5:</label>
+                                    <div id="mov5">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov5Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov5Min}"
+                                                   th:value="${raceSearch.mov5Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov5Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov5Max}"
+                                                   th:value="${raceSearch.mov5Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price3">Price at 3:</label>
+                                    <div id="price3">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price3Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price3Min}"
+                                                   th:value="${raceSearch.price3Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price3Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price3Max}"
+                                                   th:value="${raceSearch.price3Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov3"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 3">Mov 3:</label>
+                                    <div id="mov3">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov3Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov3Min}"
+                                                   th:value="${raceSearch.mov3Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov3Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov3Max}"
+                                                   th:value="${raceSearch.mov3Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price2">Price at 2:</label>
+                                    <div id="price2">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price2Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price2Min}"
+                                                   th:value="${raceSearch.price2Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price2Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price5Max}"
+                                                   th:value="${raceSearch.price5Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov2"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 2">Mov 2:</label>
+                                    <div id="mov2">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov2Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov2Min}"
+                                                   th:value="${raceSearch.mov2Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov2Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov2Max}"
+                                                   th:value="${raceSearch.mov2Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price1">Price at 1:</label>
+                                    <div id="price1">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price1Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.price1Min}"
+                                                   th:value="${raceSearch.price1Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="price1Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.price1Max}"
+                                                   th:value="${raceSearch.price1Max}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov1"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 1">Mov 1:</label>
+                                    <div id="mov1">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov1Min" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov1Min}"
+                                                   th:value="${raceSearch.mov1Min}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="mov1Max" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov1Max}"
+                                                   th:value="${raceSearch.mov1Max}"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mean">Mean: </label>
                                     <div id="mean">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMin">min</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="meanMin" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${raceSearch.meanMin}"/>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="meanMin" class="form-control col-md-2 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.meanMin}"
+                                                   th:value="${raceSearch.meanMin}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="meanMax">max</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="meanMax" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${raceSearch.meanMax}"/>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="meanMax" class="form-control col-md-2 col-xs-12" type="number" step="0.01" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.meanMax}"
+                                                   th:value="${raceSearch.meanMax}"/>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov3to1">Mov3to1: </label>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov3to1"
+                                           data-toggle="tooltip" data-placement="right" title="Movement 3-1">Mov 3-1: </label>
                                     <div id="mov3to1">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Min">min</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
                                             <input id="mov3to1Min" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${raceSearch.mov3to1Min}"/>
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.mov3to1Min}"
+                                                   th:value="${raceSearch.mov3to1Min}"/>
                                         </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="mov3to1Max">max</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
                                             <input id="mov3to1Max" class="form-control col-md-2 col-xs-12" type="number" value="0" step="0.01"
-                                                   th:field="${raceSearch.mov3to1Max}"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsCount">NPTips: </label>
-                                    <div id="nptipsCount">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMin">MIN</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="nptipsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.nptipsCountMin}"
-                                                   th:value="${raceSearch.nptipsCountMin}"/>
-                                        </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsCountMax">MAX</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="nptipsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.nptipsCountMax}"/>
-                                        </div>
-                                    </div>
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsPerRace">per race: </label>
-                                    <div id="nptipsPerRace">
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMin">MIN</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="nptipsPerRaceMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.nptipsPerRaceMin}"/>
-                                        </div>
-                                        <label class="control-label col-md-1 col-sm-1 col-xs-12" for="nptipsPerRaceMax">MAX</label>
-                                        <div class="col-md-2 col-sm-2 col-xs-12">
-                                            <input id="nptipsPerRaceMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
-                                                   th:field="${raceSearch.nptipsPerRaceMax}"/>
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.mov3to1Max}"
+                                                   th:value="${raceSearch.mov3to1Max}"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlace">Favourite place: </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="favouritePlace" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${raceSearch.favouritePlace}"/>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsCount">NPTips: </label>
+                                    <div id="nptipsCount">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="nptipsCountMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.nptipsCountMin}"
+                                                   th:value="${raceSearch.nptipsCountMin}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="nptipsCountMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.nptipsCountMax}"
+                                                   th:value="${raceSearch.nptipsCountMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="nptipsPerRace"
+                                           data-toggle="tooltip" data-placement="right" title="NPTips per race">NPTips/R: </label>
+                                    <div id="nptipsPerRace">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="nptipsPerRaceMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.nptipsPerRaceMin}"
+                                                   th:value="${raceSearch.nptipsPerRaceMin}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="nptipsPerRaceMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.nptipsPerRaceMax}"
+                                                   th:value="${raceSearch.nptipsPerRaceMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="result">Result:</label>
+                                    <div id="result">
+                                        <div class="checkbox col-md-4 col-sm-4 col-xs-12">
+                                            <label>
+                                                <input type="checkbox" class="flat" th:field="${raceSearch.winner}" th:checked="${raceSearch.winner}"> Winner
+                                            </label>
+                                        </div>
+                                        <div class="checkbox col-md-4 col-sm-4 col-xs-12">
+                                            <label>
+                                                <input type="checkbox" class="flat" th:field="${raceSearch.placed}" th:checked="${raceSearch.placed}"> Placed
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="cpr"
+                                           data-toggle="tooltip" data-placement="right" title="Cherry picks">CPR: </label>
+                                    <div id="cpr">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="cprMin" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${raceSearch.cprMin}"
+                                                   th:value="${raceSearch.cprMin}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="cprMax" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${raceSearch.cprMax}"
+                                                   th:value="${raceSearch.cprMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlace"
+                                           data-toggle="tooltip" data-placement="right" title="Favourite place">FP: </label>
+                                    <div id="favouritePlace">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="favouritePlaceMin" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="minimum"
+                                               th:field="${raceSearch.favouritePlaceMin}"
+                                               th:value="${raceSearch.favouritePlaceMin}"/>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="favouritePlaceMax" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="maximum"
+                                               th:field="${raceSearch.favouritePlaceMax}"
+                                               th:value="${raceSearch.favouritePlaceMax}"/>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnerStars">Stars: </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="runnerStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${raceSearch.runnerStars}"/>
+                                    <div id="runnerStars">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="runnerStarsMin" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="minimum"
+                                               th:field="${raceSearch.runnerStarsMin}"
+                                               th:value="${raceSearch.runnerStarsMin}"/>
                                     </div>
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlaceAmongStars">Fav place among stars: </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <input id="favouritePlaceAmongStars" class="form-control col-md-6 col-xs-12" type="number" value="0"
-                                               th:field="${raceSearch.favouritePlaceAmongStars}"/>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="runnerStarsMax" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="maximum"
+                                               th:field="${raceSearch.runnerStarsMax}"
+                                               th:value="${raceSearch.runnerStarsMax}"/>
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <div class="well" style="overflow: auto">
-                                        <button type="submit" class="btn btn-success">Run querry</button>
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlaceAmongStars"
+                                           data-toggle="tooltip" data-placement="right" title="Favourite place among stars">FP (S): </label>
+                                    <div id="favouritePlaceAmongStars">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="favouritePlaceAmongStarsMin" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="minimum"
+                                               th:field="${raceSearch.favouritePlaceAmongStarsMin}"
+                                               th:value="${raceSearch.favouritePlaceAmongStarsMin}"/>
                                     </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="favouritePlaceAmongStarsMax" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="maximum"
+                                               th:field="${raceSearch.favouritePlaceAmongStarsMax}"
+                                               th:value="${raceSearch.favouritePlaceAmongStarsMax}"/>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="submitDiv">Query: </label>
+                                        <div id="submitDiv" class="col-md-6 col-sm-6 col-xs-12">
+                                            <button type="submit" class="btn btn-success col-md-8 col-sm-8 col-xs-12">Execute</button>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -450,6 +847,49 @@
     <!-- Custom Theme Scripts -->
     <script src="../../static/build/js/custom.min.js"
             th:src="@{/build/js/custom.min.js}"></script>
+</th:block>
+
+<th:block th:fragment="scriptsQueryForm">
+
+    <!-- select2 -->
+    <script src="../../static/js/select/select2.full.js"
+            th:src="@{/js/select/select2.full.js}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $(".select2_multiple").select2({
+                maximumSelecetionLength: 3,
+                placeholder: "Selection limit: 3",
+                allowClear: true
+            });
+        });
+    </script>
+
+    <!-- /select2 -->
+    <!-- input tags -->
+    <script>
+        function onAddTag(tag) {
+            alert("Added a tag: " + tag);
+        }
+
+        function onRemoveTag(tag) {
+            alert("Removed a tag: " + tag);
+        }
+
+        function onChangeTag(input, tag) {
+            alert("Changed a tag: " + tag);
+        }
+
+        $(function() {
+            $('#tags_1').tagsInput({
+                width: 'auto'
+            });
+        });
+    </script>
+
+    <!-- icheck -->
+    <script src="../../static/js/icheck/icheck.min.js"
+            th:src="@{/js/icheck/icheck.min.js}"></script>
 </th:block>
 
 <th:block th:fragment="scriptsDatatables">

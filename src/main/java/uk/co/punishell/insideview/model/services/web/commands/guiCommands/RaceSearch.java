@@ -27,6 +27,7 @@ public class RaceSearch {
     private double trackLengthMax;
 
     private List<RaceTypeCommand> raceTypes;
+
     private List<String> selectedRaceTypes;
 
     private double price9Min;
@@ -107,9 +108,12 @@ public class RaceSearch {
     private int nptipsPerRaceMin;
     private int nptipsPerRaceMax;
 
-    private int favouritePlace;
+    private int favouritePlaceMin;
+    private int favouritePlaceMax;
 
-    private int runnerStars;
+    private int runnerStarsMin;
+    private int runnerStarsMax;
 
-    private int favouritePlaceAmongStars;
+    private int favouritePlaceAmongStarsMin;
+    private int favouritePlaceAmongStarsMax;
 }
