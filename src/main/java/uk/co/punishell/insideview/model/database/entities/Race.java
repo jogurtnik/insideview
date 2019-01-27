@@ -5,7 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -30,7 +33,7 @@ public class Race extends BaseEntity {
     private LocalTime time;
 
     @OneToMany (cascade = CascadeType.ALL, mappedBy = "race")
-    private Set<Runner> runners = new HashSet<>();
+    private List<Runner> runners = new ArrayList<>();
 
     public Race() {
     }
@@ -46,7 +49,7 @@ public class Race extends BaseEntity {
     }
 
     public Race(Date date, String country, String city,
-                double trackLength, List<RaceType> raceTypes, LocalTime time, Set<Runner> runners) {
+                double trackLength, List<RaceType> raceTypes, LocalTime time, List<Runner> runners) {
         this.date = date;
         this.country = country;
         this.city = city;

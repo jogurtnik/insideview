@@ -2,6 +2,7 @@ package uk.co.punishell.insideview.model.database.services;
 
 import uk.co.punishell.insideview.model.database.entities.Runner;
 
+import java.util.List;
 import java.util.Set;
 
 public interface RunnerService {
@@ -12,7 +13,7 @@ public interface RunnerService {
 
     Runner save(Runner runner);
 
-    Set<Runner> saveAll(Set<Runner> runnrs);
+    List<Runner> saveAll(List<Runner> runnrs);
 
     void delete(Runner runner);
 

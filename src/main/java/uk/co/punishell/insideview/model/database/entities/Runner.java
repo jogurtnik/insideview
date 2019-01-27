@@ -50,6 +50,8 @@ public class Runner extends BaseEntity {
     private boolean winner;
     private boolean placed;
 
+    private int favouritePosition;
+
     private int cpr;
     private int nptips;
     private int stars;

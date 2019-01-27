@@ -9,9 +9,7 @@ import uk.co.punishell.insideview.model.services.web.converters.RunnerCommandToR
 import uk.co.punishell.insideview.model.services.web.converters.RunnerToRunnerCommand;
 
 import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -79,9 +77,9 @@ public class RunnerServiceImpl implements RunnerService {
 
     @Override
     @Transactional
-    public Set<Runner> saveAll(Set<Runner> runners) {
+    public List<Runner> saveAll(List<Runner> runners) {
 
-        Set<Runner> savedRunners = new HashSet<>();
+        List<Runner> savedRunners = new ArrayList<>();
 
         runners.stream().forEach(runner -> savedRunners.add(this.save(runner)));
 

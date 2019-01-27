@@ -33,7 +33,8 @@ public class RaceSpecification implements Specification<Race> {
         Path<String> country = root.get(Race_.country);
         Path<Double> trackLength = root.get(Race_.trackLength);
 
-        SetJoin<Race, Runner> setJoinRunners = root.join(Race_.runners);
+
+        // Add Race predicates
 
         if ((criteria.getDateSince() != null) && (criteria.getDateTo() != null)) {
 
@@ -48,15 +49,22 @@ public class RaceSpecification implements Specification<Race> {
         }
 
         if (criteria.getTrackLengthMin() != 0) {
-
             racePredicates.add(criteriaBuilder.greaterThanOrEqualTo(trackLength, criteria.getTrackLengthMin()));
         }
 
         if (criteria.getTrackLengthMax() != 0) {
-
             racePredicates.add(criteriaBuilder.lessThanOrEqualTo(trackLength, criteria.getTrackLengthMax()));
         }
 
+        if (criteria.getRunnersCountMin() != 0) {
+            racePredicates.add(criteriaBuilder.ge(criteriaBuilder.size(root.get(Race_.RUNNERS)), criteria.getRunnersCountMin()));
+        }
+
+        if (criteria.getRunnersCountMax() != 0) {
+            racePredicates.add(criteriaBuilder.le(criteriaBuilder.size(root.get(Race_.RUNNERS)), criteria.getRunnersCountMax()));
+        }
+
+        // Add Runners predicates
         Join<Race, Runner> joinedRunner = root.join(Race_.runners, JoinType.INNER);
 
         Path<Double> price9 = joinedRunner.get(Runner_.price9);
