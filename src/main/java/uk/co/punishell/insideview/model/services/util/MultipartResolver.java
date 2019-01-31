@@ -10,7 +10,7 @@ public class MultipartResolver {
 
     public MultipartResolver() {
         multipartResolver = new CommonsMultipartResolver();
-        multipartResolver.setMaxUploadSize(500000);
+        multipartResolver.setMaxUploadSize(20848820);
     }
 
     public CommonsMultipartResolver getMultipartResolver() {

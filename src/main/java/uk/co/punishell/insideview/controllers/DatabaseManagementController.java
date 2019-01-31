@@ -1,8 +1,6 @@
 package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,39 +31,44 @@ public class DatabaseManagementController {
     }
 
     @PostMapping({"/uploadFile", "uploadFile"})
-    public String uploadFileHandler(@RequestParam("file") MultipartFile file) {
+    public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) {
 
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
+        for (MultipartFile file : files) {
 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
-                if (!dir.exists())
-                    dir.mkdirs();
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
 
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath()
+                    // Creating the directory to store file
+                    String rootPath = System.getProperty("catalina.home");
+                    File dir = new File(rootPath + File.separator + "tmpFiles");
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+
+                    // Create the file on server
+                    File serverFile = new File(dir.getAbsolutePath()
                         + File.separator + file.getOriginalFilename());
-                BufferedOutputStream stream = new BufferedOutputStream(
-                        new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
+                    BufferedOutputStream stream = new BufferedOutputStream(
+                            new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
 
-                log.info("Server File Location="
-                        + serverFile.getAbsolutePath());
+                    log.info("Server File Location="
+                            + serverFile.getAbsolutePath());
 
-                dbPopulatingManager.populateDB(serverFile);
+                    dbPopulatingManager.populateDB(serverFile);
 
-                return "redirect:/databaseManagement";
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "redirect:/";
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return "redirect:/";
+                }
+            } else {
+                return "You failed to upload because the file was empty.";
             }
-        } else {
-            return "You failed to upload because the file was empty.";
+
         }
+
+        return "redirect:/databaseManagement";
     }
 }

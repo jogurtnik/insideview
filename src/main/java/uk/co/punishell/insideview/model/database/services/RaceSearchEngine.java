@@ -12,7 +12,7 @@ import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSe
 import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearchResult;
 import uk.co.punishell.insideview.model.services.web.converters.RaceToRaceCommand;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -36,7 +36,8 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
 
         this.raceSpecification = new RaceSpecification(raceSearch);
 
-        List<Race> races = this.filterPostQuery(raceRepository.findAll(raceSpecification), raceSearch);
+        List<Race> races = raceRepository.findAll(raceSpecification);
+        races = filterPostQuery(races, raceSearch);
 
         RaceSearchResult result = new RaceSearchResult();
         races
@@ -57,11 +58,14 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
 
     private List<Race> filterPostQuery(@NotNull List<Race> races, RaceSearch raceSearch) {
 
-        List<Race> filteredRaces = new LinkedList<>();
+        List<Race> filteredRaces = new ArrayList<>();
+
+        if (raceSearch.getFiveStarsCountMin() != 0 && raceSearch.getFiveStarsCountMax() != 0) {
 
         for (Race race : races) {
 
-            boolean checkFiveStarsCountResult = false;
+            boolean checkFiveStarsCountMinResult = false;
+            boolean checkFiveStarsCountMaxResult = false;
 
             int fiveStarsCount = 0;
 
@@ -75,30 +79,35 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
                 }
             }
 
-            if (raceSearch.getFiveStarsCountMin() != 0 || raceSearch.getFiveStarsCountMax() != 0) {
 
-                if (raceSearch.getFiveStarsCountMin() != 0) {
-                    if (fiveStarsCount >= raceSearch.getFiveStarsCountMin()) {
-                        checkFiveStarsCountResult = true;
-                    } else {
-                        checkFiveStarsCountResult = false;
-                    }
+            if (raceSearch.getFiveStarsCountMin() != 0) {
+                if (fiveStarsCount >= raceSearch.getFiveStarsCountMin()) {
+                    checkFiveStarsCountMinResult = true;
+                } else {
+                    checkFiveStarsCountMinResult = false;
                 }
-
-                if (raceSearch.getFiveStarsCountMax() != 0) {
-                    if (fiveStarsCount <= raceSearch.getFiveStarsCountMax()) {
-                        checkFiveStarsCountResult = true;
-                    } else {
-                        checkFiveStarsCountResult = false;
-                    }
-                }
+            } else {
+                checkFiveStarsCountMinResult = true;
             }
 
-            if (checkFiveStarsCountResult) {
+            if (raceSearch.getFiveStarsCountMax() != 0) {
+                if (fiveStarsCount <= raceSearch.getFiveStarsCountMax()) {
+                    checkFiveStarsCountMaxResult = true;
+                } else {
+                    checkFiveStarsCountMaxResult = false;
+                }
+            } else {
+                checkFiveStarsCountMaxResult = true;
+            }
+
+            if (checkFiveStarsCountMinResult && checkFiveStarsCountMaxResult) {
 
                 filteredRaces.add(race);
             }
 
+        }
+        } else {
+            return races;
         }
 
         return filteredRaces;

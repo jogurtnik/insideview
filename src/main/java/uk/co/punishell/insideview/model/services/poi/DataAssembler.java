@@ -47,7 +47,7 @@ public class DataAssembler {
         List<Race> races = new LinkedList();
 
         // Two-dimensional array to store row index for the start and the end of the race rows
-        int[][] raceStartStopIndexes = new int[50][2];
+        int[][] raceStartStopIndexes = new int[1000][2];
 
         // iteration will start from second row
         int rowIndex = 1;

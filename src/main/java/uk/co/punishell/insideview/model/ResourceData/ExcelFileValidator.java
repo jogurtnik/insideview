@@ -1,9 +1,6 @@
 package uk.co.punishell.insideview.model.ResourceData;
 
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.ss.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,9 +50,25 @@ public class ExcelFileValidator implements FileValidator{
             // 26th cell in the header row is numerical so it has to be obtained with different method.
             String fileHeader;
             if (cellIteration != 25 ) {
-                fileHeader = headerRow.getCell(cellIteration).getStringCellValue();
+                Cell currentCell = headerRow.getCell(cellIteration);
+
+                // empty cell means that the file has invalid headers and therefore contains invalid data
+                if (currentCell != null) {
+                    fileHeader = currentCell.getStringCellValue();
+                } else {
+                    return false;
+                }
+
             } else {
-                fileHeader = String.valueOf(headerRow.getCell(cellIteration).getNumericCellValue());
+
+                Cell currentCell = headerRow.getCell(cellIteration);
+
+                // empty cell means that the file has invalid headers and therefore contains invalid data
+                if (currentCell != null) {
+                    fileHeader = String.valueOf(currentCell.getNumericCellValue());
+                } else {
+                    return false;
+                }
             }
 
             // For the sake of 26th cell in the header row comparison is made with contains()
