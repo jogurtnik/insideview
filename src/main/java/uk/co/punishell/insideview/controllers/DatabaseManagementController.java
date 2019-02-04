@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import uk.co.punishell.insideview.model.ResourceData.FileValidator;
+import uk.co.punishell.insideview.model.exceptions.FileUploadException;
 import uk.co.punishell.insideview.model.managers.DBPopulatingManager;
 
 import java.io.BufferedOutputStream;
@@ -39,7 +41,7 @@ public class DatabaseManagementController {
     }
 
     @PostMapping({"/uploadFile", "uploadFile"})
-    public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) {
+    public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) throws FileUploadException {
 
         Set<File> savedFiles = new HashSet<>();
 
@@ -71,8 +73,7 @@ public class DatabaseManagementController {
                             + serverFile.getAbsolutePath());
 
                 } catch (Exception e) {
-                    e.printStackTrace();
-                    return "redirect:/";
+                    throw new FileUploadException("File is empty or the path to the file is invalid.");
                 }
             } else {
                 return "You failed to upload because the file was empty.";
@@ -83,9 +84,14 @@ public class DatabaseManagementController {
         Set<File> validatedFiles = new HashSet<>();
 
         for (File f : savedFiles) {
-            if (validator.isValidFile(f)) {
-                validatedFiles.add(f);
+            try {
+                if (validator.isValidFile(f)) {
+                    validatedFiles.add(f);
+                }
+            } catch (IOException e) {
+                throw new FileUploadException("File is not recognised MS Excel format.");
             }
+
         }
 
         log.info("FILE VALIDATION: " + validatedFiles.size() + " files valid.");
@@ -94,12 +100,24 @@ public class DatabaseManagementController {
             try {
                 dbPopulatingManager.populateDB(file);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new FileUploadException("File access denied.");
             } catch (InvalidFormatException e) {
-                e.printStackTrace();
+                throw new FileUploadException("File is not recognised MS Excel format.");
             }
         });
 
         return "redirect:/databaseManagement";
+    }
+
+    @ExceptionHandler(FileUploadException.class)
+    public ModelAndView handleFileUploadError() {
+
+        log.error("FILE UPLOAD ERROR!");
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("FileUploadError");
+
+        return modelAndView;
     }
 }

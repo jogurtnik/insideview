@@ -26,17 +26,13 @@ public class ExcelFileValidator implements FileValidator{
     }
 
     @Override
-    public boolean isValidFile(File file) {
+    public boolean isValidFile(File file) throws IOException {
 
         logger.info("Checking " + file.getName());
 
         boolean result = false;
-        try {
-            this.workbook = WorkbookFactory.create(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+
+        this.workbook = WorkbookFactory.create(file);
 
         Sheet sheet = workbook.getSheetAt(dataFormat.getDefaultSheetNumber());
 
