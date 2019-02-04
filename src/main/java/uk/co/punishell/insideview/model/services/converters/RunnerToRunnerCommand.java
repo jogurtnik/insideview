@@ -6,7 +6,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Runner;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RunnerCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RunnerCommand;
 
 @Component
 public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {

@@ -5,7 +5,7 @@ import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.services.converters.RaceCommandToRace;
 import uk.co.punishell.insideview.model.services.converters.RaceTypeCommandToRaceType;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RaceCommand;
 
 import java.time.LocalTime;
 import java.util.Date;

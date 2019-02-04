@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.services.converters.HorseCommandToHorse;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.HorseCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.HorseCommand;
 
 import static org.junit.Assert.*;
 

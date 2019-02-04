@@ -1,10 +1,10 @@
-package uk.co.punishell.insideview.view.web.commands.guiCommands;
+package uk.co.punishell.insideview.view.commands.guiCommands;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceTypeCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RaceTypeCommand;
 
 import java.util.Date;
 import java.util.List;

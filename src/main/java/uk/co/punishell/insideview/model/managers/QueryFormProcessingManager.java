@@ -2,8 +2,8 @@ package uk.co.punishell.insideview.model.managers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import uk.co.punishell.insideview.view.web.forms.QueryFormData;
-import uk.co.punishell.insideview.view.web.forms.QueryFormResult;
+import uk.co.punishell.insideview.view.forms.QueryFormData;
+import uk.co.punishell.insideview.view.forms.QueryFormResult;
 
 @Slf4j
 @Component

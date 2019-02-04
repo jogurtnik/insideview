@@ -6,8 +6,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Race;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceTypeCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RaceTypeCommand;
 
 @Component
 public class RaceCommandToRace implements Converter<RaceCommand, Race> {

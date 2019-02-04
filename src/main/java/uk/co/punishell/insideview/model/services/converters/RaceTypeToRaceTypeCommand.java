@@ -3,7 +3,7 @@ package uk.co.punishell.insideview.model.services.converters;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.database.entities.RaceType;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceTypeCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RaceTypeCommand;
 
 @Service
 public class RaceTypeToRaceTypeCommand implements Converter<RaceType, RaceTypeCommand> {

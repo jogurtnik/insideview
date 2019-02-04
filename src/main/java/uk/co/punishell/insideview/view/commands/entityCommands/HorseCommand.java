@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.view.web.commands.entityCommands;
+package uk.co.punishell.insideview.view.commands.entityCommands;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

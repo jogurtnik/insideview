@@ -5,7 +5,7 @@ import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.services.converters.HorseToHorseCommand;
 import uk.co.punishell.insideview.model.services.converters.RunnerToRunnerCommand;
-import uk.co.punishell.insideview.view.web.commands.entityCommands.RunnerCommand;
+import uk.co.punishell.insideview.view.commands.entityCommands.RunnerCommand;
 
 import static org.junit.Assert.*;
 
