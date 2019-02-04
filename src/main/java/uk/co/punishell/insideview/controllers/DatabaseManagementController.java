@@ -1,27 +1,35 @@
 package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import uk.co.punishell.insideview.model.ResourceData.FileValidator;
 import uk.co.punishell.insideview.model.managers.DBPopulatingManager;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 @Slf4j
 @Controller
 public class DatabaseManagementController {
 
     DBPopulatingManager dbPopulatingManager;
+    private FileValidator validator;
 
     @Autowired
-    public DatabaseManagementController(DBPopulatingManager dbPopulatingManager) {
+    public DatabaseManagementController(DBPopulatingManager dbPopulatingManager, FileValidator validator) {
         this.dbPopulatingManager = dbPopulatingManager;
+        this.validator = validator;
     }
 
     @GetMapping(value={"/databaseManagement"})
@@ -32,6 +40,10 @@ public class DatabaseManagementController {
 
     @PostMapping({"/uploadFile", "uploadFile"})
     public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) {
+
+        Set<File> savedFiles = new HashSet<>();
+
+        log.info("FILE UPLOAD: " + files.length + " files");
 
         for (MultipartFile file : files) {
 
@@ -53,11 +65,10 @@ public class DatabaseManagementController {
                             new FileOutputStream(serverFile));
                     stream.write(bytes);
                     stream.close();
+                    savedFiles.add(serverFile);
 
                     log.info("Server File Location="
                             + serverFile.getAbsolutePath());
-
-                    dbPopulatingManager.populateDB(serverFile);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -68,6 +79,26 @@ public class DatabaseManagementController {
             }
 
         }
+
+        Set<File> validatedFiles = new HashSet<>();
+
+        for (File f : savedFiles) {
+            if (validator.isValidFile(f)) {
+                validatedFiles.add(f);
+            }
+        }
+
+        log.info("FILE VALIDATION: " + validatedFiles.size() + " files valid.");
+
+        validatedFiles.iterator().forEachRemaining(file -> {
+            try {
+                dbPopulatingManager.populateDB(file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InvalidFormatException e) {
+                e.printStackTrace();
+            }
+        });
 
         return "redirect:/databaseManagement";
     }

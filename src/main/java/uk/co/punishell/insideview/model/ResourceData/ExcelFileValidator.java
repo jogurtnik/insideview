@@ -28,7 +28,7 @@ public class ExcelFileValidator implements FileValidator{
     @Override
     public boolean isValidFile(File file) {
 
-        logger.info("File upload validation...");
+        logger.info("Checking " + file.getName());
 
         boolean result = false;
         try {

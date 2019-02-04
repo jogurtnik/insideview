@@ -1,5 +1,6 @@
 package uk.co.punishell.insideview.model.services.poi;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.services.util.NullValueResolver;
@@ -168,7 +169,13 @@ public class XLSXRunnerDataReader {
 
     public int getNaps(Row row) {
 
-        return (int) row.getCell(30).getNumericCellValue();
+        Cell cell = row.getCell(30);
+
+        if (cell != null) {
+            return (int) row.getCell(30).getNumericCellValue();
+        } else {
+            return 0;
+        }
     }
 
 }

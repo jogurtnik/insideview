@@ -7,6 +7,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import uk.co.punishell.insideview.model.ResourceData.FileValidator;
 import uk.co.punishell.insideview.model.managers.DBPopulatingManager;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -22,6 +23,9 @@ public class DatabaseManagementControllerTest {
     @Mock
     DBPopulatingManager dbPopulatingManager;
 
+    @Mock
+    FileValidator validator;
+
     @Before
     public void setUp() throws Exception {
 
@@ -29,7 +33,7 @@ public class DatabaseManagementControllerTest {
 
         multipartFile = new MockMultipartFile("data","filename.txt","text/plain","some xml".getBytes());
 
-        databaseManagementController = new DatabaseManagementController(dbPopulatingManager);
+        databaseManagementController = new DatabaseManagementController(dbPopulatingManager, validator);
 
     }
 

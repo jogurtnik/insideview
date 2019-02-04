@@ -14,7 +14,7 @@ public class JSHDataFormat implements DataFormat {
                                                               "Movement 15", "Price at 5 min", "Movement 5", "Price at 3 min",
                                                               "Movement 3", "Price at 2 min", "Movement 2", "Price at 1 min",
                                                               "Movement 1", "Mean", "321", "Result", "Cherry Pick Rating",
-                                                              "Newspaper Tips", "Star", "Naps"};
+                                                              "Newspaper Tips", "Star"};
 
     private String[] customDataColumnsHeaders;
 
