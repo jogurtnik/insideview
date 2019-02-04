@@ -110,13 +110,14 @@ public class DatabaseManagementController {
     }
 
     @ExceptionHandler(FileUploadException.class)
-    public ModelAndView handleFileUploadError() {
+    public ModelAndView handleFileUploadError(Exception exception) {
 
-        log.error("FILE UPLOAD ERROR!");
+        log.error("FILE UPLOAD ERROR! " + exception.getMessage());
 
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.setViewName("FileUploadError");
+        modelAndView.addObject("exception", exception);
 
         return modelAndView;
     }

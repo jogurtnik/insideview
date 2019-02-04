@@ -36,10 +36,13 @@
 
         <div th:replace="fragments/navigation :: topNavigationMenu"></div>
 
+
+        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.FileUploadException" */ -->
         <div class="right_col" role="main">
 
-            <h1>Error occured while uploading your files</h1>
+            <h1>FILE UPLOAD ERROR</h1>
 
+            <p th:text="'ERROR MESSAGE: ' + ${exception.getMessage()}">ERROR_MESSAGE_STRING</p>
         </div>
 
     </div>
