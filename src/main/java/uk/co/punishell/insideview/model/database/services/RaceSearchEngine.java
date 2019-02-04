@@ -8,9 +8,9 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
 import uk.co.punishell.insideview.model.database.specifications.RaceSpecification;
-import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch;
-import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearchResult;
-import uk.co.punishell.insideview.model.services.web.converters.RaceToRaceCommand;
+import uk.co.punishell.insideview.model.services.converters.RaceToRaceCommand;
+import uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearch;
+import uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;

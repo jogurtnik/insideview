@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services.web.forms;
+package uk.co.punishell.insideview.view.web.forms;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

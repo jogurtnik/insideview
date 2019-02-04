@@ -4,7 +4,8 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.RaceType;
 import uk.co.punishell.insideview.model.database.entities.RaceTypeGroup;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceTypeCommand;
+import uk.co.punishell.insideview.model.services.converters.RaceTypeToRaceTypeCommand;
+import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceTypeCommand;
 
 import static org.junit.Assert.*;
 

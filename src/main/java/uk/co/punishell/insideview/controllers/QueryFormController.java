@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import uk.co.punishell.insideview.model.database.services.RaceSearchEngine;
-import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch;
+import uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearch;
 
 import javax.servlet.http.HttpSession;
 

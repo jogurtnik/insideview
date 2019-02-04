@@ -1,8 +1,8 @@
-package uk.co.punishell.insideview.model.services.web.commands.guiCommands;
+package uk.co.punishell.insideview.view.web.commands.guiCommands;
 
 import lombok.Getter;
 import lombok.Setter;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand;
 
 import java.util.ArrayList;
 import java.util.List;

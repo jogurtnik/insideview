@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
-import uk.co.punishell.insideview.model.services.web.converters.RunnerCommandToRunner;
-import uk.co.punishell.insideview.model.services.web.converters.RunnerToRunnerCommand;
+import uk.co.punishell.insideview.model.services.converters.RunnerCommandToRunner;
+import uk.co.punishell.insideview.model.services.converters.RunnerToRunnerCommand;
 
 import javax.transaction.Transactional;
 import java.util.*;

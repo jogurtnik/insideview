@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services.web.commands.guiCommands;
+package uk.co.punishell.insideview.view.web.commands.guiCommands;
 
 import java.util.List;
 

@@ -69,7 +69,7 @@
 
             <div th:fragment="queryForm">
 
-                <!--/*@thymesVar id="raceSearch" type="uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch"*/-->
+                <!--/*@thymesVar id="raceSearch" type="uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearch"*/-->
 
             <form class="form-horizontal form-label-left"
             th:object="${session.raceSearch}"
@@ -706,11 +706,11 @@
 
             <div th:fragment="queryResult">
 
-                <!--/*@thymesVar id="queryFormResult" type="uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearchResult"*/-->
-                <!--/*@thymesVar id="race" type="uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand"*/-->
+                <!--/*@thymesVar id="queryFormResult" type="uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearchResult"*/-->
+                <!--/*@thymesVar id="race" type="uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand"*/-->
                 <!--/*@thymesVar id="races" type="java.util.ArrayList"*/-->
                 <!--/*@thymesVar id="raceTypes" type="uk.co.punishell.insideview.model."*/-->
-                <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.model.services.web.commands.entityCommands.RunnerCommand"*/-->
+                <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.view.web.commands.entityCommands.RunnerCommand"*/-->
                 <!--/*@thymesVar id="runners" type="java.util.ArrayList"*/-->
 
             <th:block th:each="race : ${session.queryFormResult.races}">

@@ -4,7 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Runner;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.model.services.converters.HorseToHorseCommand;
+import uk.co.punishell.insideview.model.services.converters.RaceToRaceCommand;
+import uk.co.punishell.insideview.model.services.converters.RaceTypeToRaceTypeCommand;
+import uk.co.punishell.insideview.model.services.converters.RunnerToRunnerCommand;
+import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand;
 
 import java.time.LocalTime;
 import java.util.Date;

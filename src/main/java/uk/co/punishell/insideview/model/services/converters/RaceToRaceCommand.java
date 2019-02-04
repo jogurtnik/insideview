@@ -1,4 +1,4 @@
-package uk.co.punishell.insideview.model.services.web.converters;
+package uk.co.punishell.insideview.model.services.converters;
 
 import lombok.Synchronized;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +7,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.RaceType;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RaceCommand;
+import uk.co.punishell.insideview.view.web.commands.entityCommands.RaceCommand;
 
 @Component
 public class RaceToRaceCommand implements Converter<Race, RaceCommand> {

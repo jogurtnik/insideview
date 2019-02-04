@@ -6,7 +6,7 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Race_;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.entities.Runner_;
-import uk.co.punishell.insideview.model.services.web.commands.guiCommands.RaceSearch;
+import uk.co.punishell.insideview.view.web.commands.guiCommands.RaceSearch;
 
 import javax.persistence.criteria.*;
 import java.util.ArrayList;

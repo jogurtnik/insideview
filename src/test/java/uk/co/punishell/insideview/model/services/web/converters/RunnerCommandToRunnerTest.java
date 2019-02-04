@@ -3,7 +3,9 @@ package uk.co.punishell.insideview.model.services.web.converters;
 import org.junit.Before;
 import org.junit.Test;
 import uk.co.punishell.insideview.model.database.entities.Runner;
-import uk.co.punishell.insideview.model.services.web.commands.entityCommands.RunnerCommand;
+import uk.co.punishell.insideview.model.services.converters.HorseCommandToHorse;
+import uk.co.punishell.insideview.model.services.converters.RunnerCommandToRunner;
+import uk.co.punishell.insideview.view.web.commands.entityCommands.RunnerCommand;
 
 import static org.junit.Assert.*;
 
