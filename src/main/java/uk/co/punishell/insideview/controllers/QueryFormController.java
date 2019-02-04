@@ -36,10 +36,10 @@ public class QueryFormController {
     @PostMapping("performQuery")
     public String performQuery(@ModelAttribute("raceSearch") @Valid RaceSearch raceSearch,
                                BindingResult bindingResult,
-                               HttpSession session) throws NumberFormatException {
+                               HttpSession session) throws Exception {
 
         if (bindingResult.hasErrors()) {
-            throw new NumberFormatException("At least of the number fields in the query form was blank instead of zero.");
+            throw new Exception("At least one of the number fields in the query form was blank instead of zero.");
         }
 
         RaceSearchResult raceSearchResult = raceSearchEngine.search(raceSearch);
@@ -54,7 +54,7 @@ public class QueryFormController {
         return new RaceSearch();
     }
 
-    @ExceptionHandler(NumberFormatException.class)
+    @ExceptionHandler(Exception.class)
     public ModelAndView handleBindingError(Exception exception) {
 
         log.error("QUERY FORM OBJECT BINDING ERROR!");
