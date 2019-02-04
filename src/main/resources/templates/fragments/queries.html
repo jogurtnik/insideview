@@ -902,7 +902,7 @@
     <script src="../../static/js/datatables/dataTables.fixedHeader.min.js"
             th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
 
-
+    <!--/*@thymesVar id="queryFormResult" type="uk.co.punishell.insideview.view.commands.guiCommands.RaceSearchResult"*/-->
     <th:block th:if="${session.queryFormResult != null}">
     <th:block th:if="${not #lists.isEmpty(session.queryFormResult.races)}"
               th:each="race : ${session.queryFormResult.races}">

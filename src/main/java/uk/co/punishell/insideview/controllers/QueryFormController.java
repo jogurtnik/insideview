@@ -3,14 +3,15 @@ package uk.co.punishell.insideview.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import uk.co.punishell.insideview.model.database.services.RaceSearchEngine;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch;
+import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearchResult;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Slf4j
 @Controller
@@ -27,14 +28,23 @@ public class QueryFormController {
     @GetMapping({"query", "/query", "query.html"})
     public String getQueryPage(HttpSession session) {
 
+
+
         return "query";
     }
 
     @PostMapping("performQuery")
-    public String performQuery(@ModelAttribute("raceSearch") RaceSearch raceSearch,
-                               HttpSession session) {
+    public String performQuery(@ModelAttribute("raceSearch") @Valid RaceSearch raceSearch,
+                               BindingResult bindingResult,
+                               HttpSession session) throws NumberFormatException {
 
-        session.setAttribute("queryFormResult", raceSearchEngine.search(raceSearch));
+        if (bindingResult.hasErrors()) {
+            throw new NumberFormatException("At least of the number fields in the query form was blank instead of zero.");
+        }
+
+        RaceSearchResult raceSearchResult = raceSearchEngine.search(raceSearch);
+
+        session.setAttribute("queryFormResult", raceSearchResult);
 
         return "redirect:/query";
     }
@@ -42,5 +52,19 @@ public class QueryFormController {
     @ModelAttribute("raceSearch")
     public RaceSearch getRaceSearchFormData() {
         return new RaceSearch();
+    }
+
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleBindingError(Exception exception) {
+
+        log.error("QUERY FORM OBJECT BINDING ERROR!");
+        log.error(exception.getMessage());
+
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("QueryFormError");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
     }
 }

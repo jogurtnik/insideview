@@ -89,7 +89,7 @@ public class DatabaseManagementController {
                     validatedFiles.add(f);
                 }
             } catch (IOException e) {
-                throw new FileUploadException("File is not recognised MS Excel format.");
+                throw new FileUploadException("File is not in compatible MS Excel format.");
             }
 
         }
@@ -102,7 +102,7 @@ public class DatabaseManagementController {
             } catch (IOException e) {
                 throw new FileUploadException("File access denied.");
             } catch (InvalidFormatException e) {
-                throw new FileUploadException("File is not recognised MS Excel format.");
+                throw new FileUploadException("File is not in compatible MS Excel format.");
             }
         });
 
