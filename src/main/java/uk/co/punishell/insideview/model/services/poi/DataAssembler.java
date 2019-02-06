@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.model.ResourceData.DataFormat;
 import uk.co.punishell.insideview.model.database.entities.Race;
+import uk.co.punishell.insideview.model.database.entities.Runner;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,7 +91,13 @@ public class DataAssembler {
                  positionMarker <= raceStartStopIndexes[raceIndex][1];
                  positionMarker++) {
 
-                races.get(raceIndex).getRunners().add(xlsxRunnerAssembler.getRunner(sheet.getRow(positionMarker)));
+                Runner runner = xlsxRunnerAssembler.getRunner(sheet.getRow(positionMarker));
+
+                // check if runner participated in the race
+                if (runner.isStatus()) {
+                    races.get(raceIndex).getRunners().add(runner);
+                }
+
             }
         }
 

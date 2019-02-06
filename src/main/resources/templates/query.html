@@ -7,7 +7,7 @@
 
 </head>
 <body class="nav-md">
-<!--/*@thymesVar id="queryFormData" type="uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch"*/-->
+<!--/*@thymesVar id="raceSearch" type="uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch"*/-->
 <!--/*@thymesVar id="race" type="uk.co.punishell.insideview.view.commands.entityCommands.RaceCommand"*/-->
 <!--/*@thymesVar id="races" type="java.util.List"*/-->
 <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.view.commands.entityCommands.RunnerCommand"*/-->
@@ -30,8 +30,12 @@
 
             <div th:replace="fragments/queries :: queryForm"></div>
 
-            <div  th:if="${session.queryFormResult != null}">
-                <div th:replace="fragments/queries :: queryResult"></div>
+            <div  th:if="${session.raceSearchResult != null}">
+                <div th:replace="fragments/queries :: queryRaceResult"></div>
+            </div>
+
+            <div  th:if="${session.runnerSearchResult != null}">
+                <div th:replace="fragments/queries :: queryRunnerResult"></div>
             </div>
 
         </div>
@@ -44,7 +48,7 @@
 <th:block th:replace="fragments/queries :: scriptsQueryForm"></th:block>
 
 
-<th:block th:if="${session.queryFormResult != null}"
+<th:block th:if="${session.raceSearchResult != null}"
           th:replace="fragments/queries :: scriptsDatatables"></th:block>
 </body>
 </html>

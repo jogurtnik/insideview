@@ -10,6 +10,7 @@ import lombok.Setter;
 public class RunnerCommand {
 
     private Long id;
+    private Long raceId;
 
     private HorseCommand horse;
 

@@ -76,7 +76,7 @@ public class DatabaseManagementController {
                     throw new FileUploadException("File is empty or the path to the file is invalid.");
                 }
             } else {
-                return "You failed to upload because the file was empty.";
+                throw new FileUploadException("You failed to upload because the file was empty.");
             }
 
         }

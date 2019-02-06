@@ -14,6 +14,7 @@ import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearchResult;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Component
@@ -40,12 +41,19 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
         races = filterPostQuery(races, raceSearch);
 
         RaceSearchResult result = new RaceSearchResult();
-        races
+
+        /*races
                 .iterator()
                 .forEachRemaining(race -> result.getRaces().add(raceToRaceCommand.convert(race)));
+*/
+        result.setRaces(races
+                .stream()
+                .map((@NotNull var race) -> raceToRaceCommand.convert(race))
+                .collect(Collectors.toList()));
 
-        result.setMessage("Query has " + result.getRaces().size() + " results.");
-        log.debug("Query results: " + result.getRaces().size());
+        result.setMessage("Race Query has " + result.getRaces().size() + " results.");
+
+        log.debug("Race Query results: " + result.getRaces().size());
 
         return result;
     }
