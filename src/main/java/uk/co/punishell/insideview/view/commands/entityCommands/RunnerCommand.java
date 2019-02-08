@@ -42,7 +42,7 @@ public class RunnerCommand implements Comparable<RunnerCommand> {
 
     private int cpr;
     private int nptips;
-    private int stars;
+    private int[] stars = new int[1];
     private int naps;
 
     @Override

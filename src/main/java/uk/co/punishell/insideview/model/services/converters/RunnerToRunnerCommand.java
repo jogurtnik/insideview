@@ -68,7 +68,7 @@ public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
 
         runnerCommand.setCpr(source.getCpr());
         runnerCommand.setNptips(source.getNptips());
-        runnerCommand.setStars(source.getStars());
+        runnerCommand.setStars(new int[source.getStars()]);
         runnerCommand.setNaps(source.getNaps());
 
         return runnerCommand;

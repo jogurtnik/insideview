@@ -121,7 +121,7 @@ public class RunnerToRunnerCommandTest {
         assertEquals(RESULT, runnerCommand.getResult());
         assertEquals(CPR, runnerCommand.getCpr());
         assertEquals(NPTIPS, runnerCommand.getNptips());
-        assertEquals(STARS, runnerCommand.getStars());
+        assertEquals(STARS, runnerCommand.getStars().length);
         assertEquals(NAPS, runnerCommand.getNaps());
     }
 }

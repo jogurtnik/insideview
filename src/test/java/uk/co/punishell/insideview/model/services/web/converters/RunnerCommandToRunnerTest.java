@@ -39,7 +39,7 @@ public class RunnerCommandToRunnerTest {
     public static final String RESULT = "P";
     public static final int CPR = 22;
     public static final int NPTIPS = 23;
-    public static final int STARS = 5;
+    public static final int[] STARS = new int[5];
     public static final int NAPS = 24;
     private RunnerCommandToRunner converter;
 
@@ -121,7 +121,7 @@ public class RunnerCommandToRunnerTest {
         assertEquals(BOOLEAN_IS_PLACED, runner.isPlaced());
         assertEquals(CPR, runner.getCpr());
         assertEquals(NPTIPS, runner.getNptips());
-        assertEquals(STARS, runner.getStars());
+        assertEquals(STARS.length, runner.getStars());
         assertEquals(NAPS, runner.getNaps());
     }
 }

@@ -834,32 +834,7 @@
                                             <td th:text="${runner.mean}">-1.32</td>
                                             <td th:text="${runner.mov3to1}">0.23</td>
                                             <td>
-                                                <th:block th:if="${runner.stars == 0}" th:text="''">
-                                                    0
-                                                </th:block>
-                                                <th:block th:if="${runner.stars == 1}">
-                                                    <i class="fa fa-star"></i>
-                                                </th:block>
-                                                <th:block th:if="${runner.stars == 2}">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </th:block>
-                                                <th:block th:if="${runner.stars == 3}">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </th:block>
-                                                <th:block th:if="${runner.stars == 4}">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                </th:block>
-                                                <th:block th:if="${runner.stars == 5}">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
+                                                <th:block th:each="star : ${runner.stars}">
                                                     <i class="fa fa-star"></i>
                                                 </th:block>
                                             </td>
@@ -928,11 +903,11 @@
                                             <tr>
                                                 <th>Runner</th>
                                                 <th>Price9</th>
-                                                <th>Mov9-11</th>
+                                                <th>MovAM</th>
                                                 <th>Price1</th>
                                                 <th>Mov1</th>
                                                 <th>Mean</th>
-                                                <th>Mov3-1</th>
+                                                <th>321</th>
                                                 <th>Result</th>
                                                 <th>CPR</th>
                                                 <th>NPTips</th>
@@ -942,6 +917,8 @@
                                         </thead>
 
                                         <tbody>
+                                            <!--/*@thymesVar id="runners" type="java.util.List"*/-->
+                                            <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.view.commands.entityCommands.RunnerCommand"*/-->
                                             <tr th:each="runner : ${session.runnerSearchResult.runners}">
                                                 <td th:text="${runner.horse.name}">1</td>
                                                 <td th:text="${runner.price9}">2</td>
@@ -955,32 +932,7 @@
                                                 <td th:text="${runner.nptips}"></td>
                                                 <td th:text="${runner.naps}">1</td>
                                                 <td>
-                                                    <th:block th:if="${runner.stars == 0}" th:text="''">
-                                                        0
-                                                    </th:block>
-                                                    <th:block th:if="${runner.stars == 1}">
-                                                        <i class="fa fa-star"></i>
-                                                    </th:block>
-                                                    <th:block th:if="${runner.stars == 2}">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </th:block>
-                                                    <th:block th:if="${runner.stars == 3}">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </th:block>
-                                                    <th:block th:if="${runner.stars == 4}">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                    </th:block>
-                                                    <th:block th:if="${runner.stars == 5}">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
+                                                    <th:block th:each="star : ${runner.stars}">
                                                         <i class="fa fa-star"></i>
                                                     </th:block>
                                                 </td>
