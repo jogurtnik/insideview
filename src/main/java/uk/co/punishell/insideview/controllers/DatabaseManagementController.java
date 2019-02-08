@@ -2,14 +2,13 @@ package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 import uk.co.punishell.insideview.model.ResourceData.FileValidator;
 import uk.co.punishell.insideview.model.exceptions.FileUploadException;
 import uk.co.punishell.insideview.model.managers.DBPopulatingManager;
@@ -43,43 +42,7 @@ public class DatabaseManagementController {
     @PostMapping({"/uploadFile", "uploadFile"})
     public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) throws FileUploadException {
 
-        Set<File> savedFiles = new HashSet<>();
-
-        log.info("FILE UPLOAD: " + files.length + " files");
-
-        for (MultipartFile file : files) {
-
-            if (!file.isEmpty()) {
-                try {
-                    byte[] bytes = file.getBytes();
-
-                    // Creating the directory to store file
-                    String rootPath = System.getProperty("catalina.home");
-                    File dir = new File(rootPath + File.separator + "tmpFiles");
-                    if (!dir.exists()) {
-                        dir.mkdirs();
-                    }
-
-                    // Create the file on server
-                    File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + file.getOriginalFilename());
-                    BufferedOutputStream stream = new BufferedOutputStream(
-                            new FileOutputStream(serverFile));
-                    stream.write(bytes);
-                    stream.close();
-                    savedFiles.add(serverFile);
-
-                    log.info("Server File Location="
-                            + serverFile.getAbsolutePath());
-
-                } catch (Exception e) {
-                    throw new FileUploadException("File is empty or the path to the file is invalid.");
-                }
-            } else {
-                throw new FileUploadException("You failed to upload because the file was empty.");
-            }
-
-        }
+        Set<File> savedFiles = this.saveFilesTemp(files);
 
         Set<File> validatedFiles = new HashSet<>();
 
@@ -109,16 +72,46 @@ public class DatabaseManagementController {
         return "redirect:/databaseManagement";
     }
 
-    @ExceptionHandler(FileUploadException.class)
-    public ModelAndView handleFileUploadError(Exception exception) {
+    private Set<File> saveFilesTemp(@NotNull MultipartFile[] files) {
 
-        log.error("FILE UPLOAD ERROR! " + exception.getMessage());
+        Set<File> savedFiles = new HashSet<>();
 
-        ModelAndView modelAndView = new ModelAndView();
+        log.info("FILE UPLOAD: " + files.length + " files");
 
-        modelAndView.setViewName("FileUploadError");
-        modelAndView.addObject("exception", exception);
+        for (MultipartFile file : files) {
 
-        return modelAndView;
+            if (!file.isEmpty()) {
+                try {
+                    byte[] bytes = file.getBytes();
+
+                    // Creating the directory to store file
+                    String rootPath = System.getProperty("catalina.home");
+                    File dir = new File(rootPath + File.separator + "tmpFiles");
+                    if (!dir.exists()) {
+                        dir.mkdirs();
+                    }
+
+                    // Create the file on server
+                    File serverFile = new File(dir.getAbsolutePath()
+                            + File.separator + file.getOriginalFilename());
+                    BufferedOutputStream stream = new BufferedOutputStream(
+                            new FileOutputStream(serverFile));
+                    stream.write(bytes);
+                    stream.close();
+                    savedFiles.add(serverFile);
+
+                    log.info("Server File Location="
+                            + serverFile.getAbsolutePath());
+
+                } catch (Exception e) {
+                    throw new FileUploadException("File is empty or the path to the file is invalid.");
+                }
+            } else {
+                throw new FileUploadException("You failed to upload because the file was empty.");
+            }
+
+        }
+
+        return savedFiles;
     }
 }

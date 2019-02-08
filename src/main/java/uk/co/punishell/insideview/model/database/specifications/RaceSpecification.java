@@ -46,21 +46,20 @@ public class RaceSpecification implements Specification<Race> {
         }
 
         if (criteria.getTrackLengthMin() != 0) {
-            racePredicates.add(criteriaBuilder.greaterThanOrEqualTo(trackLength, criteria.getTrackLengthMin()));
+            racePredicates.add(criteriaBuilder.ge(trackLength, criteria.getTrackLengthMin()));
         }
-
         if (criteria.getTrackLengthMax() != 0) {
-            racePredicates.add(criteriaBuilder.lessThanOrEqualTo(trackLength, criteria.getTrackLengthMax()));
+            racePredicates.add(criteriaBuilder.le(trackLength, criteria.getTrackLengthMax()));
         }
 
         if (criteria.getRunnersCountMin() != 0) {
-            racePredicates.add(criteriaBuilder.ge(criteriaBuilder.size(root.get(Race_.RUNNERS)), criteria.getRunnersCountMin()));
+            racePredicates.add(criteriaBuilder.ge(criteriaBuilder.size(root.get(Race_.RUNNERS)),
+                                                  criteria.getRunnersCountMin()));
         }
-
         if (criteria.getRunnersCountMax() != 0) {
-            racePredicates.add(criteriaBuilder.le(criteriaBuilder.size(root.get(Race_.RUNNERS)), criteria.getRunnersCountMax()));
+            racePredicates.add(criteriaBuilder.le(criteriaBuilder.size(root.get(Race_.RUNNERS)),
+                                                  criteria.getRunnersCountMax()));
         }
-
 
         log.debug("Race Predicates list size: " + racePredicates.size());
 

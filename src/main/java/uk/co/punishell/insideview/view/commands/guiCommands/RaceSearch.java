@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
-import uk.co.punishell.insideview.view.commands.entityCommands.RaceTypeCommand;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,9 +26,10 @@ public class RaceSearch extends Criteria {
     private double trackLengthMin = 0;
     private double trackLengthMax = 0;
 
-    private List<RaceTypeCommand> raceTypes;
+    private String[] raceTypes = {"Nov", "Hrd", "Hcap", "Chs", "Listed", "Mdn", "Stks", "Grp1", "Grp2",
+                                  "Grp3", "Claim", "PA", "NHF", "INHF", "Sell", "Nursery", "App", "Class"};
 
-    private List<String> selectedRaceTypes;
+    private List<String> selectedRaceTypes = new ArrayList<>();
 
     private int runnersCountMin = 0;
     private int runnersCountMax = 0;

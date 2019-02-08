@@ -4,15 +4,17 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Objects;
 
 @Setter
 @Getter
 @Entity
-public class Runner extends BaseEntity {
+public class Runner extends BaseEntity implements Comparable<Runner>{
 
     @ManyToOne
     @JoinColumn(name = "race_id")
@@ -101,4 +103,24 @@ public class Runner extends BaseEntity {
         this.naps = naps;
     }
 
+    @Override
+    public int compareTo(@NotNull Runner anotherRunner) {
+        return Double.compare(this.getPrice1(), anotherRunner.getPrice1());
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Runner)) return false;
+        Runner runner = (Runner) o;
+        return Double.compare(runner.getPrice1(), getPrice1()) == 0 &&
+                Objects.equals(getRace(), runner.getRace()) &&
+                Objects.equals(getHorse(), runner.getHorse());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getRace(), getHorse(), getPrice1());
+    }
 }

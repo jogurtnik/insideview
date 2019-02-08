@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.database.entities.Race;
+import uk.co.punishell.insideview.model.database.entities.RaceType;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
 import uk.co.punishell.insideview.model.database.specifications.RaceSpecification;
@@ -13,6 +14,7 @@ import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearchResult;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,20 +35,18 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
     }
 
     @Override
-    public RaceSearchResult search(RaceSearch raceSearch) {
+    public RaceSearchResult search(RaceSearch criteria) {
 
-        this.raceSpecification = new RaceSpecification(raceSearch);
+        this.raceSpecification = new RaceSpecification(criteria);
 
         List<Race> races = raceRepository.findAll(raceSpecification);
-        races = filterPostQuery(races, raceSearch);
+
+        List<Race> postQueryFiletedRaces;
+        postQueryFiletedRaces = this.postSearch(races, criteria);
 
         RaceSearchResult result = new RaceSearchResult();
 
-        /*races
-                .iterator()
-                .forEachRemaining(race -> result.getRaces().add(raceToRaceCommand.convert(race)));
-*/
-        result.setRaces(races
+        result.setRaces(postQueryFiletedRaces
                 .stream()
                 .map((@NotNull var race) -> raceToRaceCommand.convert(race))
                 .collect(Collectors.toList()));
@@ -64,60 +64,50 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
      * @return filtered list by passed criteria
      */
 
-    private List<Race> filterPostQuery(@NotNull List<Race> races, RaceSearch raceSearch) {
+    public List<Race> postSearch(List<Race> queryResult, RaceSearch criteria) {
 
-        List<Race> filteredRaces = new ArrayList<>();
+        // In order to avoid ConcurrentModificationException create this copy of passed queryResult
+        List<Race> safeCopyOfQueryResult = new ArrayList<>();
+        queryResult.iterator().forEachRemaining(race -> safeCopyOfQueryResult.add(race));
 
-        if (raceSearch.getFiveStarsCountMin() != 0 && raceSearch.getFiveStarsCountMax() != 0) {
+        // remove races which do not meet the criteria
+        for (Race race : safeCopyOfQueryResult) {
 
-        for (Race race : races) {
-
-            boolean checkFiveStarsCountMinResult = false;
-            boolean checkFiveStarsCountMaxResult = false;
-
-            int fiveStarsCount = 0;
-
-            List<Runner> runners = race.getRunners();
-
-            for (Runner runner : runners) {
-
-                if (runner.getStars() == 5) {
-
-                    fiveStarsCount++;
-                }
-            }
-
-
-            if (raceSearch.getFiveStarsCountMin() != 0) {
-                if (fiveStarsCount >= raceSearch.getFiveStarsCountMin()) {
-                    checkFiveStarsCountMinResult = true;
+            if (!criteria.getSelectedRaceTypes().isEmpty()) {
+                if(race.getRaceTypes().size() != criteria.getSelectedRaceTypes().size()) {
+                    queryResult.remove(race);
                 } else {
-                    checkFiveStarsCountMinResult = false;
+                    for (RaceType raceType : race.getRaceTypes()) {
+                        for (String selectedRaceType : criteria.getSelectedRaceTypes()) {
+                            if (!raceType.getName().equalsIgnoreCase(selectedRaceType)) {
+                                queryResult.remove(race);
+                            }
+                        }
+                    }
                 }
-            } else {
-                checkFiveStarsCountMinResult = true;
             }
 
-            if (raceSearch.getFiveStarsCountMax() != 0) {
-                if (fiveStarsCount <= raceSearch.getFiveStarsCountMax()) {
-                    checkFiveStarsCountMaxResult = true;
-                } else {
-                    checkFiveStarsCountMaxResult = false;
+            if (criteria.getFiveStarsCountMin() != 0 ||
+                criteria.getFiveStarsCountMax() != 0) {
+                int count = 0;
+                for (Runner runner : race.getRunners()) {
+                    if (runner.getStars() == 5) {
+                        count++;
+                    }
                 }
-            } else {
-                checkFiveStarsCountMaxResult = true;
+                if (count > criteria.getFiveStarsCountMin()) {
+                    queryResult.remove(race);
+                }
+                if (count < criteria.getFiveStarsCountMax()) {
+                    queryResult.remove(race);
+                }
             }
 
-            if (checkFiveStarsCountMinResult && checkFiveStarsCountMaxResult) {
-
-                filteredRaces.add(race);
-            }
-
-        }
-        } else {
-            return races;
+            Collections.sort(race.getRunners());
         }
 
-        return filteredRaces;
+
+
+        return queryResult;
     }
 }

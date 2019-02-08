@@ -69,8 +69,7 @@ public class RunnerSearch extends Criteria {
     private double mov3to1Min = 0;
     private double mov3to1Max = 0;
 
-    private boolean winner;
-    private boolean placed;
+    private String result = "all";
 
     private int cprMin = 0;
     private int cprMax = 0;
@@ -92,6 +91,9 @@ public class RunnerSearch extends Criteria {
 
     private int runnerStarsMin = 0;
     private int runnerStarsMax = 0;
+
+    private int runnerStarsPerRaceMin = 0;
+    private int runnerStarsPerRaceMax = 0;
 
     private int favouritePlaceAmongStarsMin = 0;
     private int favouritePlaceAmongStarsMax = 0;

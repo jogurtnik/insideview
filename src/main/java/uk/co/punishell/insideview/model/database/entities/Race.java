@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 @Setter
@@ -28,7 +27,7 @@ public class Race extends BaseEntity {
     @ElementCollection(targetClass = RaceType.class)
     @Embedded
     @AttributeOverride(name = "id", column = @Column(name = "raceType_id"))
-    private List<RaceType> raceTypes = new LinkedList<>();
+    private List<RaceType> raceTypes = new ArrayList<>();
 
     private LocalTime time;
 

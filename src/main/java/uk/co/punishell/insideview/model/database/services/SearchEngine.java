@@ -7,5 +7,4 @@ import uk.co.punishell.insideview.view.commands.guiCommands.SearchResult;
 public interface SearchEngine<T extends Criteria, E extends SearchResult> {
 
     E search(T criteria);
-
 }

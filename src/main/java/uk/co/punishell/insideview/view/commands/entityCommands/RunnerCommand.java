@@ -3,11 +3,12 @@ package uk.co.punishell.insideview.view.commands.entityCommands;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 @Setter
 @Getter
 @NoArgsConstructor
-public class RunnerCommand {
+public class RunnerCommand implements Comparable<RunnerCommand> {
 
     private Long id;
     private Long raceId;
@@ -43,4 +44,12 @@ public class RunnerCommand {
     private int nptips;
     private int stars;
     private int naps;
+
+    @Override
+    public int compareTo(@NotNull RunnerCommand anotherRunner) {
+
+        int result;
+
+        return Double.compare(this.getPrice1(), anotherRunner.getPrice1());
+    }
 }

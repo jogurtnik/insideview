@@ -147,8 +147,8 @@
                                         <select id="raceType" class="select2_multiple form-control" multiple="multiple"
                                                 th:field="${raceSearch.selectedRaceTypes}">
                                             <option th:each="type : ${raceSearch.raceTypes}"
-                                                    th:value="${type.name}"
-                                                    th:text="${type.name}">Choose option</option>
+                                                    th:value="${type}"
+                                                    th:text="${type}">Choose option</option>
                                         </select>
                                         </div>
                                     </div>
@@ -617,21 +617,6 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="result">Result:</label>
-                                    <div id="result">
-                                        <div class="checkbox col-md-4 col-sm-4 col-xs-12">
-                                            <label>
-                                                <input type="checkbox" class="flat" th:field="${runnerSearch.winner}" th:checked="${runnerSearch.winner}"> Winner
-                                            </label>
-                                        </div>
-                                        <div class="checkbox col-md-4 col-sm-4 col-xs-12">
-                                            <label>
-                                                <input type="checkbox" class="flat" th:field="${runnerSearch.placed}" th:checked="${runnerSearch.placed}"> Placed
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="cpr"
                                            data-toggle="tooltip" data-placement="right" title="Cherry picks">CPR: </label>
                                     <div id="cpr">
@@ -685,6 +670,24 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnerStarsPerRace"
+                                                  data-toggle="tooltip" data-placement="right" title="Stars per race">Stars/R: </label>
+                                    <div id="runnerStarsPerRace">
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="runnerStarsPerRaceMin" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="minimum"
+                                                   th:field="${runnerSearch.runnerStarsPerRaceMin}"
+                                                   th:value="${runnerSearch.runnerStarsPerRaceMin}"/>
+                                        </div>
+                                        <div class="col-md-4 col-sm-4 col-xs-12">
+                                            <input id="runnerStarsPerRaceMax" class="form-control col-md-6 col-xs-12" type="number" value="0"
+                                                   data-toggle="tooltip" data-placement="top" title="maximum"
+                                                   th:field="${runnerSearch.runnerStarsPerRaceMax}"
+                                                   th:value="${runnerSearch.runnerStarsPerRaceMax}"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="favouritePlaceAmongStars"
                                            data-toggle="tooltip" data-placement="right" title="Favourite place among stars">FP (S): </label>
                                     <div id="favouritePlaceAmongStars">
@@ -701,6 +704,32 @@
                                                th:value="${runnerSearch.favouritePlaceAmongStarsMax}"/>
                                     </div>
                                     </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="result">Result:</label>
+                                    <div id="result" class="radio" >
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            <input type="radio" class="radio" name="result" value="winner"
+                                                   th:field="${runnerSearch.result}"> Winner
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="radio" name="result" value="placed"
+                                                   th:field="${runnerSearch.result}"> Placed
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <label>
+                                            <input type="radio" class="radio" name="result" value="notPlaced"
+                                                   th:field="${runnerSearch.result}"> !Placed
+                                        </label>
+                                        <label>
+                                            <input type="radio" class="radio" name="result" value="all"
+                                                   th:field="${runnerSearch.result}"> All
+                                        </label>
+                                    </div>
+                                    </div>
+
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="submitRunnerQDiv">Query: </label>
