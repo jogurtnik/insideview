@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Setter
 @Getter
@@ -56,5 +57,22 @@ public class Race extends BaseEntity {
         this.raceTypes = raceTypes;
         this.time = time;
         this.runners = runners;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Race)) return false;
+        Race race = (Race) o;
+        return Double.compare(race.getTrackLength(), getTrackLength()) == 0 &&
+                Objects.equals(getDate(), race.getDate()) &&
+                Objects.equals(getCountry(), race.getCountry()) &&
+                Objects.equals(getCity(), race.getCity()) &&
+                Objects.equals(getTime(), race.getTime());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDate(), getCountry(), getCity(), getTrackLength(), getTime());
     }
 }

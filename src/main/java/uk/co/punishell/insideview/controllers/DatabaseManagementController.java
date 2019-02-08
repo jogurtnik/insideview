@@ -1,7 +1,6 @@
 package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,15 +58,7 @@ public class DatabaseManagementController {
 
         log.info("FILE VALIDATION: " + validatedFiles.size() + " files valid.");
 
-        validatedFiles.iterator().forEachRemaining(file -> {
-            try {
-                dbPopulatingManager.populateDB(file);
-            } catch (IOException e) {
-                throw new FileUploadException("File access denied.");
-            } catch (InvalidFormatException e) {
-                throw new FileUploadException("File is not in compatible MS Excel format.");
-            }
-        });
+        dbPopulatingManager.populateDB(validatedFiles);
 
         return "redirect:/databaseManagement";
     }

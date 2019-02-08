@@ -118,20 +118,43 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                 }
             }
 
-            if (criteria.getFavouritePlaceAmongStarsMin() != 0 ||
-                criteria.getFavouritePlaceAmongStarsMax() != 0) {
-                int count = 1;
+            if (criteria.getRunnerStarsPerRaceMin() != 0 ||
+                criteria.getRunnerStarsPerRaceMax() != 0) {
+                int count = 0;
                 for (Runner raceRunner : raceRunners) {
-                    if (raceRunner.getStars() == runner.getStars()) {
+                    if (runner.getStars() == raceRunner.getStars()) {
                         count++;
-
                     }
                 }
-                if (count <  criteria.getFavouritePlaceAmongStarsMin()) {
-                    queryResult.remove(runner);
+                if (criteria.getRunnerStarsPerRaceMin() != 0) {
+                    if (count < criteria.getRunnerStarsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
                 }
-                if (count > criteria.getFavouritePlaceAmongStarsMax()) {
-                    queryResult.remove(runner);
+                if (criteria.getRunnerStarsPerRaceMax() != 0) {
+                    if (count > criteria.getRunnerStarsPerRaceMax()) {
+                        queryResult.remove(runner);
+                    }
+                }
+            }
+            if (criteria.getFavouritePlaceAmongStarsMin() != 0 ||
+                criteria.getFavouritePlaceAmongStarsMax() != 0) {
+                List<Runner> starRunners = new ArrayList<>();
+                for (Runner raceRunner : raceRunners) {
+                    if (raceRunner.getStars() == runner.getStars()) {
+                        starRunners.add(raceRunner);
+                    }
+                }
+                Collections.sort(starRunners);
+                if (criteria.getFavouritePlaceAmongStarsMin() != 0) {
+                    if (starRunners.indexOf(runner) + 1 < criteria.getFavouritePlaceAmongStarsMin() ) {
+                        queryResult.remove(runner);
+                    }
+                }
+                if (criteria.getFavouritePlaceAmongStarsMax() != 0) {
+                    if (starRunners.indexOf(runner) + 1 > criteria.getFavouritePlaceAmongStarsMax()) {
+                        queryResult.remove(runner);
+                    }
                 }
             }
         }

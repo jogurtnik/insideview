@@ -58,12 +58,6 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
         return result;
     }
 
-    /**
-     * Returns filtered by criteria, list of entities, not applicable in Criteria API.
-     *
-     * @return filtered list by passed criteria
-     */
-
     public List<Race> postSearch(List<Race> queryResult, RaceSearch criteria) {
 
         // In order to avoid ConcurrentModificationException create this copy of passed queryResult
@@ -78,10 +72,14 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
                     queryResult.remove(race);
                 } else {
                     for (RaceType raceType : race.getRaceTypes()) {
+                        boolean exists = false;
                         for (String selectedRaceType : criteria.getSelectedRaceTypes()) {
-                            if (!raceType.getName().equalsIgnoreCase(selectedRaceType)) {
-                                queryResult.remove(race);
+                            if (raceType.getName().equalsIgnoreCase(selectedRaceType)) {
+                                exists = true;
                             }
+                        }
+                        if (!exists) {
+                            queryResult.remove(race);
                         }
                     }
                 }

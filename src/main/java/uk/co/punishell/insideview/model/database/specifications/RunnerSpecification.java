@@ -195,7 +195,6 @@ public class RunnerSpecification implements Specification<Runner> {
 
         Path<Boolean> winner = root.get(Runner_.winner);
         Path<Boolean> placed = root.get(Runner_.placed);
-        log.debug("RunnerSearch result value: " + criteria.getResult());
         if (criteria.getResult().equalsIgnoreCase("winner")) {
             runnerPredicates.add(criteriaBuilder.isTrue(winner));
         }
