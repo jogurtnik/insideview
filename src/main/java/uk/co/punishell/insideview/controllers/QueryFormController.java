@@ -3,11 +3,9 @@ package uk.co.punishell.insideview.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import uk.co.punishell.insideview.model.database.services.RaceSearchEngine;
 import uk.co.punishell.insideview.model.database.services.RunnerSearchEngine;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch;
@@ -69,6 +67,33 @@ public class QueryFormController {
         return "redirect:/query";
     }
 
+    @RequestMapping({"clearRaceForm", "/clearRaceForm"})
+    public String clearRaceForm(@ModelAttribute("raceSearch") RaceSearch raceSearch,
+                                Model model) {
+        model.addAttribute("raceSearch", new RaceSearch());
+        return "redirect:/query";
+    }
+
+    @RequestMapping({"clearRaceResults", "/clearRaceResults"})
+    public String clearRaceResutls(@ModelAttribute("raceSearchResult") RaceSearchResult raceSearchResult,
+                                   HttpSession session) {
+        session.setAttribute("raceSearchResult", null);
+        return "redirect:/query";
+    }
+
+    @RequestMapping({"clearRunnerForm", "/clearRunnerForm"})
+    public String clearRunnerForm(@ModelAttribute("runnerSearch") RunnerSearch runnerSearch,
+                                  Model model) {
+        model.addAttribute("runnerSearch", new RunnerSearch());
+        return "redirect:/query";
+    }
+
+    @RequestMapping({"clearRunnerResults", "/clearRunnerResults"})
+    public String clearRunnerResults(@ModelAttribute("runnerSearchResult") RunnerSeachResult runnerSeachResult,
+                                     HttpSession session) {
+        session.setAttribute("runnerSearchResult", null);
+        return "redirect:/query";
+    }
 
     @ModelAttribute("raceSearch")
     public RaceSearch getRaceSearchFormData() {

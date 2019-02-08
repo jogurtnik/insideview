@@ -51,6 +51,11 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
                         (RaceType raceType) -> raceCommand.getRaceTypes()
                                                           .add(raceTypeToRaceTypeCommand.convert(raceType)));
 
+        StringBuilder sb = new StringBuilder();
+        source.getRaceTypes().iterator().forEachRemaining(type -> sb.append(type.getName() + " "));
+
+        raceCommand.setRaceTypesNames(sb.toString());
+
         return raceCommand;
     }
 }
