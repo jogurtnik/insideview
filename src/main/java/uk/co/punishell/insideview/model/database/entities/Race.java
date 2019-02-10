@@ -2,6 +2,7 @@ package uk.co.punishell.insideview.model.database.entities;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.time.LocalTime;
@@ -18,7 +19,7 @@ import java.util.Objects;
                                                        subgraph = "runners"),
                   subgraphs = @NamedSubgraph(name = "runners",
                                              attributeNodes = @NamedAttributeNode("horse")))
-public class Race extends BaseEntity {
+public class Race extends BaseEntity implements Comparable<Race> {
 
     private Date date;
     private String country;
@@ -74,5 +75,25 @@ public class Race extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(getDate(), getCountry(), getCity(), getTrackLength(), getTime());
+    }
+
+    @Override
+    public int compareTo(@NotNull Race anotherRace) {
+
+        if (this == anotherRace) return 0;
+
+        switch (this.getDate().compareTo(anotherRace.getDate())) {
+            case 1:
+                return 1;
+
+            case -1:
+                return -1;
+
+            case 0:
+                return this.getTime().compareTo(anotherRace.getTime());
+
+            default:
+                return -1;
+        }
     }
 }

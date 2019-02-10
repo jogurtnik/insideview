@@ -48,8 +48,6 @@ public class RunnerCommand implements Comparable<RunnerCommand> {
     @Override
     public int compareTo(@NotNull RunnerCommand anotherRunner) {
 
-        int result;
-
         return Double.compare(this.getPrice1(), anotherRunner.getPrice1());
     }
 }

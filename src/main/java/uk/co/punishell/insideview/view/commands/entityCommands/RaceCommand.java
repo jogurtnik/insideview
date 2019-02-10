@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class RaceCommand {
+public class RaceCommand{
 
     private Long id = 1L;
     @DateTimeFormat(pattern="yyyy-MM-dd")
@@ -26,4 +26,5 @@ public class RaceCommand {
     private String raceTypesNames = "";
 
     private List<RunnerCommand> runners = new LinkedList<>();
+
 }

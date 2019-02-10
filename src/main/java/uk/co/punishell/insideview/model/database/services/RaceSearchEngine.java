@@ -44,6 +44,11 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
         List<Race> postQueryFiletedRaces;
         postQueryFiletedRaces = this.postSearch(races, criteria);
 
+        Collections.sort(postQueryFiletedRaces);
+
+        postQueryFiletedRaces
+                .stream().forEach(race -> Collections.sort(race.getRunners()));
+
         RaceSearchResult result = new RaceSearchResult();
 
         result.setRaces(postQueryFiletedRaces
@@ -100,8 +105,6 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
                     queryResult.remove(race);
                 }
             }
-
-            Collections.sort(race.getRunners());
         }
 
 
