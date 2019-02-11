@@ -21,7 +21,7 @@ public class RaceSearch extends Criteria {
     private Date dateTo = new Date();
 
     private String country;
-    private String[] countries = {"GB", "IE"};
+    private String[] countries = {"All", "GB", "IE"};
 
     private double trackLengthMin = 0;
     private double trackLengthMax = 0;

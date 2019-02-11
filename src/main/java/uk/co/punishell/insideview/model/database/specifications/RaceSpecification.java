@@ -40,7 +40,7 @@ public class RaceSpecification implements Specification<Race> {
             racePredicates.add(criteriaBuilder.lessThanOrEqualTo(date, criteria.getDateTo()));
         }
 
-        if (criteria.getCountry() != null) {
+        if (!criteria.getCountry().equalsIgnoreCase("all")) {
 
             racePredicates.add(criteriaBuilder.like(country, criteria.getCountry()));
         }
