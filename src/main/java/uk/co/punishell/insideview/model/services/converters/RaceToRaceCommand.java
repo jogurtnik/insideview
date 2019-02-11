@@ -1,6 +1,7 @@
 package uk.co.punishell.insideview.model.services.converters;
 
 import lombok.Synchronized;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
@@ -9,6 +10,7 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.RaceType;
 import uk.co.punishell.insideview.view.commands.entityCommands.RaceCommand;
 
+@Slf4j
 @Component
 public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
 
@@ -36,6 +38,9 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
                 .getRunners()
                 .iterator()
                 .forEachRemaining(runner -> raceCommand.getRunners().add(runnerToRunnerCommand.convert(runner)));
+
+        // find a different way, this violates Single Responsibility Principle
+        raceCommand.getRunners().iterator().forEachRemaining(runner -> runner.setFavPos(raceCommand.getRunners().indexOf(runner) + 1));
 
         raceCommand.setId(source.getId());
         raceCommand.setDate(source.getDate());

@@ -45,6 +45,8 @@ public class RunnerCommand implements Comparable<RunnerCommand> {
     private int[] stars = new int[1];
     private int naps;
 
+    private int favPos;
+
     @Override
     public int compareTo(@NotNull RunnerCommand anotherRunner) {
 
