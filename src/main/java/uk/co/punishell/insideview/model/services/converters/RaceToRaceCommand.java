@@ -47,7 +47,18 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
         raceCommand.setTime(source.getTime());
         raceCommand.setCountry(source.getCountry());
         raceCommand.setCity(source.getCity());
+
+        // Convert track length to common for horse racing format (miles and furlongs)
         raceCommand.setTrackLength(source.getTrackLength());
+        int miles = (int) raceCommand.getTrackLength();
+        int furlongs = (int) ((raceCommand.getTrackLength() - (double) miles) / 0.125);
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(miles).append("m").append(furlongs).append("f");
+        raceCommand.setTrackLengthString(sb.toString());
+
+        sb.delete(0, sb.length());
+
 
         source
                 .getRaceTypes()
@@ -56,7 +67,7 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
                         (RaceType raceType) -> raceCommand.getRaceTypes()
                                                           .add(raceTypeToRaceTypeCommand.convert(raceType)));
 
-        StringBuilder sb = new StringBuilder();
+
         source.getRaceTypes().iterator().forEachRemaining(type -> sb.append(type.getName() + " "));
 
         raceCommand.setRaceTypesNames(sb.toString());

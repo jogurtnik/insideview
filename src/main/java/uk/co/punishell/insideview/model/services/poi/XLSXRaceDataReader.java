@@ -31,7 +31,22 @@ public class XLSXRaceDataReader {
     }
 
     public double getTrackLength(Row row) {
-        return extractTrackLength(row.getCell(2).getStringCellValue());
+        // some of the races lack the data about track length and in that case first character is NaN
+        String firstChar = row
+                                .getCell(2)
+                                .getStringCellValue()
+                                .substring(0, 1);
+
+        try {
+            if (!Double.isNaN(Double.parseDouble(firstChar))) {
+                return extractTrackLength(row.getCell(2).getStringCellValue());
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            log.warn("Exception while parsing 1st character of 3rd cell in a row as double.");
+            return 0;
+        }
     }
 
     public List<RaceType> getRaceType(Row row) {

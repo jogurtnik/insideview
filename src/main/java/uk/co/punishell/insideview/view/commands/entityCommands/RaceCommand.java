@@ -22,6 +22,7 @@ public class RaceCommand{
     private String country;
     private String city;
     private double trackLength;
+    private String trackLengthString;
     private List<RaceTypeCommand> raceTypes = new LinkedList<>();
     private String raceTypesNames = "";
 

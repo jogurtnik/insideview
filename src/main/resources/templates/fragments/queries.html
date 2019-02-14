@@ -786,9 +786,8 @@
                         <div class="x_title">
                                 <h2 th:text="'Race ' + ${raceStat.count} + ' - ' + ${race.country} + ', ' + ${race.city} +
                                     ' | ' + ${{race.date}} + ', ' + ${race.time.toString()} +
-                                     ' | ' + ${race.trackLength} + ' (miles)'">
-                                    Race - Country, City | Date(day), Time | 0 (miles)
-                                    <small th:text="${race.raceTypesNames}">Type1 Type2</small>
+                                     ' | ' + ${race.trackLengthString} + ' | ' + ${race.raceTypesNames}">
+                                    Race - Country, City | Date(day), Time | 0m0f | RaceTypes
                                 </h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li>
