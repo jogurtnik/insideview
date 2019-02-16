@@ -7,8 +7,8 @@ import uk.co.punishell.insideview.model.database.entities.Race_;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch;
 
 import javax.persistence.criteria.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -27,17 +27,17 @@ public class RaceSpecification implements Specification<Race> {
         final List<Predicate> racePredicates = new ArrayList<>();
 
 
-        Path<Date> date = root.get(Race_.date);
+        Path<LocalDate> localDate = root.get(Race_.localDate);
         Path<String> country = root.get(Race_.country);
         Path<Double> trackLength = root.get(Race_.trackLength);
 
 
         // Add Race predicates
 
-        if ((criteria.getDateSince() != null) && (criteria.getDateTo() != null)) {
+        if ((criteria.getLocalDateSince() != null) && (criteria.getLocalDateTo() != null)) {
 
-            racePredicates.add(criteriaBuilder.greaterThanOrEqualTo(date, criteria.getDateSince()));
-            racePredicates.add(criteriaBuilder.lessThanOrEqualTo(date, criteria.getDateTo()));
+            racePredicates.add(criteriaBuilder.greaterThanOrEqualTo(localDate, criteria.getLocalDateSince()));
+            racePredicates.add(criteriaBuilder.lessThanOrEqualTo(localDate, criteria.getLocalDateTo()));
         }
 
         if (!criteria.getCountry().equalsIgnoreCase("all")) {

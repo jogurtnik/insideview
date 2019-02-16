@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,7 +17,7 @@ public class RaceCommand{
 
     private Long id = 1L;
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date date = new Date();
+    private LocalDate localDate;
     private LocalTime time;
     private String country;
     private String city;

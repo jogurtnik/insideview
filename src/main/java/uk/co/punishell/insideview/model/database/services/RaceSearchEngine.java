@@ -41,17 +41,17 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
 
         List<Race> races = raceRepository.findAll(raceSpecification);
 
-        List<Race> postQueryFiletedRaces;
-        postQueryFiletedRaces = this.postSearch(races, criteria);
+        List<Race> postQueryFilteredRaces;
+        postQueryFilteredRaces = this.postSearch(races, criteria);
 
-        Collections.sort(postQueryFiletedRaces);
+        Collections.sort(postQueryFilteredRaces);
 
-        postQueryFiletedRaces
+        postQueryFilteredRaces
                 .stream().forEach(race -> Collections.sort(race.getRunners()));
 
         RaceSearchResult result = new RaceSearchResult();
 
-        result.setRaces(postQueryFiletedRaces
+        result.setRaces(postQueryFilteredRaces
                 .stream()
                 .map((@NotNull var race) -> raceToRaceCommand.convert(race))
                 .collect(Collectors.toList()));
@@ -71,6 +71,18 @@ public class RaceSearchEngine implements SearchEngine<RaceSearch, RaceSearchResu
 
         // remove races which do not meet the criteria
         for (Race race : safeCopyOfQueryResult) {
+
+            if (!criteria.getSelectedWeekDays().isEmpty()) {
+                boolean isMatch = false;
+                for (String weekday : criteria.getSelectedWeekDays()) {
+                    if (race.getLocalDate().getDayOfWeek().name().equalsIgnoreCase(weekday)) {
+                        isMatch = true;
+                    }
+                }
+                if (!isMatch) {
+                    queryResult.remove(race);
+                }
+            }
 
             if (!criteria.getSelectedRaceTypes().isEmpty()) {
                 if(race.getRaceTypes().size() != criteria.getSelectedRaceTypes().size()) {

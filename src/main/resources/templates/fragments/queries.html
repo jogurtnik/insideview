@@ -114,16 +114,26 @@
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-since">Date since: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <p><input id="date-since" class="form-control col-md-6 col-xs-12" type="date"
-                                                          th:field="${raceSearch.dateSince}"
-                                                          th:type="date"/></p>
+                                                          th:field="${raceSearch.localDateSince}"/></p>
                                             </div>
                                     </div>
                                     <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="date-to">Date to: <span class="required">*</span></label>
                                             <div class="col-md-6 col-sm-6 col-xs-12">
                                                 <p><input id="date-to" class="form-control col-md-6 col-xs-12" type="date"
-                                                          th:field="${raceSearch.dateTo}"/></p>
+                                                          th:field="${raceSearch.localDateTo}"/></p>
                                             </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="weekdays">Weekdays: </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="weekdays" class="select2_multiple form-control" multiple="multiple"
+                                                    th:field="${raceSearch.selectedWeekDays}">
+                                                <option th:each="day : ${raceSearch.weekDays}"
+                                                        th:value="${day}"
+                                                        th:text="${day}">Choose option</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                             <label class="control-label col-md-4 col-sm-4 col-xs-12" for="country">Country: </label>
@@ -153,9 +163,9 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceType">Race type: </label>
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceTypes">Race type: </label>
                                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select id="raceType" class="select2_multiple form-control" multiple="multiple"
+                                        <select id="raceTypes" class="select2_multiple form-control" multiple="multiple"
                                                 th:field="${raceSearch.selectedRaceTypes}">
                                             <option th:each="type : ${raceSearch.raceTypes}"
                                                     th:value="${type}"
@@ -785,7 +795,8 @@
 
                         <div class="x_title">
                                 <h2 th:text="'Race ' + ${raceStat.count} + ' - ' + ${race.country} + ', ' + ${race.city} +
-                                    ' | ' + ${{race.date}} + ', ' + ${race.time.toString()} +
+                                    ' | ' + ${{race.localDate}} + ' (' + ${#temporals.dayOfWeekNameShort(race.localDate)} + ')'
+                                    + ', ' + ${race.time.toString()} +
                                      ' | ' + ${race.trackLengthString} + ' | ' + ${race.raceTypesNames}">
                                     Race - Country, City | Date(day), Time | 0m0f | RaceTypes
                                 </h2>
@@ -977,7 +988,12 @@
 
     <script>
         $(document).ready(function() {
-            $(".select2_multiple").select2({
+            $("#weekdays").select2({
+                maximumSelecetionLength: 7,
+                placeholder: "Selection limit: 7",
+                allowClear: true
+            });
+            $("#raceTypes").select2({
                 maximumSelecetionLength: 3,
                 placeholder: "Selection limit: 3",
                 allowClear: true

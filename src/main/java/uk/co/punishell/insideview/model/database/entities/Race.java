@@ -5,9 +5,9 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,7 +21,7 @@ import java.util.Objects;
                                              attributeNodes = @NamedAttributeNode("horse")))
 public class Race extends BaseEntity implements Comparable<Race> {
 
-    private Date date;
+    private LocalDate localDate;
     private String country;
     private String city;
     private double trackLength;
@@ -39,9 +39,9 @@ public class Race extends BaseEntity implements Comparable<Race> {
     public Race() {
     }
 
-    public Race(Date date, String country, String city,
+    public Race(LocalDate localDate, String country, String city,
                 double trackLength, List<RaceType> raceTypes, LocalTime time) {
-        this.date = date;
+        this.localDate = localDate;
         this.country = country;
         this.city = city;
         this.trackLength = trackLength;
@@ -49,9 +49,9 @@ public class Race extends BaseEntity implements Comparable<Race> {
         this.time = time;
     }
 
-    public Race(Date date, String country, String city,
+    public Race(LocalDate localDate, String country, String city,
                 double trackLength, List<RaceType> raceTypes, LocalTime time, List<Runner> runners) {
-        this.date = date;
+        this.localDate = localDate;
         this.country = country;
         this.city = city;
         this.trackLength = trackLength;
@@ -66,7 +66,7 @@ public class Race extends BaseEntity implements Comparable<Race> {
         if (!(o instanceof Race)) return false;
         Race race = (Race) o;
         return Double.compare(race.getTrackLength(), getTrackLength()) == 0 &&
-                Objects.equals(getDate(), race.getDate()) &&
+                Objects.equals(getLocalDate(), race.getLocalDate()) &&
                 Objects.equals(getCountry(), race.getCountry()) &&
                 Objects.equals(getCity(), race.getCity()) &&
                 Objects.equals(getTime(), race.getTime());
@@ -74,7 +74,7 @@ public class Race extends BaseEntity implements Comparable<Race> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDate(), getCountry(), getCity(), getTrackLength(), getTime());
+        return Objects.hash(getLocalDate(), getCountry(), getCity(), getTrackLength(), getTime());
     }
 
     @Override
@@ -82,18 +82,16 @@ public class Race extends BaseEntity implements Comparable<Race> {
 
         if (this == anotherRace) return 0;
 
-        switch (this.getDate().compareTo(anotherRace.getDate())) {
-            case 1:
-                return 1;
+        int cmp = this.getLocalDate().compareTo(anotherRace.getLocalDate());
 
-            case -1:
-                return -1;
-
-            case 0:
-                return this.getTime().compareTo(anotherRace.getTime());
-
-            default:
-                return -1;
+        if (cmp > 0) {
+            return 1;
+        } else if (cmp < 0) {
+            return -1;
+        } else if (cmp == 0) {
+            return this.getTime().compareTo(anotherRace.getTime());
         }
+
+        return -1;
     }
 }

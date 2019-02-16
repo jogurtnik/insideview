@@ -10,15 +10,15 @@ import uk.co.punishell.insideview.model.services.converters.RaceTypeToRaceTypeCo
 import uk.co.punishell.insideview.model.services.converters.RunnerToRunnerCommand;
 import uk.co.punishell.insideview.view.commands.entityCommands.RaceCommand;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 import static org.junit.Assert.*;
 
 public class RaceToRaceCommandTest {
 
     public static final Long ID_VALUE = 1L;
-    public static final Date DATE = new Date();
+    public static final LocalDate DATE = LocalDate.now();
     public static final LocalTime TIME = LocalTime.now();
     public static final String COUNTRY = "HappyLittleCountry";
     public static final String CITY = "HappyLittleCity";
@@ -47,7 +47,7 @@ public class RaceToRaceCommandTest {
         // given
         Race race = new Race();
         race.setId(ID_VALUE);
-        race.setDate(DATE);
+        race.setLocalDate(DATE);
         race.setTime(TIME);
         race.setCountry(COUNTRY);
         race.setCity(CITY);
@@ -60,7 +60,7 @@ public class RaceToRaceCommandTest {
 
         // then
         assertEquals(ID_VALUE, raceCommand.getId());
-        assertEquals(DATE, raceCommand.getDate());
+        assertEquals(DATE, raceCommand.getLocalDate());
         assertEquals(TIME, raceCommand.getTime());
         assertEquals(COUNTRY, raceCommand.getCountry());
         assertEquals(CITY, raceCommand.getCity());

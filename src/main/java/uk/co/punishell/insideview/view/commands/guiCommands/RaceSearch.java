@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Setter
@@ -15,10 +15,10 @@ import java.util.List;
 public class RaceSearch extends Criteria {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date dateSince = new Date();
+    private LocalDate localDateSince = LocalDate.now();
 
-    @DateTimeFormat (pattern="yyyy-MM-dd")
-    private Date dateTo = new Date();
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
+    private LocalDate localDateTo = LocalDate.now();
 
     private String country;
     private String[] countries = {"All", "GB", "IE"};
@@ -30,6 +30,9 @@ public class RaceSearch extends Criteria {
                                   "Grp3", "Claim", "PA", "NHF", "INHF", "Sell", "Nursery", "App", "Class"};
 
     private List<String> selectedRaceTypes = new ArrayList<>();
+
+    private String[] weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    private List<String> selectedWeekDays = new ArrayList<>();
 
     private int runnersCountMin = 0;
     private int runnersCountMax = 0;

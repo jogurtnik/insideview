@@ -43,7 +43,7 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
         raceCommand.getRunners().iterator().forEachRemaining(runner -> runner.setFavPos(raceCommand.getRunners().indexOf(runner) + 1));
 
         raceCommand.setId(source.getId());
-        raceCommand.setDate(source.getDate());
+        raceCommand.setLocalDate(source.getLocalDate());
         raceCommand.setTime(source.getTime());
         raceCommand.setCountry(source.getCountry());
         raceCommand.setCity(source.getCity());
