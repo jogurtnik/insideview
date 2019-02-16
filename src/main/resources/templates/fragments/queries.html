@@ -1029,7 +1029,78 @@
 
     <script>
         $(document).ready(function(){
-            $('.dataTable').DataTable();
+            $('.dataTable').DataTable({
+                rowCallback: function(row, data, index) {
+
+                    // conditional background-color formatting for MovAM column
+                    if (data[2] > 5) {
+                        $(row).find('td:eq(2)').css('background-color', '#99ccff');
+
+                    } else if (data[2] >= 2.5 && data[2] <= 5) {
+                        $(row).find('td:eq(2)').css('background-color', '#ccffcc');
+
+                    } else if (data[2] > 0 && data[2] < 2.5) {
+                        $(row).find('td:eq(2)').css('background-color', '#ffff99');
+
+                    } else if (data[2] < 0 && data[2] > -2.5) {
+                        $(row).find('td:eq(2)').css('background-color', '#ffcc99');
+
+                    } else if (data[2] <= -2.5) {
+                        $(row).find('td:eq(2)').css('background-color', '#ff99cc');
+                    }
+
+                    // conditional background-color formatting for Mov1 column
+                    if (data[4] > 5) {
+                        $(row).find('td:eq(4)').css('background-color', '#99ccff');
+
+                    } else if (data[4] >= 2.5 && data[4] <= 5) {
+                        $(row).find('td:eq(4)').css('background-color', '#ccffcc');
+
+                    } else if (data[4] > 0 && data[4] < 2.5) {
+                        $(row).find('td:eq(4)').css('background-color', '#ffff99');
+
+                    } else if (data[4] < 0 && data[4] > -2.5) {
+                        $(row).find('td:eq(4)').css('background-color', '#ffcc99');
+
+                    } else if (data[4] <= -2.5) {
+                        $(row).find('td:eq(4)').css('background-color', '#ff99cc');
+                    }
+
+                    // conditional background-color formatting for Mean column
+                    if (data[5] > 5) {
+                        $(row).find('td:eq(5)').css('background-color', '#99ccff');
+
+                    } else if (data[5] >= 2.5 && data[5] <= 5) {
+                        $(row).find('td:eq(5)').css('background-color', '#ccffcc');
+
+                    } else if (data[5] > 0 && data[5] < 2.5) {
+                        $(row).find('td:eq(5)').css('background-color', '#ffff99');
+
+                    } else if (data[5] < 0 && data[5] > -2.5) {
+                        $(row).find('td:eq(5)').css('background-color', '#ffcc99');
+
+                    } else if (data[5] <= -2.5) {
+                        $(row).find('td:eq(5)').css('background-color', '#ff99cc');
+                    }
+
+                    // conditional background-color formatting for 321 column
+                    if (data[6] > 5) {
+                        $(row).find('td:eq(6)').css('background-color', '#99ccff');
+
+                    } else if (data[6] >= 2.5 && data[6] <= 5) {
+                        $(row).find('td:eq(6)').css('background-color', '#ccffcc');
+
+                    } else if (data[6] > 0 && data[6] < 2.5) {
+                        $(row).find('td:eq(6)').css('background-color', '#ffff99');
+
+                    } else if (data[6] < 0 && data[6] > -2.5) {
+                        $(row).find('td:eq(6)').css('background-color', '#ffcc99');
+
+                    } else if (data[6] <= -2.5) {
+                        $(row).find('td:eq(6)').css('background-color', '#ff99cc');
+                    }
+                }
+            });
         });
     </script>
 
