@@ -10,7 +10,7 @@ import uk.co.punishell.insideview.model.exceptions.FileUploadException;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    /*@ExceptionHandler(Exception.class)
     public ModelAndView handleBindingError(Exception exception) {
 
         log.error("QUERY FORM OBJECT BINDING ERROR!");
@@ -22,7 +22,7 @@ public class ControllerExceptionHandler {
         modelAndView.addObject("exception", exception);
 
         return modelAndView;
-    }
+    }*/
 
     @ExceptionHandler(FileUploadException.class)
     public ModelAndView handleFileUploadError(Exception exception) {

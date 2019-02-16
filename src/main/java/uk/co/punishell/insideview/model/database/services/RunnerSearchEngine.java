@@ -40,9 +40,11 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
         List<Runner> postQueryFilteredRunners;
         postQueryFilteredRunners = this.postSearch(runners, criteria);
 
+        List<Runner> sortedRunners = mergeSortRunnersByDate(postQueryFilteredRunners);
+
         RunnerSeachResult result = new RunnerSeachResult();
 
-        result.setRunners(postQueryFilteredRunners
+        result.setRunners(sortedRunners
                 .stream()
                 .map((@NotNull var runner) -> runnerToRunnerCommand.convert(runner))
                 .collect(Collectors.toList()));
@@ -176,5 +178,94 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
         }
 
         return queryResult;
+    }
+
+    private List<Runner> mergeSortRunnersByDate(List<Runner> list) {
+        List<Runner> sortedList = new ArrayList<>();
+
+        Runner[] runnersArray = new Runner[list.size()];
+
+        for (int i = 0; i < runnersArray.length; i++) {
+            runnersArray[i] = list.get(i);
+        }
+
+        sort(runnersArray, 0, runnersArray.length - 1);
+
+        for (Runner runner : runnersArray) {
+            sortedList.add(runner);
+        }
+
+        return sortedList;
+    }
+
+    private void sort(Runner arr[], int l, int r) {
+        if (l < r)
+        {
+            // Find the middle point
+            int m = (l+r)/2;
+
+            // Sort first and second halves
+            sort(arr, l, m);
+            sort(arr , m+1, r);
+
+            // Merge the sorted halves
+            merge(arr, l, m, r);
+        }
+    }
+
+    private void merge(Runner arr[], int l, int m, int r) {
+
+        // Find sizes of two subarrays to be merged
+        int n1 = m - l + 1;
+        int n2 = r - m;
+
+        /* Create temp arrays */
+        Runner L[] = new Runner [n1];
+        Runner R[] = new Runner [n2];
+
+        /*Copy data to temp arrays*/
+        for (int i=0; i<n1; ++i)
+            L[i] = arr[l + i];
+        for (int j=0; j<n2; ++j)
+            R[j] = arr[m + 1+ j];
+
+
+        /* Merge the temp arrays */
+
+        // Initial indexes of first and second subarrays
+        int i = 0, j = 0;
+
+        // Initial index of merged subarray array
+        int k = l;
+        while (i < n1 && j < n2)
+        {
+            if (L[i].getRace().compareTo(R[j].getRace()) <= 0)
+            {
+                arr[k] = L[i];
+                i++;
+            }
+            else
+            {
+                arr[k] = R[j];
+                j++;
+            }
+            k++;
+        }
+
+        /* Copy remaining elements of L[] if any */
+        while (i < n1)
+        {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+
+        /* Copy remaining elements of R[] if any */
+        while (j < n2)
+        {
+            arr[k] = R[j];
+            j++;
+            k++;
+        }
     }
 }
