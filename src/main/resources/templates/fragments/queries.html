@@ -39,6 +39,8 @@
         th:href="@{/js/datatables/responsive.bootstrap.min.css}"/>
     <link href="../../static/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"
         th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
+        <link href="../../static/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
 
     <!-- select2 -->
     <link href="../../static/css/select/select2.min.css" rel="stylesheet"
@@ -1026,10 +1028,45 @@
             th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
     <script src="../../static/js/datatables/dataTables.responsive.js"
             th:src="@{/js/datatables/dataTables.responsive.js}"></script>
+    <script src="../../static/js/datatables/dataTables.buttons.min.js"
+            th:src="@{/js/datatables/dataTables.buttons.min.js}"></script>
+    <script src="../../static/js/buttons.bootstrap.min.js"
+            th:src="@{/js/buttons.bootstrap.min.js}"></script>
+    <script src="../../static/js/datatables/buttons.flash.min.js"
+            th:src="@{/js/datatables/buttons.flash.min.js}"></script>
+    <script src="../../static/js/datatables/buttons.html5.min.js"
+            th:src="@{/js/datatables/buttons.html5.min.js}"></script>
+    <script src="../../static/js/datatables/buttons.print.min.js"
+            th:src="@{/js/datatables/buttons.print.min.js}"></script>
 
     <script>
         $(document).ready(function(){
             $('.dataTableRace').DataTable({
+
+                dom: "Blfrtip",
+                buttons: [
+                    {
+                        extend: "copy",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "csv",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "excel",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "print",
+                        className: "btn-sm"
+                    },
+                ],
+
                 rowCallback: function(row, data, index) {
 
                     // conditional background-color formatting for HorseName column
@@ -1113,6 +1150,29 @@
 
             $('#dataTableRunners').DataTable({
                 "ordering": false,
+                dom: "Blfrtip",
+                buttons: [
+                    {
+                        extend: "copy",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "csv",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "excel",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "pdfHtml5",
+                        className: "btn-sm"
+                    },
+                    {
+                        extend: "print",
+                        className: "btn-sm"
+                    },
+                ],
                 rowCallback: function(row, data, index) {
 
                     // conditional background-color formatting for HorseName column
