@@ -54,7 +54,13 @@ public class RaceToRaceCommand implements Converter<Race, RaceCommand> {
         int furlongs = (int) ((raceCommand.getTrackLength() - (double) miles) / 0.125);
 
         StringBuilder sb = new StringBuilder();
-        sb.append(miles).append("m").append(furlongs).append("f");
+        if (miles != 0) {
+            sb.append(miles).append("m");
+        }
+        if (furlongs != 0) {
+            sb.append(furlongs).append("f");
+        }
+
         raceCommand.setTrackLengthString(sb.toString());
 
         sb.delete(0, sb.length());
