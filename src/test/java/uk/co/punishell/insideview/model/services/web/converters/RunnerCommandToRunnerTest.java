@@ -36,7 +36,7 @@ public class RunnerCommandToRunnerTest {
     public static final double DELTA = 0.001;
     public static final boolean BOOLEAN_IS_WINNER = false;
     public static final boolean BOOLEAN_IS_PLACED = true;
-    public static final String RESULT = "P";
+    public static final String RESULT = "Placed";
     public static final int CPR = 22;
     public static final int NPTIPS = 23;
     public static final int[] STARS = new int[5];
