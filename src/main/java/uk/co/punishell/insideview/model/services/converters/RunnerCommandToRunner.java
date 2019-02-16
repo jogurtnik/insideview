@@ -52,12 +52,12 @@ public class RunnerCommandToRunner implements Converter<RunnerCommand, Runner> {
 
         if (source.getResult() != null) {
 
-            if (source.getResult().equalsIgnoreCase("W")) {
+            if (source.getResult().equalsIgnoreCase("Won")) {
 
                 runner.setWinner(true);
                 runner.setPlaced(true);
 
-            } else if (source.getResult().equalsIgnoreCase("P")) {
+            } else if (source.getResult().equalsIgnoreCase("Placed")) {
 
                 runner.setWinner(false);
                 runner.setPlaced(true);

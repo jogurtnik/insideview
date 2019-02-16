@@ -65,6 +65,7 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             List<Runner> raceRunners = runner.getRace().getRunners();
             Collections.sort(raceRunners);
 
+            // remove runners from races with runners count different from criteria
             if (criteria.getRunnersCountMin() != 0) {
                 if (raceRunners.size() < criteria.getRunnersCountMin()) {
                     queryResult.remove(runner);
@@ -76,10 +77,13 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                 }
             }
 
+
+
+            // remove runners from races which do not match nptips count criteria
             if (criteria.getNptipsPerRaceMin() != 0) {
                 int count = 0;
                 for (Runner raceRunner : raceRunners) {
-                    if (runner.getNptips() >= criteria.getNptipsCountMin()) {
+                    if (raceRunner.getNptips() >= criteria.getNptipsCountMin()) {
                         count++;
                     }
                 }
@@ -90,7 +94,7 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             if (criteria.getNptipsPerRaceMax() != 0) {
                 int count = 0;
                 for (Runner raceRunner : runner.getRace().getRunners()) {
-                    if (runner.getNptips() <= criteria.getNptipsPerRaceMax()) {
+                    if (raceRunner.getNptips() <= criteria.getNptipsPerRaceMax()) {
                         count++;
                     }
                 }
@@ -99,6 +103,7 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                 }
             }
 
+            // remove runners from races which are not at demanded favourite place
             if (criteria.getFavouritePlaceMin() != 0) {
                 for (int i = 1; i <= raceRunners.size(); i++) {
                     if (runner.equals(raceRunners.get(i-1))) {
@@ -118,6 +123,7 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                 }
             }
 
+            // remove runners from races which do not have specified count of star runners
             if (criteria.getRunnerStarsPerRaceMin() != 0 ||
                 criteria.getRunnerStarsPerRaceMax() != 0) {
                 int count = 0;
@@ -137,6 +143,8 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                     }
                 }
             }
+
+            // remove runners which are not at specified favourite place among star runners
             if (criteria.getFavouritePlaceAmongStarsMin() != 0 ||
                 criteria.getFavouritePlaceAmongStarsMax() != 0) {
                 List<Runner> starRunners = new ArrayList<>();
@@ -155,6 +163,14 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                     if (starRunners.indexOf(runner) + 1 > criteria.getFavouritePlaceAmongStarsMax()) {
                         queryResult.remove(runner);
                     }
+                }
+            }
+
+            // remove runners which were not last favourite in the race
+            log.debug("Criteria check | LAST FAVOURITE? " + criteria.isLastRunner());
+            if (criteria.isLastRunner()) {
+                if (!raceRunners.get(raceRunners.size() - 1).equals(runner)) {
+                    queryResult.remove(runner);
                 }
             }
         }

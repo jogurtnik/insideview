@@ -89,6 +89,8 @@ public class RunnerSearch extends Criteria {
     private int favouritePlaceMin = 0;
     private int favouritePlaceMax = 0;
 
+    private boolean lastRunner = false;
+
     private int runnerStarsMin = 0;
     private int runnerStarsMax = 0;
 

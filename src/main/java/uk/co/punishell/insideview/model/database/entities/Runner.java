@@ -115,8 +115,8 @@ public class Runner extends BaseEntity implements Comparable<Runner>{
         if (!(o instanceof Runner)) return false;
         Runner runner = (Runner) o;
         return Double.compare(runner.getPrice1(), getPrice1()) == 0 &&
-                Objects.equals(getRace(), runner.getRace()) &&
-                Objects.equals(getHorse(), runner.getHorse());
+                getHorse().getName().equalsIgnoreCase(runner.getHorse().getName()) &&
+                getRace().equals(runner.getRace());
     }
 
     @Override

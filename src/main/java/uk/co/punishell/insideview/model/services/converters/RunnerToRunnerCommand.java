@@ -58,9 +58,9 @@ public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
         runnerCommand.setMov3to1(source.getMov3to1());
 
         if (source.isWinner()) {
-            runnerCommand.setResult("W");
+            runnerCommand.setResult("Won");
         } else if (source.isPlaced()) {
-            runnerCommand.setResult("P");
+            runnerCommand.setResult("Placed");
         } else {
             runnerCommand.setResult("");
         }

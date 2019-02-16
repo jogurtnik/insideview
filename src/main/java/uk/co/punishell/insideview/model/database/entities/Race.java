@@ -65,11 +65,16 @@ public class Race extends BaseEntity implements Comparable<Race> {
         if (this == o) return true;
         if (!(o instanceof Race)) return false;
         Race race = (Race) o;
-        return Double.compare(race.getTrackLength(), getTrackLength()) == 0 &&
-                Objects.equals(getLocalDate(), race.getLocalDate()) &&
-                Objects.equals(getCountry(), race.getCountry()) &&
-                Objects.equals(getCity(), race.getCity()) &&
-                Objects.equals(getTime(), race.getTime());
+
+        if (getLocalDate().isEqual(race.getLocalDate())) {
+            if (getTime().equals(race.getTime())) {
+                if (getCountry().equalsIgnoreCase(race.getCountry())) {
+                    if (getCity().equalsIgnoreCase(race.getCity())) {
+                        return true;
+                    } else return false;
+                } else return false;
+            } else return false;
+        } else return false;
     }
 
     @Override

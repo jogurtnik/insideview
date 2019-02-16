@@ -685,6 +685,13 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="isLast"
+                                           data-toggle="tooltip" data-placement="right" title="Get only last favourite">LastFav: </label>
+                                    <div id="isLast" class="col-md-8 col-sm-8 col-xs-12">
+                                        <input type="checkbox" th:field="${runnerSearch.lastRunner}"> Yes
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnerStars">Stars: </label>
                                     <div id="runnerStars">
                                     <div class="col-md-4 col-sm-4 col-xs-12">
