@@ -64,14 +64,11 @@ public class HorseServiceImpl implements HorseService {
 
             if (horse.getName().equalsIgnoreCase(foundHorse.getName())) {
 
-                log.info("Horse already exists in database with name: " + foundHorse.getName());
                 return foundHorse;
             }
         }
 
         savedHorse = horseRepository.save(horse);
-
-        log.info("NEW HORSE ID: " + savedHorse.getId());
 
         return savedHorse;
     }

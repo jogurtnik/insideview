@@ -7,6 +7,7 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.services.RaceService;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -23,6 +24,7 @@ public class DBPopulatorImpl implements DBPopulator {
     public void populate(List<Race> races) {
 
         log.info("Populating database...");
-        raceService.saveAll(races);
+        Set<Race> savedRaces = raceService.saveAll(races);
+        log.info("Done. Saved " + savedRaces.size() + " races.");
     }
 }

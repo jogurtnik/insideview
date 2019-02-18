@@ -48,7 +48,6 @@ public class RunnerServiceImpl implements RunnerService {
 
         if (runnerOptional.isEmpty()) {
 
-            log.info("Runner to found by ID: " + id);
             return null;
         }
 
@@ -69,8 +68,6 @@ public class RunnerServiceImpl implements RunnerService {
 
         //update Horse entity
         horseService.save(savedHorse);
-
-        log.info("NEW RUNNER ID: " + savedRunner.getId());
 
         return savedRunner;
     }

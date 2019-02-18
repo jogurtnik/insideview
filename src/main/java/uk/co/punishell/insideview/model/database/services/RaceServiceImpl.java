@@ -127,7 +127,6 @@ public class RaceServiceImpl implements RaceService {
 
         savedRunners.iterator().forEachRemaining(runner -> runner.setRace(savedRace));
 
-        log.info("NEW RACE ID: " + savedRace.getId());
         log.debug(savedRace.toString());
 
         return savedRace;

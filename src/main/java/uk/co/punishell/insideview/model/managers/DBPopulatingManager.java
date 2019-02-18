@@ -1,7 +1,6 @@
 package uk.co.punishell.insideview.model.managers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import uk.co.punishell.insideview.model.services.poi.DataAssembler;
@@ -42,8 +41,6 @@ public class DBPopulatingManager implements Runnable {
         try {
             dbPopulator.populate(dataAssemlber.getRaces(file));
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidFormatException e) {
             e.printStackTrace();
         }
     }
