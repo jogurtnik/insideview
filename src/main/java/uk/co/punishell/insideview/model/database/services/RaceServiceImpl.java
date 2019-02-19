@@ -62,35 +62,33 @@ public class RaceServiceImpl implements RaceService {
     @Transactional
     public Race save(Race race) {
 
-        Set<Race> races = this.getRaces();
+        long startTime = System.currentTimeMillis();
+        Race foundRace = raceRepository.findByLocalDateAndTimeAndCity(race.getLocalDate(), race.getTime(), race.getCity());
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        log.debug("Checking for duplicate took " + ((double) elapsedTime)/1000 + " s");
 
-        if (!races.isEmpty()) {
+        if (foundRace != null) {
 
-            for (Race foundRace : races) {
-
-                /*if (raceRepository.findByDateAndCityAndCountryAndTimeAndTrackLength(race.getDate(),
-                        race.getCity(), race.getCountry(), race.getTime(), race.getTrackLength()) != null) {
-
-                    log.info("Race already exists in the database with ID: " + foundRace.getId());
-
-                    return foundRace;
-                }*/
-
-                // Check first if race already exists in the database
-                if (    race.getLocalDate().compareTo(foundRace.getLocalDate()) == 0 &&
-                        race.getCountry().equalsIgnoreCase(foundRace.getCountry())  &&
-                        race.getTime().equals(foundRace.getTime()) &&
-                        race.getTrackLength() == foundRace.getTrackLength()) {
-
-
-                }
-            }
-
-            return saveAndSetRelations(race);
+            return foundRace;
 
         } else {
 
-            return saveAndSetRelations(race);
+            startTime = System.currentTimeMillis();
+            // convert and de-convert to command object to save entity without reference to an unsaved object
+            Race savedRace = raceRepository.save(race);
+            List<Runner> savedRunners = runnerService.saveAll(race.getRunners());
+
+            savedRace.setRunners(savedRunners);
+
+            savedRunners.iterator().forEachRemaining(runner -> runner.setRace(savedRace));
+
+            stopTime = System.currentTimeMillis();
+            elapsedTime = stopTime - startTime;
+
+            log.debug(savedRace.toString() + " saved in " + ((double) elapsedTime)/1000 + " s");
+
+            return savedRace;
         }
     }
 
@@ -115,20 +113,5 @@ public class RaceServiceImpl implements RaceService {
     public void deleteById(Long id) {
 
         raceRepository.deleteById(id);
-    }
-
-    private Race saveAndSetRelations(Race race) {
-
-        // convert and de-convert to command object to save entity without reference to an unsaved object
-        Race savedRace = raceRepository.save(raceCommandToRace.convert(raceToRaceCommand.convert(race)));
-        List<Runner> savedRunners = runnerService.saveAll(race.getRunners());
-
-        savedRace.setRunners(savedRunners);
-
-        savedRunners.iterator().forEachRemaining(runner -> runner.setRace(savedRace));
-
-        log.debug(savedRace.toString());
-
-        return savedRace;
     }
 }

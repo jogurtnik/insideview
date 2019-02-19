@@ -54,23 +54,13 @@ public class HorseServiceImpl implements HorseService {
             return horseRepository.save(horse);
         }
 
-        Horse savedHorse;
+        Optional<Horse> horseOptional = horseRepository.findByName(horse.getName());
 
-        Set<Horse> horses = new HashSet<>();
-        horseRepository.findAll().iterator().forEachRemaining(horses::add);
-
-        // Check if horse already exists in the database
-        for (Horse foundHorse : horses) {
-
-            if (horse.getName().equalsIgnoreCase(foundHorse.getName())) {
-
-                return foundHorse;
-            }
+        if (horseOptional.isEmpty()) {
+            return horseRepository.save(horse);
+        } else {
+            return horseOptional.get();
         }
-
-        savedHorse = horseRepository.save(horse);
-
-        return savedHorse;
     }
 
     @Override

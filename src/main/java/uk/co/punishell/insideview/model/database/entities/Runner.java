@@ -6,9 +6,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.jetbrains.annotations.NotNull;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Setter
@@ -16,12 +14,13 @@ import java.util.Objects;
 @Entity
 public class Runner extends BaseEntity implements Comparable<Runner>{
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "race_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Race race;
 
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     @JoinColumn(name = "horse_id")
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Horse horse;
@@ -115,8 +114,7 @@ public class Runner extends BaseEntity implements Comparable<Runner>{
         if (!(o instanceof Runner)) return false;
         Runner runner = (Runner) o;
         return Double.compare(runner.getPrice1(), getPrice1()) == 0 &&
-                getHorse().getName().equalsIgnoreCase(runner.getHorse().getName()) &&
-                getRace().equals(runner.getRace());
+                getHorse().getName().equalsIgnoreCase(runner.getHorse().getName());
     }
 
     @Override

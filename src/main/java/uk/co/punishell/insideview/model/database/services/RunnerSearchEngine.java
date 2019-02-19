@@ -169,7 +169,6 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             }
 
             // remove runners which were not last favourite in the race
-            log.debug("Criteria check | LAST FAVOURITE? " + criteria.isLastRunner());
             if (criteria.isLastRunner()) {
                 if (!raceRunners.get(raceRunners.size() - 1).equals(runner)) {
                     queryResult.remove(runner);

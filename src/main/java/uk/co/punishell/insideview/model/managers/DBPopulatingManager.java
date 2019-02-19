@@ -12,11 +12,10 @@ import java.util.Set;
 
 @Slf4j
 @Component
-public class DBPopulatingManager implements Runnable {
+public class DBPopulatingManager {
 
     DBPopulator dbPopulator;
     DataAssembler dataAssemlber;
-    private File file;
 
     @Autowired
     public DBPopulatingManager(DBPopulator dbPopulator, DataAssembler dataAssemlber) {
@@ -26,22 +25,23 @@ public class DBPopulatingManager implements Runnable {
     }
 
     public void populateDB(File file) {
-
-        this.file = file;
-        this.run();
-    }
-
-    public void populateDB(Set<File> files) {
-        files.stream().forEach(file -> this.populateDB(file));
-    }
-
-
-    @Override
-    public void run() {
+        long startTime = System.currentTimeMillis();
         try {
             dbPopulator.populate(dataAssemlber.getRaces(file));
         } catch (IOException e) {
             e.printStackTrace();
         }
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        log.debug(file.getName() + " saved in " + ((double) elapsedTime)/1000 + " s");
+    }
+
+    public void populateDB(Set<File> files) {
+
+        long startTime = System.currentTimeMillis();
+        files.stream().forEach(file -> this.populateDB(file));
+        long stopTime = System.currentTimeMillis();
+        long elapsedTime = stopTime - startTime;
+        log.debug(files.size() + " files saved in " + ((double) elapsedTime)/1000 + " ms");
     }
 }
