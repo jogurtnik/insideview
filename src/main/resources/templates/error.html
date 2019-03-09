@@ -52,14 +52,16 @@
     </div>
 
 </div>
-<!-- jQuery -->
-<script src="../static/js/jquery.min.js"
-        th:src="@{/js/jquery.min.js}"></script>
-<!-- Bootstrap -->
-<script src="../static/js/bootstrap.min.js"
-        th:src="@{/js/bootstrap.min.js}"></script>
-<!-- Custom Theme Scripts -->
-<script src="../static/js/custom.min.js"
-        th:src="@{/js/custom.min.js}"></script>
+<th:block th:fragment="scriptsCommon">
+    <!-- JQuery -->
+    <script src="../static/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../static/js/custom.js"
+            th:src="@{/js/custom.js}"></script>
+</th:block>
 </body>
 </html>
