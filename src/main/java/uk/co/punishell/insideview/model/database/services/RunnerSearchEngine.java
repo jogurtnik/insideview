@@ -181,19 +181,15 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
 
     private List<Runner> mergeSortRunnersByDate(List<Runner> list) {
         List<Runner> sortedList = new ArrayList<>();
-
         Runner[] runnersArray = new Runner[list.size()];
-
         for (int i = 0; i < runnersArray.length; i++) {
             runnersArray[i] = list.get(i);
         }
 
         sort(runnersArray, 0, runnersArray.length - 1);
-
         for (Runner runner : runnersArray) {
             sortedList.add(runner);
         }
-
         return sortedList;
     }
 

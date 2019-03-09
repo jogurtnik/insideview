@@ -32,13 +32,13 @@ public class DatabaseManagementController {
         this.validator = validator;
     }
 
-    @GetMapping(value={"/databaseManagement"})
+    @GetMapping(value={"databaseManagement"})
     public String getDatabaseManagementWebsite() {
 
         return "databaseManagement";
     }
 
-    @PostMapping({"/uploadFile", "uploadFile"})
+    @PostMapping("uploadFile")
     public String uploadFileHandler(@RequestParam("files") MultipartFile[] files) throws FileUploadException {
 
         Set<File> savedFiles = this.saveFilesTemp(files);

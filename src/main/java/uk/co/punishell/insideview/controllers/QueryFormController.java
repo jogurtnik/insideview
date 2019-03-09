@@ -30,7 +30,7 @@ public class QueryFormController {
         this.runnerSearchEngine = runnerSearchEngine;
     }
 
-    @GetMapping({"query", "/query", "query.html"})
+    @GetMapping({"query", "query.html"})
     public String getQueryPage(HttpSession session) {
 
         return "query";

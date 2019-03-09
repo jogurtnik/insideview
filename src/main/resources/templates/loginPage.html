@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+<th:block th:replace="fragments/navigation :: headCommon">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../favicon.ico" type="image/ico"
+          th:href="@{../favicon.ico}"/>
+
+    <title>Inside View</title>
+
+    <!-- Bootstrap -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet"
+          th:href="@{/css/bootstrap.min.css}"/>
+    <!-- Font Awesome -->
+    <link href="../static/css/font-awesome.min.css" rel="stylesheet"
+          th:href="@{/css/font-awesome.min.css}"/>
+
+    <link href="../static/css/animate.min.css" rel="stylesheet"
+          th:href="@{/css/animate.min.css}"/>
+
+    <!-- Custom Theme Style -->
+    <link href="../static/css/custom.min.css" rel="stylesheet"
+          th:href="@{/css/custom.min.css}"/>
+    <link href="../static/css/icheck/flat/green.css" rel="stylesheet"
+          th:href="@{/css/icheck/flat/green.css}"/>
+</th:block>
+
+</head>
+
+<body class="login">
+<div>
+    <a class="hiddenanchor" id="resetPassword"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form id="loginForm"
+                        th:action="@{/authenticateTheUser}" method="POST">
+                    <h1>Sign in</h1>
+                    <div class="alert alert-danger alert-dismissible fade in"
+                         th:if="${loginFailureMessage != null}"
+                         th:text="${loginFailureMessage}">
+                        Login failure message.
+                    </div>
+                    <div class="alert alert-success alert-dismissible fade in"
+                         th:if="${logoutSuccessMessage != null}"
+                         th:text="${logoutSuccessMessage}">
+                        Login failure message.
+                    </div>
+                    <div>
+                        <input id="username" class="form-control" type="text" name="username" placeholder="username" required="" />
+                    </div>
+                    <div>
+                        <input id="password" class="form-control" type="password" name="password" placeholder="password" required="" />
+                    </div>
+                    <div>
+                        <a class="btn btn-default submit" href="javascript:{}" onclick="document.getElementById('loginForm').submit(); return false;">Sumbit</a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Lost password?
+                            <a href="#resetPassword" class="toResetPassword"> Remind me </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br />
+                    </div>
+                </form>
+            </section>
+        </div>
+
+        <div id="resetPassword" class="animate form registration_form">
+            <section class="login_content">
+                <form>
+                    <h1>Reset password</h1>
+                    <div>
+                        <input type="email" class="form-control" placeholder="Email" required="" />
+                    </div>
+                    <div>
+                        <a class="btn btn-default submit" href="user/home.html">Reset</a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Go back?
+                            <a href="#signin" class="to_register"> Log in </a>
+                        </p>
+
+                        <div class="clearfix"></div>
+                        <br />
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+<th:block th:replace="fragments/navigation :: scriptsCommon">
+    <!-- Bootstrap -->
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../static/js/custom.js"
+            th:src="@{/js/custom.js}"></script>
+
+</th:block>
+
+</body>
+</html>

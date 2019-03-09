@@ -8,24 +8,24 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../../static/images/favicon.ico" type="image/ico"
-        th:href="@{/images/favicon.ico}"/>
+    <link rel="icon" href="../../favicon.ico" type="image/ico"
+          th:href="@{../favicon.ico}"/>
 
     <title>Inside View</title>
 
     <!-- Bootstrap -->
-    <link href="../../static/vendors/css/bootstrap.min.css" rel="stylesheet"
-        th:href="@{/vendors/css/bootstrap.min.css}"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet"
+          th:href="@{/css/bootstrap.min.css}"/>
     <!-- Font Awesome -->
-    <link href="../../static/vendors/css/font-awesome.min.css" rel="stylesheet"
-        th:href="@{/vendors/css/font-awesome.min.css}"/>
+    <link href="../../static/css/font-awesome.min.css" rel="stylesheet"
+          th:href="@{/css/font-awesome.min.css}"/>
 
     <link href="../../static/css/animate.min.css" rel="stylesheet"
         th:href="@{/css/animate.min.css}"/>
 
     <!-- Custom Theme Style -->
-    <link href="../../static/build/css/custom.min.css" rel="stylesheet"
-        th:href="@{/build/css/custom.min.css}"/>
+    <link href="../../static/css/custom.min.css" rel="stylesheet"
+          th:href="@{/css/custom.min.css}"/>
     <link href="../../static/css/icheck/flat/green.css" rel="stylesheet"
           th:href="@{/css/icheck/flat/green.css}"/>
     </th:block>
@@ -39,7 +39,7 @@
             <div class="col-md-3 left_col" th:fragment="leftNavigationMenu">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="../index.html" class="site_title" th:href="@{'index'}"><i class="fa fa-home"></i> <span>Inside View</span></a>
+                        <a href="../home.html" class="site_title" th:href="@{'home'}"><i class="fa fa-home"></i> <span>Inside View</span></a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -136,7 +136,7 @@
                                         </a>
                                     </li>
                                     <li><a href="javascript:">Help</a></li>
-                                    <li><a href="#"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                                    <li><a href="#" th:href="@{/logout}"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                                 </ul>
                             </li>
 
@@ -157,12 +157,15 @@
     </div>
 
     <th:block th:fragment="scriptsCommon">
+    <!-- JQuery -->
+    <script src="../../static/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
     <!-- Bootstrap -->
-    <script src="../../static/vendors/js/bootstrap.min.js"
-            th:src="@{/vendors/js/bootstrap.min.js}"></script>
+    <script src="../../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
     <!-- Custom Theme Scripts -->
-    <script src="../../static/build/js/custom.js"
-            th:src="@{/build/js/custom.js}"></script>
+    <script src="../../static/js/custom.js"
+            th:src="@{/js/custom.js}"></script>
     </th:block>
 </body>
 </html>
