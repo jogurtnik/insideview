@@ -44,6 +44,12 @@
             <section class="login_content">
                 <form id="loginForm"
                         th:action="@{/authenticateTheUser}" th:method="POST">
+
+                    <input
+                            type="hidden"
+                            th:name="${_csrf.parameterName}"
+                            th:value="${_csrf.token}" />
+
                     <h1>Sign in</h1>
                     <div class="alert alert-danger alert-dismissible fade in"
                          th:if="${loginFailureMessage != null}"
