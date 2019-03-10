@@ -3407,30 +3407,36 @@ a.hiddenanchor {
   max-width: 350px;
   position: relative
 }
-.registration_form,
+
+.resetPassword_form {
+  z-index: 21;
+  opacity: 0;
+  width: 100%
+}
+
+.login_form {
+  z-index: 22
+}
+
+.resetPassword_form,
 .login_form {
   position: absolute;
   top: 0px;
   width: 100%
 }
-.registration_form {
-  z-index: 21;
-  opacity: 0;
-  width: 100%
-}
-.login_form {
-  z-index: 22
-}
-#signup:target ~ .login_wrapper .registration_form,
+
+#resetPassword:target ~ .login_wrapper .resetPassword_form,
 #signin:target ~ .login_wrapper .login_form {
   z-index: 22;
   animation-name: fadeInLeft;
   animation-delay: .1s
 }
-#signup:target ~ .login_wrapper .login_form,
-#signin:target ~ .login_wrapper .registration_form {
+
+#resetPassword:target ~ .login_wrapper .login_form,
+#signin:target ~ .login_wrapper .resetPassword_form {
   animation-name: fadeOutLeft
 }
+
 .animate {
   -webkit-animation-duration: 0.5s;
   -webkit-animation-timing-function: ease;

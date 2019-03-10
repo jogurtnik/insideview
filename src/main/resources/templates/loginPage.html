@@ -25,8 +25,8 @@
           th:href="@{/css/animate.min.css}"/>
 
     <!-- Custom Theme Style -->
-    <link href="../static/css/custom.min.css" rel="stylesheet"
-          th:href="@{/css/custom.min.css}"/>
+    <link href="../static/css/custom.css" rel="stylesheet"
+          th:href="@{/css/custom.css}"/>
     <link href="../static/css/icheck/flat/green.css" rel="stylesheet"
           th:href="@{/css/icheck/flat/green.css}"/>
 </th:block>
@@ -35,14 +35,15 @@
 
 <body class="login">
 <div>
-    <a class="hiddenanchor" id="resetPassword"></a>
+
     <a class="hiddenanchor" id="signin"></a>
+    <a class="hiddenanchor" id="resetPassword"></a>
 
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
                 <form id="loginForm"
-                        th:action="@{/authenticateTheUser}" method="POST">
+                        th:action="@{/authenticateTheUser}" th:method="POST">
                     <h1>Sign in</h1>
                     <div class="alert alert-danger alert-dismissible fade in"
                          th:if="${loginFailureMessage != null}"
@@ -52,7 +53,7 @@
                     <div class="alert alert-success alert-dismissible fade in"
                          th:if="${logoutSuccessMessage != null}"
                          th:text="${logoutSuccessMessage}">
-                        Login failure message.
+                        Login success message.
                     </div>
                     <div>
                         <input id="username" class="form-control" type="text" name="username" placeholder="username" required="" />
@@ -68,32 +69,32 @@
 
                     <div class="separator">
                         <p class="change_link">Lost password?
-                            <a href="#resetPassword" class="toResetPassword"> Remind me </a>
+                            <a href="#resetPassword"
+                               th:href="@{/resetUserPassword-form}"> Remind me </a>
                         </p>
-
-                        <div class="clearfix"></div>
                         <br />
                     </div>
                 </form>
             </section>
         </div>
 
-        <div id="resetPassword" class="animate form registration_form">
+        <div class="animate form resetPassword_form">
             <section class="login_content">
-                <form>
+                <form id="resetPasswordForm">
                     <h1>Reset password</h1>
-                    <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
+                    <div class="alert alert-danger alert-dismissible fade in">
+                        Not implemented.
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="user/home.html">Reset</a>
+                        <input type="email" class="form-control" placeholder="Email" required=""/>
                     </div>
-
-                    <div class="clearfix"></div>
+                    <div>
+                        <a class="btn btn-default submit" href="#">Confirm</a>
+                    </div>
 
                     <div class="separator">
-                        <p class="change_link">Go back?
-                            <a href="#signin" class="to_register"> Log in </a>
+                        <p class="change_link">
+                            <a href="#signin"> Login </a>
                         </p>
 
                         <div class="clearfix"></div>
