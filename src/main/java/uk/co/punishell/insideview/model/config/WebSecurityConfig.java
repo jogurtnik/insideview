@@ -1,16 +1,21 @@
 package uk.co.punishell.insideview.model.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private DataSource securityDataSource;
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
@@ -38,10 +43,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
 
-        User.UserBuilder users = User.withDefaultPasswordEncoder();
+        auth.jdbcAuthentication().dataSource(securityDataSource);
 
-        auth.inMemoryAuthentication()
-                .withUser(users.username("admin").password("shitronica").roles("USER", "ADMIN"));
     }
 
 }
