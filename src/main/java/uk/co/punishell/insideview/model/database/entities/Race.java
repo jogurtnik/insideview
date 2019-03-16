@@ -14,6 +14,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Entity
+@Table(name = "RACE")
 @NamedEntityGraph(name = "graph.Race.runners",
                   attributeNodes = @NamedAttributeNode(value = "runners",
                                                        subgraph = "runners"),

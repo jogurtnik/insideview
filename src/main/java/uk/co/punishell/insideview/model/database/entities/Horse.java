@@ -6,12 +6,14 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
 @Setter
 @Getter
 @Entity
+@Table(name = "HORSE")
 public class Horse extends BaseEntity {
 
     private String name;

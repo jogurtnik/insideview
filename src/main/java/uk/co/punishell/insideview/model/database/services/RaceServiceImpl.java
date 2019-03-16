@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
-import uk.co.punishell.insideview.model.services.converters.RaceCommandToRace;
-import uk.co.punishell.insideview.model.services.converters.RaceToRaceCommand;
 
 import java.util.HashSet;
 import java.util.List;
@@ -21,22 +19,18 @@ public class RaceServiceImpl implements RaceService {
 
     private final RaceRepository raceRepository;
     private final RunnerService runnerService;
-    private final RaceToRaceCommand raceToRaceCommand;
-    private final RaceCommandToRace raceCommandToRace;
+    private final String tm = "horseRacingTransactionManager";
 
     @Autowired
     public RaceServiceImpl(RaceRepository raceRepository,
-                           RunnerService runnerService,
-                           RaceToRaceCommand raceToRaceCommand,
-                           RaceCommandToRace raceCommandToRace) {
+                           RunnerService runnerService) {
 
         this.raceRepository = raceRepository;
         this.runnerService = runnerService;
-        this.raceToRaceCommand = raceToRaceCommand;
-        this.raceCommandToRace = raceCommandToRace;
     }
 
     @Override
+    @Transactional(tm)
     public Set<Race> getRaces() {
 
         Set<Race> races = new HashSet<>();
@@ -47,6 +41,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
+    @Transactional(tm)
     public Race findById(Long id) {
 
         Optional<Race> raceOptional = raceRepository.findById(id);
@@ -59,7 +54,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional
+    @Transactional(tm)
     public Race save(Race race) {
 
         long startTime = System.currentTimeMillis();
@@ -93,7 +88,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional
+    @Transactional(tm)
     public Set<Race> saveAll(List<Race> races) {
 
         Set<Race> savedRaces = new HashSet<>();
@@ -104,12 +99,14 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
+    @Transactional(tm)
     public void delete(Race race) {
 
         raceRepository.delete(race);
     }
 
     @Override
+    @Transactional(tm)
     public void deleteById(Long id) {
 
         raceRepository.deleteById(id);

@@ -16,6 +16,7 @@ import java.util.Set;
 public class HorseServiceImpl implements HorseService {
 
     private final HorseRepository horseRepository;
+    private final String tm = "horseRacingTransactionManager";
 
     @Autowired
     public HorseServiceImpl(HorseRepository horseRepository) {
@@ -23,6 +24,7 @@ public class HorseServiceImpl implements HorseService {
     }
 
     @Override
+    @Transactional(tm)
     public Set<Horse> getHorses() {
 
         Set<Horse> horses = new HashSet<>();
@@ -32,6 +34,7 @@ public class HorseServiceImpl implements HorseService {
     }
 
     @Override
+    @Transactional(tm)
     public Horse findById(Long id) {
 
         Optional<Horse> horseOptional = horseRepository.findById(id);
@@ -45,7 +48,7 @@ public class HorseServiceImpl implements HorseService {
     }
 
     @Override
-    @Transactional
+    @Transactional(tm)
     public Horse save(Horse horse) {
 
         // update entity if it already has an ID
@@ -64,12 +67,14 @@ public class HorseServiceImpl implements HorseService {
     }
 
     @Override
+    @Transactional(tm)
     public void delete(Horse horse) {
 
         horseRepository.delete(horse);
     }
 
     @Override
+    @Transactional(tm)
     public void deleteById(Long id) {
 
         horseRepository.deleteById(id);

@@ -12,6 +12,7 @@ import java.util.Objects;
 @Setter
 @Getter
 @Entity
+@Table(name = "RUNNER")
 public class Runner extends BaseEntity implements Comparable<Runner>{
 
     @ManyToOne(fetch = FetchType.LAZY)

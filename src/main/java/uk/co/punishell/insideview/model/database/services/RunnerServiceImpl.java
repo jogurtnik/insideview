@@ -2,13 +2,11 @@ package uk.co.punishell.insideview.model.database.services;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import uk.co.punishell.insideview.model.database.entities.Horse;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RunnerRepository;
-import uk.co.punishell.insideview.model.services.converters.RunnerCommandToRunner;
-import uk.co.punishell.insideview.model.services.converters.RunnerToRunnerCommand;
 
-import javax.transaction.Transactional;
 import java.util.*;
 
 @Slf4j
@@ -17,21 +15,17 @@ public class RunnerServiceImpl implements RunnerService {
 
     private final RunnerRepository runnerRepository;
     private final HorseService horseService;
-    private final RunnerToRunnerCommand runnerToRunnerCommand;
-    private final RunnerCommandToRunner runnerCommandToRunner;
+    private final String tm = "horseRacingTransactionManager";
 
     public RunnerServiceImpl(RunnerRepository runnerRepository,
-                             HorseService horseService,
-                             RunnerToRunnerCommand runnerToRunnerCommand,
-                             RunnerCommandToRunner runnerCommandToRunner) {
+                             HorseService horseService) {
 
         this.runnerRepository = runnerRepository;
         this.horseService = horseService;
-        this.runnerToRunnerCommand = runnerToRunnerCommand;
-        this.runnerCommandToRunner = runnerCommandToRunner;
     }
 
     @Override
+    @Transactional(tm)
     public Set<Runner> getRunners() {
 
         Set<Runner> runners = new HashSet<>();
@@ -42,6 +36,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
+    @Transactional(tm)
     public Runner findById(Long id) {
 
         Optional<Runner> runnerOptional = runnerRepository.findById(id);
@@ -55,7 +50,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional
+    @Transactional(tm)
     public Runner save(Runner runner) {
 
         Horse savedHorse = horseService.save(runner.getHorse());
@@ -73,7 +68,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional
+    @Transactional(tm)
     public List<Runner> saveAll(List<Runner> runners) {
 
         List<Runner> savedRunners = new ArrayList<>();
@@ -84,12 +79,14 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
+    @Transactional(tm)
     public void delete(Runner runner) {
 
         runnerRepository.delete(runner);
     }
 
     @Override
+    @Transactional(tm)
     public void deleteById(Long id) {
 
         runnerRepository.deleteById(id);

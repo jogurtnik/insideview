@@ -3,8 +3,12 @@ package uk.co.punishell.insideview.model.config;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
@@ -13,29 +17,36 @@ import java.beans.PropertyVetoException;
 
 @Slf4j
 @Configuration
-@PropertySource("classpath:persistence-mysql.properties")
-public class CredentialsDatabaseConfig {
+@PropertySource("classpath:datasources.properties")
+public class SecurityDataSourceConfig {
 
     @Autowired
     Environment env;
 
+    @Bean(name = "customDataSourceSecurity")
+    @ConfigurationProperties(prefix="datasource.security")
+    public DataSourceProperties securityDataSourceProperties() {
+        return new DataSourceProperties();
+    }
+
     @Bean
-    public DataSource securityDataSource() {
+    @Primary
+    public DataSource securityDataSource(@Qualifier("customDataSourceSecurity") DataSourceProperties dataSourceProperties) {
 
         // create connection pool
         ComboPooledDataSource securityDataSource = new ComboPooledDataSource();
 
         // set the jdbc driver
         try {
-            securityDataSource.setDriverClass(env.getProperty("jdbc.driver"));
+            securityDataSource.setDriverClass(securityDataSourceProperties().getDriverClassName());
         } catch (PropertyVetoException exc) {
             throw new RuntimeException(exc);
         }
 
         // set database connection props
-        securityDataSource.setJdbcUrl(env.getProperty("jdbc.url"));
-        securityDataSource.setUser(env.getProperty("jdbc.user"));
-        securityDataSource.setPassword(env.getProperty("jdbc.password"));
+        securityDataSource.setJdbcUrl(dataSourceProperties.getUrl());
+        securityDataSource.setUser(dataSourceProperties.getUsername());
+        securityDataSource.setPassword(dataSourceProperties.getPassword());
 
         // set connection pool props
         securityDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));
