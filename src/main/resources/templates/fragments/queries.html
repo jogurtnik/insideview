@@ -263,6 +263,31 @@
                         <div class="x_content">
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runner-date-since">Date since: <span class="required">*</span></label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                        <p><input id="runner-date-since" class="form-control col-md-6 col-xs-12" type="date"
+                                                  th:field="${runnerSearch.localDateSince}"/></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runner-date-to">Date to: <span class="required">*</span></label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                        <p><input id="runner-date-to" class="form-control col-md-6 col-xs-12" type="date"
+                                                  th:field="${runnerSearch.localDateTo}"/></p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runner-weekdays">Weekdays: </label>
+                                    <div class="col-md-8 col-sm-8 col-xs-12">
+                                        <select id="runner-weekdays" class="select2_multiple form-control" multiple="multiple"
+                                                th:field="${runnerSearch.selectedWeekDays}">
+                                            <option th:each="day : ${runnerSearch.weekDays}"
+                                                    th:value="${day}"
+                                                    th:text="${day}">Choose option</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price9">Price at 9:</label>
                                     <div id="price9">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -401,6 +426,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price15">Price at 15:</label>
                                     <div id="price15">
@@ -436,8 +463,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price5">Price at 5:</label>
                                     <div id="price5">

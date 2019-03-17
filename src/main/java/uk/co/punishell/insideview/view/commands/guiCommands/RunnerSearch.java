@@ -3,11 +3,25 @@ package uk.co.punishell.insideview.view.commands.guiCommands;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
 @NoArgsConstructor
 public class RunnerSearch extends Criteria {
+
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private LocalDate localDateSince = LocalDate.now();
+
+    @DateTimeFormat(pattern ="yyyy-MM-dd")
+    private LocalDate localDateTo = LocalDate.now();
+
+    private String[] weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    private List<String> selectedWeekDays = new ArrayList<>();
 
     private double price9Min = 0;
     private double price9Max = 0;
