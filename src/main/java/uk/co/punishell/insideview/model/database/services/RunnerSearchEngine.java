@@ -69,12 +69,16 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
 
             // remove runners not matching date specs
             if (criteria.getLocalDateSince() != null) {
-                if (!runner.getRace().getLocalDate().isAfter(criteria.getLocalDateSince())) {
+                int dateComparisonResult = runner.getRace().getLocalDate().compareTo(criteria.getLocalDateSince());
+
+                if (dateComparisonResult < 0) {
                     queryResult.remove(runner);
                 }
             }
             if (criteria.getLocalDateTo() != null) {
-                if (!runner.getRace().getLocalDate().isBefore(criteria.getLocalDateTo())) {
+                int dateComparisonResult = runner.getRace().getLocalDate().compareTo(criteria.getLocalDateTo());
+
+                if (dateComparisonResult > 0) {
                     queryResult.remove(runner);
                 }
             }
