@@ -33,6 +33,7 @@ public class RunnerToRunnerCommand implements Converter<Runner, RunnerCommand> {
 
         if (source.getRace() != null) {
             runnerCommand.setRaceId(source.getRace().getId());
+            runnerCommand.setRaceDate(source.getRace().getLocalDate());
         }
         runnerCommand.setHorse(horseToHorseCommand.convert(source.getHorse()));
         runnerCommand.setStatus(source.isStatus());

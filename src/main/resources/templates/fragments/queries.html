@@ -951,6 +951,8 @@
 
                                         <thead>
                                             <tr>
+                                                <th>Date</th>
+                                                <th>Weekday</th>
                                                 <th>Runner</th>
                                                 <th>Price9</th>
                                                 <th>MovAM</th>
@@ -970,6 +972,8 @@
                                             <!--/*@thymesVar id="runners" type="java.util.List"*/-->
                                             <!--/*@thymesVar id="runner" type="uk.co.punishell.insideview.view.commands.entityCommands.RunnerCommand"*/-->
                                             <tr th:each="runner : ${session.runnerSearchResult.runners}">
+                                                <td th:text="${#temporals.format(runner.raceDate, 'yyyy-MM-dd')}"></td>
+                                                <td th:text="${#temporals.dayOfWeekNameShort(runner.raceDate)}"></td>
                                                 <td th:text="${runner.horse.name}">1</td>
                                                 <td th:text="${runner.price9}">2</td>
                                                 <td th:text="${runner.mov9to11}">1</td>
@@ -1023,13 +1027,18 @@
     <script>
         $(document).ready(function() {
             $("#weekdays").select2({
-                maximumSelecetionLength: 7,
+                maximumSelectionLength: 7,
                 placeholder: "Selection limit: 7",
                 allowClear: true
             });
             $("#raceTypes").select2({
-                maximumSelecetionLength: 3,
+                maximumSelectionLength: 3,
                 placeholder: "Selection limit: 3",
+                allowClear: true
+            });
+            $("#runner-weekdays").select2({
+                maximumSelectionLength: 7,
+                placeholder: "Selection limit: 7",
                 allowClear: true
             });
         });

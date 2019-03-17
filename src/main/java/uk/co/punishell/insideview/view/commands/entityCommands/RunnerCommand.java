@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.time.LocalDate;
+
 @Setter
 @Getter
 @NoArgsConstructor
@@ -12,6 +14,8 @@ public class RunnerCommand implements Comparable<RunnerCommand> {
 
     private Long id;
     private Long raceId;
+
+    private LocalDate raceDate;
 
     private HorseCommand horse;
 
