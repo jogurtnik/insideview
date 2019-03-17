@@ -67,6 +67,31 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             List<Runner> raceRunners = runner.getRace().getRunners();
             Collections.sort(raceRunners);
 
+            // remove runners not matching date specs
+            if (criteria.getLocalDateSince() != null) {
+                if (!runner.getRace().getLocalDate().isAfter(criteria.getLocalDateSince())) {
+                    queryResult.remove(runner);
+                }
+            }
+            if (criteria.getLocalDateTo() != null) {
+                if (!runner.getRace().getLocalDate().isBefore(criteria.getLocalDateTo())) {
+                    queryResult.remove(runner);
+                }
+            }
+
+            // remove runners not matching weekday specs
+            if (!criteria.getSelectedWeekDays().isEmpty()) {
+                boolean isMatch = false;
+                for (String weekday : criteria.getSelectedWeekDays()) {
+                    if (runner.getRace().getLocalDate().getDayOfWeek().name().equalsIgnoreCase(weekday)) {
+                        isMatch = true;
+                    }
+                }
+                if (!isMatch) {
+                    queryResult.remove(runner);
+                }
+            }
+
             // remove runners from races with runners count different from criteria
             if (criteria.getRunnersCountMin() != 0) {
                 if (raceRunners.size() < criteria.getRunnersCountMin()) {
@@ -78,8 +103,6 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                     queryResult.remove(runner);
                 }
             }
-
-
 
             // remove runners from races which do not match nptips count criteria
             if (criteria.getNptipsPerRaceMin() != 0) {
