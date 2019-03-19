@@ -52,9 +52,11 @@ function init_DataTables() {
         if (data[7] == 'Won') {
             $(row).find('td:eq(0)').css('background-color', '#3ED578');
             $(row).find('td:eq(7)').css('background-color', '#3ED578');
+            $(row).find('td:eq(12)').css('background-color', '#3ED578');
         } else if (data[7] == 'Placed') {
             $(row).find('td:eq(0)').css('background-color', '#f2dac1');
             $(row).find('td:eq(7)').css('background-color', '#f2dac1');
+            $(row).find('td:eq(12)').css('background-color', '#f2dac1');
         }
 
         // conditional background-color formatting for MovAM column
