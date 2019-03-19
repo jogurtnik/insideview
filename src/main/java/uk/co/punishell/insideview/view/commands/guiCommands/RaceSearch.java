@@ -15,7 +15,7 @@ import java.util.List;
 public class RaceSearch extends Criteria {
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    private LocalDate localDateSince = LocalDate.now();
+    private LocalDate localDateSince = LocalDate.MIN;
 
     @DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDate localDateTo = LocalDate.now();

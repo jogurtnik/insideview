@@ -90,8 +90,30 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
+                                <!--/*@thymesVar id="databaseStatusCheck" type="uk.co.punishell.insideview.view.commands.guiCommands.DatabaseStatusCheck"*/-->
                                 <div class="x_content">
+                                    <div class="row">
 
+                                        <th:block th:if="${databaseStatusCheck.summaryMessage != null}">
+                                            <h4>Summary</h4>
+                                            <p th:text="${databaseStatusCheck.summaryMessage}">Data summary message set by controller.</p>
+                                        </th:block>
+
+
+                                        <table class="table table-striped table-bordered dataTable no-footer" th:if="${!databaseStatusCheck.missingDates.isEmpty()}">
+                                            <thead>
+                                            <th>#</th>
+                                            <th>Date</th>
+                                            </thead>
+
+                                            <tbody>
+                                                <tr th:each="date : ${databaseStatusCheck.missingDates}">
+                                                    <td th:text="${dateStat.count}">1</td>
+                                                    <td th:text="${#temporals.format(date, 'dd-MM-yyy')} + ' ' + ${#temporals.dayOfWeekName(date)}">11-07-2017 Friday</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 

@@ -141,13 +141,13 @@ function init_DataTables() {
         if (data[4] > 5) {
             $(row).find('td:eq(4)').css('background-color', '#99ccff');
 
-        } else if (data[4] >= 2.5 && data[2] <= 5) {
+        } else if (data[4] >= 2.5 && data[4] <= 5) {
             $(row).find('td:eq(4)').css('background-color', '#ccffcc');
 
-        } else if (data[4] > 0 && data[2] < 2.5) {
+        } else if (data[4] > 0 && data[4] < 2.5) {
             $(row).find('td:eq(4)').css('background-color', '#ffff99');
 
-        } else if (data[4] < 0 && data[2] > -2.5) {
+        } else if (data[4] < 0 && data[4] > -2.5) {
             $(row).find('td:eq(4)').css('background-color', '#ffcc99');
 
         } else if (data[4] <= -2.5) {
@@ -158,13 +158,13 @@ function init_DataTables() {
         if (data[6] > 5) {
             $(row).find('td:eq(6)').css('background-color', '#99ccff');
 
-        } else if (data[6] >= 2.5 && data[4] <= 5) {
+        } else if (data[6] >= 2.5 && data[6] <= 5) {
             $(row).find('td:eq(6)').css('background-color', '#ccffcc');
 
-        } else if (data[6] > 0 && data[4] < 2.5) {
+        } else if (data[6] > 0 && data[6] < 2.5) {
             $(row).find('td:eq(6)').css('background-color', '#ffff99');
 
-        } else if (data[6] < 0 && data[4] > -2.5) {
+        } else if (data[6] < 0 && data[6] > -2.5) {
             $(row).find('td:eq(6)').css('background-color', '#ffcc99');
 
         } else if (data[6] <= -2.5) {
@@ -175,13 +175,13 @@ function init_DataTables() {
         if (data[7] > 5) {
             $(row).find('td:eq(7)').css('background-color', '#99ccff');
 
-        } else if (data[7] >= 2.5 && data[5] <= 5) {
+        } else if (data[7] >= 2.5 && data[7] <= 5) {
             $(row).find('td:eq(7)').css('background-color', '#ccffcc');
 
-        } else if (data[7] > 0 && data[5] < 2.5) {
+        } else if (data[7] > 0 && data[7] < 2.5) {
             $(row).find('td:eq(7)').css('background-color', '#ffff99');
 
-        } else if (data[7] < 0 && data[5] > -2.5) {
+        } else if (data[7] < 0 && data[7] > -2.5) {
             $(row).find('td:eq(7)').css('background-color', '#ffcc99');
 
         } else if (data[7] <= -2.5) {
@@ -192,13 +192,13 @@ function init_DataTables() {
         if (data[8] > 5) {
             $(row).find('td:eq(8)').css('background-color', '#99ccff');
 
-        } else if (data[8] >= 2.5 && data[6] <= 5) {
+        } else if (data[8] >= 2.5 && data[8] <= 5) {
             $(row).find('td:eq(8)').css('background-color', '#ccffcc');
 
-        } else if (data[8] > 0 && data[6] < 2.5) {
+        } else if (data[8] > 0 && data[8] < 2.5) {
             $(row).find('td:eq(8)').css('background-color', '#ffff99');
 
-        } else if (data[8] < 0 && data[6] > -2.5) {
+        } else if (data[8] < 0 && data[8] > -2.5) {
             $(row).find('td:eq(8)').css('background-color', '#ffcc99');
 
         } else if (data[8] <= -2.5) {

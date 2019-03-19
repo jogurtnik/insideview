@@ -6,8 +6,10 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 public interface RaceRepository extends JpaRepository<Race, Long>, JpaSpecificationExecutor<Race> {
 
     Race findByLocalDateAndTimeAndCity(LocalDate date, LocalTime time, String city);
+    Set<Race> findByLocalDate(LocalDate date);
 }

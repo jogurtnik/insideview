@@ -8,6 +8,7 @@ import uk.co.punishell.insideview.model.database.entities.Race;
 import uk.co.punishell.insideview.model.database.entities.Runner;
 import uk.co.punishell.insideview.model.database.repositories.RaceRepository;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,19 @@ public class RaceServiceImpl implements RaceService {
         }
 
         return raceOptional.get();
+    }
+
+    @Override
+    @Transactional(tm)
+    public Set<Race> findByDate(LocalDate date) {
+
+        Set<Race> races = raceRepository.findByLocalDate(date);
+
+        if (races.isEmpty()) {
+            return null;
+        }
+
+        return races;
     }
 
     @Override
