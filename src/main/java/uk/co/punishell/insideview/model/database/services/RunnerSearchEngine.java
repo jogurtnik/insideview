@@ -111,24 +111,66 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             // remove runners from races which do not match nptips count criteria
             if (criteria.getNptipsPerRaceMin() != 0) {
                 int count = 0;
-                for (Runner raceRunner : raceRunners) {
-                    if (raceRunner.getNptips() >= criteria.getNptipsCountMin()) {
-                        count++;
+                if (criteria.getNptipsCountMin() != 0 && criteria.getNptipsCountMax() == 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() >= criteria.getNptipsCountMin()) {
+                            count++;
+                        }
                     }
-                }
-                if (count < criteria.getNptipsPerRaceMin()) {
-                    queryResult.remove(runner);
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
+                } else if (criteria.getNptipsCountMin() == 0 && criteria.getNptipsCountMax() != 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() <= criteria.getNptipsCountMax()) {
+                            count++;
+                        }
+                    }
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
+                } else if (criteria.getNptipsCountMin() != 0 && criteria.getNptipsCountMax() != 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() >= criteria.getNptipsCountMin() &&
+                                raceRunner.getNptips() <= criteria.getNptipsCountMax()) {
+                            count++;
+                        }
+                    }
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
                 }
             }
             if (criteria.getNptipsPerRaceMax() != 0) {
                 int count = 0;
-                for (Runner raceRunner : runner.getRace().getRunners()) {
-                    if (raceRunner.getNptips() <= criteria.getNptipsPerRaceMax()) {
-                        count++;
+                if (criteria.getNptipsCountMin() != 0 && criteria.getNptipsCountMax() == 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() >= criteria.getNptipsCountMin()) {
+                            count++;
+                        }
                     }
-                }
-                if (count > criteria.getNptipsPerRaceMax()) {
-                    queryResult.remove(runner);
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
+                } else if (criteria.getNptipsCountMin() == 0 && criteria.getNptipsCountMax() != 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() <= criteria.getNptipsCountMax()) {
+                            count++;
+                        }
+                    }
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
+                } else if (criteria.getNptipsCountMin() != 0 && criteria.getNptipsCountMax() != 0) {
+                    for (Runner raceRunner : raceRunners) {
+                        if (raceRunner.getNptips() >= criteria.getNptipsCountMin() &&
+                                raceRunner.getNptips() <= criteria.getNptipsCountMax()) {
+                            count++;
+                        }
+                    }
+                    if (count < criteria.getNptipsPerRaceMin()) {
+                        queryResult.remove(runner);
+                    }
                 }
             }
 
