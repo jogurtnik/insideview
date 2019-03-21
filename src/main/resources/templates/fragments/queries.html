@@ -288,6 +288,23 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                <label class="control-label col-md-4 col-sm-4 col-xs-12" for="runnersCount-runnerSearch">Runners count:</label>
+                                <div id="runnersCount-runnerSearch">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="runnersCount-runnerSearchMin" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="minimum"
+                                               th:field="${runnerSearch.runnersCountMin}"
+                                               th:value="${runnerSearch.runnersCountMin}"/>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <input id="runnersCount-runnerSearchMax" class="form-control col-md-3 col-sm-3 col-xs-12" type="number" value="0"
+                                               data-toggle="tooltip" data-placement="top" title="maximum"
+                                               th:field="${runnerSearch.runnersCountMax}"
+                                               th:value="${runnerSearch.runnersCountMax}"/>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price9">Price at 9:</label>
                                     <div id="price9">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
