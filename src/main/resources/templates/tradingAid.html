@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <th:block th:replace="fragments/navigation :: headCommon">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- Meta, title, CSS, favicons, etc. -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" href="../favicon.ico" type="image/ico"
+              th:href="@{../favicon.ico}"/>
+
+        <title>Inside View</title>
+
+        <!-- Bootstrap -->
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet"
+              th:href="@{/css/bootstrap.min.css}"/>
+        <!-- Font Awesome -->
+        <link href="../static/css/font-awesome.min.css" rel="stylesheet"
+              th:href="@{/css/font-awesome.min.css}"/>
+
+        <link href="../static/css/animate.min.css" rel="stylesheet"
+              th:href="@{/css/animate.min.css}"/>
+
+        <!-- Custom Theme Style -->
+        <link href="../static/css/custom.min.css" rel="stylesheet"
+              th:href="@{/css/custom.min.css}"/>
+    </th:block>
+
+    <link href="../static/css/tradingAidStyles.css" rel="stylesheet"
+          th:href="@{/css/tradingAidStyles.css}"/>
+
+    <th:block th:replace="fragments/queries :: headDatatables">
+        <!-- Datatables Styles -->
+        <link href="../static/js/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/jquery.dataTables.min.css}"/>
+        <link href="../static/js/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/fixedHeader.bootstrap.min.css}"/>
+        <link href="../static/js/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/responsive.bootstrap.min.css}"/>
+        <link href="../static/js/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
+        <link href="../static/css/buttons.bootstrap.min.css" rel="stylesheet" type="text/css"
+              th:href="@{/js/datatables/scroller.bootstrap.min.css}"/>
+
+        <!-- select2 -->
+        <link href="../static/css/select/select2.min.css" rel="stylesheet"
+              th:href="@{/css/select/select2.min.css}">
+
+        <!-- jQuery -->
+        <script src="../static/js/jquery.min.js"
+                th:src="@{/vendors/js/jquery.min.js}"></script>
+    </th:block>
+
+</head>
+<body class="nav-md">
+
+<div class="container body">
+
+    <div class="main_container">
+
+        <div th:replace="fragments/navigation :: leftNavigationMenu"></div>
+
+        <div th:replace="fragments/navigation :: topNavigationMenu"></div>
+
+        <div class="right_col" role="main">
+
+            <div class="">
+
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>Trading Aid</h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="row" id="main">
+                    <table id="raceTable">
+                        <thead>
+                        <tr>
+                            <th class="horse">Horse</th>
+                            <th>9am</th>
+                            <th>10am</th>
+                            <th>11am</th>
+                            <th>MovAM</th>
+                            <th>60min</th>
+                            <th>Mov60</th>
+                            <th>30min</th>
+                            <th>Mov30</th>
+                            <th>15min</th>
+                            <th>Mov15</th>
+                            <th>5min</th>
+                            <th>Mov5</th>
+                            <th>3min</th>
+                            <th>Mov3</th>
+                            <th>2min</th>
+                            <th>Mov2</th>
+                            <th>1min</th>
+                            <th>Mov1</th>
+                            <th>Mean</th>
+                            <th>321</th>
+                            <th>Result</th>
+                            <th>CPR</th>
+                            <th>NPTips</th>
+                            <th>Naps</th>
+                            <th>Star</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td>Won</td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td></td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td>Placed</td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td></td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td></td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                            <tr>
+                                <td class="horse">Horse Name</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>5.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.30</td>
+                                <td>4.75</td>
+                                <td>4.40</td>
+                                <td>4.63</td>
+                                <td>4.50</td>
+                                <td>0.00</td>
+                                <td>4.40</td>
+                                <td>2.2</td>
+                                <td>1.97</td>
+                                <td>2.15</td>
+                                <td></td>
+                                <td>-5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+            </div>
+
+                <div class="row">
+                    <table id="raceTableMin">
+                        <thead>
+                        <tr>
+                            <th class="horse">Horse</th>
+                            <th>9am</th>
+                            <th>MovAM</th>
+                            <th>60min</th>
+                            <th>Mov60</th>
+                            <th>1min</th>
+                            <th>Mov1</th>
+                            <th>Mean</th>
+                            <th>321</th>
+                            <th>Result</th>
+                            <th>CPR</th>
+                            <th>NPTips</th>
+                            <th>Naps</th>
+                            <th>Star</th>
+                            <th>Sts Fp</th>
+                            <th>Sts Rs</th>
+                            <th>Jockey</th>
+                            <th>Wins</th>
+                            <th>Ride No.</th>
+                            <th>Rides</th>
+                            <th>Mov9-60</th>
+                            <th>HG</th>
+                            <th>Trainer</th>
+                            <th>Wins</th>
+                            <th>Runner No.</th>
+                            <th>Runners</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td>Placed</td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td></td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td></td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td>Won</td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td></td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td class="horse">Horse Name</td>
+                            <td>1.40</td>
+                            <td>-2.63</td>
+                            <td>2.30</td>
+                            <td>5.75</td>
+                            <td>4.40</td>
+                            <td>4.63</td>
+                            <td>4.50</td>
+                            <td>0.00</td>
+                            <td></td>
+                            <td>5</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td><i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i></td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Jockey Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>-15.7</td>
+                            <td>Gear</td>
+                            <td>Trainer Name</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+
+        </div>
+
+    </div>
+
+</div>
+<th:block th:replace="fragments/navigation :: scriptsCommon">
+    <!-- Bootstrap -->
+    <script src="../static/js/bootstrap.min.js"
+            th:src="@{/js/bootstrap.min.js}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="../static/js/custom.js"
+            th:src="@{/js/custom.js}"></script>
+</th:block>
+
+
+
+<th:block th:replace="fragments/queries :: scriptsDatatables">
+    <!-- Datatables-->
+    <script src="../static/js/datatables/jquery.dataTables.min.js"
+            th:src="@{/js/datatables/jquery.dataTables.min.js}"></script>
+    <script src="../static/js/datatables/dataTables.bootstrap.js"
+            th:src="@{/js/datatables/dataTables.bootstrap.js}"></script>
+    <script src="../static/js/datatables/dataTables.fixedHeader.min.js"
+            th:src="@{/js/datatables/dataTables.fixedHeader.min.js}"></script>
+    <script src="../static/js/datatables/dataTables.responsive.js"
+            th:src="@{/js/datatables/dataTables.responsive.js}"></script>
+    <script src="../static/js/datatables/dataTables.buttons.min.js"
+            th:src="@{/js/datatables/dataTables.buttons.min.js}"></script>
+    <script src="../static/js/buttons.bootstrap.min.js"
+            th:src="@{/js/buttons.bootstrap.min.js}"></script>
+    <script src="../static/js/datatables/buttons.flash.min.js"
+            th:src="@{/js/datatables/buttons.flash.min.js}"></script>
+    <script src="../static/js/datatables/buttons.html5.min.js"
+            th:src="@{/js/datatables/buttons.html5.min.js}"></script>
+    <script src="../static/js/datatables/buttons.print.min.js"
+            th:src="@{/js/datatables/buttons.print.min.js}"></script>
+    <script src="../static/js/datatables/tradingAid.dataTables.styles.js"
+            th:src="@{/js/datatables/tradingAid.dataTables.styles.js}"></script>
+</th:block>
+</div>
+</body>
+</html>

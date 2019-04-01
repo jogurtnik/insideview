@@ -1,0 +1,56 @@
+div#main {
+    text-align: left;
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    display: table;
+    border-spacing: 2px;
+    border-color: grey;
+    padding: 0;
+}
+
+th, td {
+    text-align: right;
+}
+
+#raceTable {
+    border: 1px solid #dddddd;
+    width: 100%;
+}
+
+#raceTableMin {
+    border: 1px solid #dddddd;
+    width: 100%;
+}
+
+table#raceTable thead {
+    color: white;
+    background-color: #555b5e;
+    font-size: 80%;
+}
+
+table#raceTableMin thead {
+    color: white;
+    background-color: #555b5e;
+    font-size: 80%;
+}
+
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.horse {
+    text-align: left;
+}
+
+table#raceTable tbody > tr:hover{
+   background-color: #c3dfff;
+}
+
+table#raceTableMin tbody > tr:hover{
+    background-color: #c3dfff;
+}

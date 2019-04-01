@@ -30,7 +30,7 @@ function init_DataTables() {
         },
     ];
 
-    $('.dataTableRace').DataTable({
+    $('#dataTableRace').DataTable({
 
         dom: domCommand,
         buttons: buttonsMap,
