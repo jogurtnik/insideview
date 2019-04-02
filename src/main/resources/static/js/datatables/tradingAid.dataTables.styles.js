@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     var raceTable = document.getElementById('raceTable');
-    var raceTbody = raceTable.getElementsByTagName('tbody')[0];
+    var raceTbody = raceTable.getElementsByTagName('tbody')[1];
     var raceRows = raceTbody.getElementsByTagName('tr');
     
     for (let rowIndex=0, len=raceRows.length; rowIndex<len; rowIndex++) {
@@ -74,8 +74,8 @@ $(document).ready(function() {
     }
 
     var raceTableMin = document.getElementById('raceTableMin');
-    var raceTbodyMin = raceTableMin.getElementsByTagName('tbody');
-    var raceRowsMin = raceTbodyMin[0].getElementsByTagName('tr');
+    var raceTbodyMin = raceTableMin.getElementsByTagName('tbody')[1];
+    var raceRowsMin = raceTbodyMin.getElementsByTagName('tr');
 
     for (let rowIndex=0, len=raceRowsMin.length; rowIndex<len; rowIndex++) {
 
@@ -131,15 +131,15 @@ $(document).ready(function() {
                 if (cellValue == 'Won') {
                     cells[cellIndex].style.backgroundColor = '#3ED578';
                     cells[0].style.backgroundColor = '#3ED578';
-                    cells[16].style.backgroundColor = '#3ED578';
-                    cells[22].style.backgroundColor = '#3ED578';
+                    cells[14].style.backgroundColor = '#3ED578';
+                    cells[20].style.backgroundColor = '#3ED578';
                 } else if (cellValue == 'Placed') {
                     cells[cellIndex].style.backgroundColor = '#f2dac1';
                     cells[0].style.backgroundColor = '#f2dac1';
-                    cells[16].style.backgroundColor = '#f2dac1';
-                    cells[22].style.backgroundColor = '#f2dac1';
+                    cells[14].style.backgroundColor = '#f2dac1';
+                    cells[20].style.backgroundColor = '#f2dac1';
                 }
-            } else if (cellIndex === 10 || cellIndex === 20) {
+            } else if (cellIndex === 10 || cellIndex === 18) {
 
                 let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
@@ -151,3 +151,18 @@ $(document).ready(function() {
     }
 
 });
+
+function toggleTables() {
+
+    let raceTable = document.getElementById("raceTable");
+    let raceTableMin = document.getElementById("raceTableMin");
+
+    if (raceTable.style.display === "table") {
+        raceTable.style.display = "none";
+        raceTableMin.style.display = "table";
+    } else {
+        raceTable.style.display = "table";
+        raceTableMin.style.display = "none";
+    }
+}
+

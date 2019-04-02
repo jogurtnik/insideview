@@ -23,6 +23,7 @@ th, td {
 #raceTableMin {
     border: 1px solid #dddddd;
     width: 100%;
+    display: none;
 }
 
 table#raceTable thead {
@@ -53,4 +54,20 @@ table#raceTable tbody > tr:hover{
 
 table#raceTableMin tbody > tr:hover{
     background-color: #c3dfff;
+}
+
+.trimmed {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+    width: max-content;
+}
+
+.raceInfo {
+    background-color: #d6ebfe;
+    height: 30px;
+    font-size: 100%;
+    text-align: left;
+    cursor: default;
 }
