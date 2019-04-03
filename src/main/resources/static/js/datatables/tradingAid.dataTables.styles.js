@@ -1,154 +1,169 @@
 $(document).ready(function() {
 
-    var raceTable = document.getElementById('raceTable');
-    var raceTbody = raceTable.getElementsByTagName('tbody')[1];
-    var raceRows = raceTbody.getElementsByTagName('tr');
-    
-    for (let rowIndex=0, len=raceRows.length; rowIndex<len; rowIndex++) {
-        
-        let cells = raceRows[rowIndex].getElementsByTagName('td');
+    // get default table with detailed race data
+    let raceTable = document.getElementById('raceTable');
 
-        for (let cellIndex = 0, len=cells.length; cellIndex<len; cellIndex++) {
+    // get table bodies of default detailed race data table
+    let raceTbody = raceTable.getElementsByTagName('tbody');
 
-            if (cellIndex > 3 && cellIndex%2 === 0 && cellIndex < 18) {
+    // iterate through odd indexes of table bodies to set conditional formatting for cells
+    for (let tBodyIndex=1, len=raceTbody.length; tBodyIndex<len; tBodyIndex+=2) {
 
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
+        let raceRows = raceTbody[tBodyIndex].getElementsByTagName('tr');
+        for (let rowIndex=0, len=raceRows.length; rowIndex<len; rowIndex++) {
 
-                if (cellValue > 5) {
-                    cells[cellIndex].style.backgroundColor = '#99ccff';
+            let cells = raceRows[rowIndex].getElementsByTagName('td');
+            for (let cellIndex = 0, len=cells.length; cellIndex<len; cellIndex++) {
 
-                } else if (cellValue >= 2 && cellValue <= 5) {
-                    cells[cellIndex].style.backgroundColor = '#ccffcc';
+                if (cellIndex > 3 && cellIndex%2 === 0 && cellIndex < 18) {
 
-                } else if (cellValue > 0 && cellValue < 2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffff99';
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
-                } else if (cellValue < 0 && cellValue > -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffcc99';
+                    if (cellValue > 5) {
+                        cells[cellIndex].style.backgroundColor = '#99ccff';
 
-                } else if (cellValue <= -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ff99cc';
+                    } else if (cellValue >= 2 && cellValue <= 5) {
+                        cells[cellIndex].style.backgroundColor = '#ccffcc';
 
-                }
+                    } else if (cellValue > 0 && cellValue < 2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffff99';
 
-            } else if (cellIndex >= 18 && cellIndex < 21) {
+                    } else if (cellValue < 0 && cellValue > -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffcc99';
 
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
+                    } else if (cellValue <= -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ff99cc';
 
-                if (cellValue > 5) {
-                    cells[cellIndex].style.backgroundColor = '#99ccff';
+                    }
 
-                } else if (cellValue >= 2.5 && cellValue <= 5) {
-                    cells[cellIndex].style.backgroundColor = '#ccffcc';
+                } else if (cellIndex >= 18 && cellIndex < 21) {
 
-                } else if (cellValue > 0 && cellValue < 2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffff99';
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
-                } else if (cellValue < 0 && cellValue > -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffcc99';
+                    if (cellValue > 5) {
+                        cells[cellIndex].style.backgroundColor = '#99ccff';
 
-                } else if (cellValue <= -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ff99cc';
+                    } else if (cellValue >= 2.5 && cellValue <= 5) {
+                        cells[cellIndex].style.backgroundColor = '#ccffcc';
 
-                }
-            } else if (cellIndex === 21) {
+                    } else if (cellValue > 0 && cellValue < 2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffff99';
 
-                let cellValue = cells[cellIndex].innerHTML;
-                
-                if (cellValue == 'Won') {
-                    cells[cellIndex].style.backgroundColor = '#3ED578';
-                    cells[0].style.backgroundColor = '#3ED578';
-                } else if (cellValue == 'Placed') {
-                    cells[cellIndex].style.backgroundColor = '#f2dac1';
-                    cells[0].style.backgroundColor = '#f2dac1';
-                }
-            } else if (cellIndex === 22) {
+                    } else if (cellValue < 0 && cellValue > -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffcc99';
 
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
-                
-                if (cellValue < 0) {
-                    cells[cellIndex].style.color = '#ff0033'
-                }
-            }
-        }
-    }
+                    } else if (cellValue <= -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ff99cc';
 
-    var raceTableMin = document.getElementById('raceTableMin');
-    var raceTbodyMin = raceTableMin.getElementsByTagName('tbody')[1];
-    var raceRowsMin = raceTbodyMin.getElementsByTagName('tr');
+                    }
+                } else if (cellIndex === 21) {
 
-    for (let rowIndex=0, len=raceRowsMin.length; rowIndex<len; rowIndex++) {
+                    let cellValue = cells[cellIndex].innerHTML;
 
-        let cells = raceRowsMin[rowIndex].getElementsByTagName('td');
+                    if (cellValue == 'Won') {
+                        cells[cellIndex].style.backgroundColor = '#3ED578';
+                        cells[0].style.backgroundColor = '#3ED578';
+                    } else if (cellValue == 'Placed') {
+                        cells[cellIndex].style.backgroundColor = '#f2dac1';
+                        cells[0].style.backgroundColor = '#f2dac1';
+                    }
+                } else if (cellIndex === 22) {
 
-        for (let cellIndex = 0, len=cells.length; cellIndex<len; cellIndex++) {
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
-            if (cellIndex > 1 && cellIndex%2 === 0 && cellIndex < 9) {
-
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
-
-                if (cellValue > 5) {
-                    cells[cellIndex].style.backgroundColor = '#99ccff';
-
-                } else if (cellValue >= 2 && cellValue <= 5) {
-                    cells[cellIndex].style.backgroundColor = '#ccffcc';
-
-                } else if (cellValue > 0 && cellValue < 2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffff99';
-
-                } else if (cellValue < 0 && cellValue > -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffcc99';
-
-                } else if (cellValue <= -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ff99cc';
-
-                }
-
-            } else if (cellIndex === 7) {
-
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
-
-                if (cellValue > 5) {
-                    cells[cellIndex].style.backgroundColor = '#99ccff';
-
-                } else if (cellValue >= 2.5 && cellValue <= 5) {
-                    cells[cellIndex].style.backgroundColor = '#ccffcc';
-
-                } else if (cellValue > 0 && cellValue < 2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffff99';
-
-                } else if (cellValue < 0 && cellValue > -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ffcc99';
-
-                } else if (cellValue <= -2.5) {
-                    cells[cellIndex].style.backgroundColor = '#ff99cc';
-
-                }
-            } else if (cellIndex === 9) {
-
-                let cellValue = cells[cellIndex].innerHTML;
-
-                if (cellValue == 'Won') {
-                    cells[cellIndex].style.backgroundColor = '#3ED578';
-                    cells[0].style.backgroundColor = '#3ED578';
-                    cells[14].style.backgroundColor = '#3ED578';
-                    cells[20].style.backgroundColor = '#3ED578';
-                } else if (cellValue == 'Placed') {
-                    cells[cellIndex].style.backgroundColor = '#f2dac1';
-                    cells[0].style.backgroundColor = '#f2dac1';
-                    cells[14].style.backgroundColor = '#f2dac1';
-                    cells[20].style.backgroundColor = '#f2dac1';
-                }
-            } else if (cellIndex === 10 || cellIndex === 18) {
-
-                let cellValue = parseFloat(cells[cellIndex].innerHTML);
-
-                if (cellValue < 0) {
-                    cells[cellIndex].style.color = '#ff0033'
+                    if (cellValue < 0) {
+                        cells[cellIndex].style.color = '#ff0033'
+                    }
                 }
             }
         }
     }
+
+    // get table with minimum race data appended with jockey and trainer data
+    let raceTableMin = document.getElementById('raceTableMin');
+
+    // get table bodies of minimum race data table
+    let raceTbodyMin = raceTableMin.getElementsByTagName('tbody');
+
+    // iterate through odd indexes of table bodies and set conditional formatting for cells
+    for (let tBodyMinIndex=1, len=raceTbodyMin.length; tBodyMinIndex<len; tBodyMinIndex+=2) {
+
+        let raceRowsMin = raceTbodyMin[tBodyMinIndex].getElementsByTagName('tr');
+        for (let rowIndex=0, len=raceRowsMin.length; rowIndex<len; rowIndex++) {
+
+            let cells = raceRowsMin[rowIndex].getElementsByTagName('td');
+            for (let cellIndex = 0, len=cells.length; cellIndex<len; cellIndex++) {
+
+                if (cellIndex > 1 && cellIndex%2 === 0 && cellIndex < 9) {
+
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
+
+                    if (cellValue > 5) {
+                        cells[cellIndex].style.backgroundColor = '#99ccff';
+
+                    } else if (cellValue >= 2 && cellValue <= 5) {
+                        cells[cellIndex].style.backgroundColor = '#ccffcc';
+
+                    } else if (cellValue > 0 && cellValue < 2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffff99';
+
+                    } else if (cellValue < 0 && cellValue > -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffcc99';
+
+                    } else if (cellValue <= -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ff99cc';
+
+                    }
+
+                } else if (cellIndex === 7) {
+
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
+
+                    if (cellValue > 5) {
+                        cells[cellIndex].style.backgroundColor = '#99ccff';
+
+                    } else if (cellValue >= 2.5 && cellValue <= 5) {
+                        cells[cellIndex].style.backgroundColor = '#ccffcc';
+
+                    } else if (cellValue > 0 && cellValue < 2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffff99';
+
+                    } else if (cellValue < 0 && cellValue > -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ffcc99';
+
+                    } else if (cellValue <= -2.5) {
+                        cells[cellIndex].style.backgroundColor = '#ff99cc';
+
+                    }
+                } else if (cellIndex === 9) {
+
+                    let cellValue = cells[cellIndex].innerHTML;
+
+                    if (cellValue == 'Won') {
+                        cells[cellIndex].style.backgroundColor = '#3ED578';
+                        cells[0].style.backgroundColor = '#3ED578';
+                        cells[14].style.backgroundColor = '#3ED578';
+                        cells[20].style.backgroundColor = '#3ED578';
+                    } else if (cellValue == 'Placed') {
+                        cells[cellIndex].style.backgroundColor = '#f2dac1';
+                        cells[0].style.backgroundColor = '#f2dac1';
+                        cells[14].style.backgroundColor = '#f2dac1';
+                        cells[20].style.backgroundColor = '#f2dac1';
+                    }
+                } else if (cellIndex === 10 || cellIndex === 18) {
+
+                    let cellValue = parseFloat(cells[cellIndex].innerHTML);
+
+                    if (cellValue < 0) {
+                        cells[cellIndex].style.color = '#ff0033'
+                    }
+                }
+            }
+        }
+
+    }
+
+
 
 });
 
