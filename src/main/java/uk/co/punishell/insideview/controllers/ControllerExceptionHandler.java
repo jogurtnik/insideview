@@ -15,6 +15,7 @@ public class ControllerExceptionHandler {
 
         log.error("QUERY FORM OBJECT BINDING ERROR!");
         log.error(exception.getMessage());
+        exception.printStackTrace();
 
         ModelAndView modelAndView = new ModelAndView();
 
