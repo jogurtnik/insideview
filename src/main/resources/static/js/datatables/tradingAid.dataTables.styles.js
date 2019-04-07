@@ -15,7 +15,7 @@ $(document).ready(function() {
             let cells = raceRows[rowIndex].getElementsByTagName('td');
             for (let cellIndex = 0, len=cells.length; cellIndex<len; cellIndex++) {
 
-                if (cellIndex > 3 && cellIndex%2 === 0 && cellIndex < 18) {
+                if (cellIndex > 1 && cellIndex%2 === 0 && cellIndex < 16) {
 
                     let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
 
                     }
 
-                } else if (cellIndex >= 18 && cellIndex < 21) {
+                } else if (cellIndex >= 16 && cellIndex < 19) {
 
                     let cellValue = parseFloat(cells[cellIndex].innerHTML);
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
                         cells[cellIndex].style.backgroundColor = '#ff99cc';
 
                     }
-                } else if (cellIndex === 21) {
+                } else if (cellIndex === 19) {
 
                     let cellValue = cells[cellIndex].innerHTML;
 
@@ -67,7 +67,7 @@ $(document).ready(function() {
                         cells[cellIndex].style.backgroundColor = '#f2dac1';
                         cells[0].style.backgroundColor = '#f2dac1';
                     }
-                } else if (cellIndex === 22) {
+                } else if (cellIndex === 20) {
 
                     let cellValue = parseFloat(cells[cellIndex].innerHTML);
 

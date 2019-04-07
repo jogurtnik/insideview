@@ -103,9 +103,7 @@ public class JSHRunnerAssembler {
         Element starsCell = row.select(".star").first();
         if (starsCell != null) {
             String cellImgSrcValue = starsCell.attr("src");
-            int beginIndex = srcPrefix.length() - 1;
-            int endIndex = cellImgSrcValue.indexOf(srcSuffix);
-            starsString = cellImgSrcValue.substring(beginIndex, endIndex);
+            starsString = this.extractString(cellImgSrcValue, srcPrefix, srcSuffix);
 
             for (int i = 0; i < Integer.parseInt(starsString); i++) {
                 stars[i] = true;
@@ -145,7 +143,7 @@ public class JSHRunnerAssembler {
     // extract string value from between passed matchers,
     // starting at the end of beginMatcher and ending at the start of endMatcher
     private String extractString(String stringData,String beginMatcher, String endMatcher) {
-        int beginIndex = stringData.indexOf(beginMatcher + beginMatcher.length());
+        int beginIndex = stringData.indexOf(beginMatcher) + beginMatcher.length() - 1;
         int endIndex = stringData.indexOf(endMatcher);
         return stringData.substring(beginIndex, endIndex);
     }
