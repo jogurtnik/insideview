@@ -18,6 +18,7 @@ th, td {
 #raceTable {
     border: 1px solid #dddddd;
     width: 100%;
+    table-layout: fixed;
 }
 
 #raceTableMin {
@@ -44,8 +45,13 @@ thead {
     border-color: inherit;
 }
 
-.horse {
+.horse-info {
     text-align: left;
+    width: 10%;
+}
+
+.small-table-cell {
+    width: fit-content;
 }
 
 table#raceTable tbody > tr:hover{

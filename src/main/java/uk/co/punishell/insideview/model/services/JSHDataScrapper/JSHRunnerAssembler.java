@@ -1,11 +1,16 @@
 package uk.co.punishell.insideview.model.services.JSHDataScrapper;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.view.commands.entityCommands.JSHRunnerCommand;
 
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
+@Slf4j
 @Service
 public class JSHRunnerAssembler {
 
@@ -41,8 +46,9 @@ public class JSHRunnerAssembler {
         runner.setHeadGear(this.getJshHeadGear(tableRow));
 
         if ((Double.compare(runner.getPrice9(), 0)) != 0) {
-            double mov9to60 = (runner.getPrice9() - runner.getPrice60())/runner.getPrice60();
-            runner.setMov9to60(mov9to60);
+            double mov9to60 = (runner.getPrice9() - runner.getPrice60())/runner.getPrice9();
+            DecimalFormat df2 = new DecimalFormat(".##");
+            runner.setMov9to60(Double.parseDouble(df2.format(mov9to60)));
         } else {
             runner.setMov9to60(0.00);
         }
@@ -98,7 +104,7 @@ public class JSHRunnerAssembler {
     private boolean[] getJshStars(Element row) {
         boolean[] stars = {false, false, false, false, false};
         String starsString;
-        String srcPrefix = "./JustStartHere_files/";
+        String srcPrefix = "/images/";
         String srcSuffix = "t.gif";
         Element starsCell = row.select(".star").first();
         if (starsCell != null) {
@@ -136,15 +142,37 @@ public class JSHRunnerAssembler {
         String firstCellText = row.select("td").first().text();
         String headGearBeginIndexStringMatcher = "Wearing: ";
         String headGearEndIndexStringMatcher = " Colours";
+        String headGearFull = this.extractString(firstCellText, headGearBeginIndexStringMatcher, headGearEndIndexStringMatcher);
+        String[] headGearArray = headGearFull.split(" and ");
 
-        return this.extractString(firstCellText, headGearBeginIndexStringMatcher, headGearEndIndexStringMatcher);
+        Map<String, String> headGearShortsMap = new HashMap<>();
+        headGearShortsMap.put("cheekpieces", "CkPc");
+        headGearShortsMap.put("hood", "Hood");
+        headGearShortsMap.put("visor", "Vsor");
+        headGearShortsMap.put("blinkers", "Blnk");
+        headGearShortsMap.put("tongue strap", "TT");
+
+        StringBuilder sb = new StringBuilder();
+
+        if (!headGearFull.equalsIgnoreCase("")) {
+            for (String gear : headGearArray) {
+                sb.append(headGearShortsMap.get(gear) + " ");
+            }
+            return sb.toString();
+        } else return "";
     }
 
     // extract string value from between passed matchers,
     // starting at the end of beginMatcher and ending at the start of endMatcher
-    private String extractString(String stringData,String beginMatcher, String endMatcher) {
-        int beginIndex = stringData.indexOf(beginMatcher) + beginMatcher.length() - 1;
+    private String extractString(String stringData, String beginMatcher, String endMatcher) {
+        int beginIndex = stringData.indexOf(beginMatcher) + beginMatcher.length();
         int endIndex = stringData.indexOf(endMatcher);
-        return stringData.substring(beginIndex, endIndex);
+
+        if (endIndex < beginIndex) {
+            return "";
+        } else {
+            return stringData.substring(beginIndex, endIndex);
+        }
     }
+
 }

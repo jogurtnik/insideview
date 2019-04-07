@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHRaceAssembler;
+import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHTradingAidAssembler;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.WebpageScrapper;
 import uk.co.punishell.insideview.view.commands.entityCommands.JSHRaceCommand;
 import uk.co.punishell.insideview.view.commands.guiCommands.TraidingAidCommand;
@@ -27,6 +28,9 @@ public class TradingAidController {
 
     @Autowired
     private JSHRaceAssembler jshRaceAssembler;
+
+    @Autowired
+    private JSHTradingAidAssembler jshTradingAidAssembler;
 
     private final String JSHLoginUrl = "https://juststarthere.co.uk/cgi-bin/just.pl";
     private final String JSHDataTargetUrl = "https://juststarthere.co.uk/allwinback.html";
@@ -62,6 +66,8 @@ public class TradingAidController {
                 races.add(race);
 
             }
+
+            races = jshTradingAidAssembler.assembleRaceData(races);
 
             traidingAidCommand.setRaces(races);
 

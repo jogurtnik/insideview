@@ -81,7 +81,7 @@
                     <table id="raceTable">
                         <thead>
                         <tr>
-                            <th class="horse">Horse</th>
+                            <th class="horse-info">Horse</th>
                             <th>9am</th>
                             <th>MovAM</th>
                             <th>60min</th>
@@ -112,13 +112,13 @@
 
                             <tbody>
                                 <tr>
-                                    <td colspan="26" class="raceInfo" th:text="${race.generalInfo}">00:00 City COUNTRY, race-length race-types MARKET, TYPE Prices</td>
+                                    <td colspan="24" class="raceInfo" th:text="${race.generalInfo}">00:00 City COUNTRY, race-length race-types MARKET, TYPE Prices</td>
                                 </tr>
                             </tbody>
 
                             <tbody>
                                 <tr th:each="runner : ${race.runners}">
-                                    <td class="horse" th:text="${runner.horseName}">Horse Name</td>
+                                    <td class="horse-info" th:text="${runner.horseName}">Horse Name</td>
                                     <td th:text="${runner.price9}">0.00</td>
                                     <td th:text="${runner.mov9to11}">0.00</td>
                                     <td th:text="${runner.price60}">0.00</td>
@@ -152,7 +152,7 @@
                     <table id="raceTableMin">
                         <thead>
                         <tr>
-                            <th class="horse">Horse</th>
+                            <th class="horse-info">Horse</th>
                             <th>9am</th>
                             <th>MovAM</th>
                             <th>60min</th>
@@ -179,44 +179,43 @@
                         </tr>
                         </thead>
 
-                        <tbody>
-                        <tr>
-                            <td colspan="24" class="raceInfo">GB, 5f Hcap WIN market, BACK prices</td>
-                        </tr>
-                        </tbody>
+                        <th:block th:each="race : ${jshData.races}">
 
-                        <tbody>
-                        <tr>
-                            <td class="horse">Horse Name</td>
-                            <td>1.40</td>
-                            <td>-2.63</td>
-                            <td>2.30</td>
-                            <td>5.75</td>
-                            <td>4.40</td>
-                            <td>4.63</td>
-                            <td>4.50</td>
-                            <td>0.00</td>
-                            <td>Placed</td>
-                            <td>5</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td><i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i></td>
-                            <td>Jockey Name</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>1</td>
-                            <td>-15.7</td>
-                            <td>Gear</td>
-                            <td>Trainer Name</td>
-                            <td>0</td>
-                            <td>1</td>
-                            <td>2</td>
-                        </tr>
-                        </tbody>
+                            <tbody>
+                            <tr>
+                                <td colspan="26" class="raceInfo" th:text="${race.generalInfo}">00:00 City COUNTRY, race-length race-types MARKET, TYPE Prices</td>
+                            </tr>
+                            </tbody>
+
+                            <tbody>
+                            <tr th:each="runner : ${race.runners}">
+                                <td class="horse-info" th:text="${runner.horseName}">Horse Name</td>
+                                <td th:text="${runner.price9}">0.00</td>
+                                <td th:text="${runner.mov9to11}">0.00</td>
+                                <td th:text="${runner.price60}">0.00</td>
+                                <td th:text="${runner.mov60}">0.00</td>
+                                <td th:text="${runner.price1}">0.00</td>
+                                <td th:text="${runner.mov1}">0.00</td>
+                                <td th:text="${runner.mean}">0.00</td>
+                                <td th:text="${runner.mov3to1}">0.00</td>
+                                <td th:text="${runner.result}">Result</td>
+                                <td th:text="${runner.cpr}">0</td>
+                                <td th:text="${runner.nptips}">0</td>
+                                <td th:text="${runner.naps}">0</td>
+                                <td><th:block th:each="star : ${runner.stars}" th:if="${star}"><i class="fa fa-star"></i></th:block></td>
+                                <td th:text="${runner.jockey}">Jockey Name</td>
+                                <td th:text="${runner.jockeyWins}">0</td>
+                                <td th:text="${runner.jockeyRideNo}">0</td>
+                                <td th:text="${runner.jockeyRides}">0</td>
+                                <td th:text="${runner.mov9to60}">0.00</td>
+                                <td th:text="${runner.headGear}">Gear</td>
+                                <td th:text="${runner.trainer}">Trainer Name</td>
+                                <td th:text="${runner.trainerWins}">0</td>
+                                <td th:text="${runner.trainerRunnerNo}">0</td>
+                                <td th:text="${runner.trainerRunners}">0</td>
+                            </tr>
+                            </tbody>
+                        </th:block>
                     </table>
 
                 </div>

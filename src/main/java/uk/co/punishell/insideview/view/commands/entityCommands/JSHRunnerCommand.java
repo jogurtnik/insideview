@@ -35,7 +35,13 @@ public class JSHRunnerCommand {
     private boolean[] stars;
 
     private String jockey;
+    private int jockeyWins;
+    private int jockeyRideNo;
+    private int jockeyRides;
     private String trainer;
+    private int trainerWins;
+    private int trainerRunnerNo;
+    private int trainerRunners;
     private String headGear;
     private double mov9to60;
 }
