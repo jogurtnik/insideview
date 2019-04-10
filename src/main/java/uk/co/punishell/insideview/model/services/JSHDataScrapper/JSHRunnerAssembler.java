@@ -151,6 +151,7 @@ public class JSHRunnerAssembler {
         headGearShortsMap.put("visor", "Vsor");
         headGearShortsMap.put("blinkers", "Blnk");
         headGearShortsMap.put("tongue strap", "TT");
+        headGearShortsMap.put("eyeshields", "Eye");
 
         StringBuilder sb = new StringBuilder();
 

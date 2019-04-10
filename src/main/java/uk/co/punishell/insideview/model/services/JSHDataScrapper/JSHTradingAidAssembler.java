@@ -24,7 +24,7 @@ public class JSHTradingAidAssembler {
                 JSHRunnerCommand runner = races.get(i).getRunners().get(j);
 
                 // exclude non-runners form the count
-                if (runner.getHorseName().contains("NR")) {
+                if (!runner.getHorseName().contains("NR")) {
 
                     if (!jockeyRidesMap.containsKey(runner.getJockey())) {
 
@@ -74,13 +74,16 @@ public class JSHTradingAidAssembler {
         for (JSHRaceCommand race : races) {
             for (JSHRunnerCommand runner : race.getRunners()) {
 
-                String jockey = runner.getJockey();
-                String trainer = runner.getTrainer();
+                if (!runner.getHorseName().contains("NR")) {
 
-                runner.setJockeyRides(jockeyRidesMap.get(jockey));
-                runner.setJockeyWins(jockeyWinsMap.get(jockey));
-                runner.setTrainerRunners(trainerRunnersMap.get(trainer));
-                runner.setTrainerWins(trainerWinsMap.get(trainer));
+                    String jockey = runner.getJockey();
+                    String trainer = runner.getTrainer();
+
+                    runner.setJockeyRides(jockeyRidesMap.get(jockey));
+                    runner.setJockeyWins(jockeyWinsMap.get(jockey));
+                    runner.setTrainerRunners(trainerRunnersMap.get(trainer));
+                    runner.setTrainerWins(trainerWinsMap.get(trainer));
+                }
             }
         }
 
