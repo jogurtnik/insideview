@@ -23,45 +23,51 @@ public class JSHTradingAidAssembler {
 
                 JSHRunnerCommand runner = races.get(i).getRunners().get(j);
 
-                if (!jockeyRidesMap.containsKey(runner.getJockey())) {
+                // exclude non-runners form the count
+                if (runner.getHorseName().contains("NR")) {
 
-                    jockeyRidesMap.put(runner.getJockey(), 1);
-                    jockeyWinsMap.put(runner.getJockey(), 0);
-                    runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+                    if (!jockeyRidesMap.containsKey(runner.getJockey())) {
 
-                    if (runner.getResult().equalsIgnoreCase("won")) {
-                        jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                        jockeyRidesMap.put(runner.getJockey(), 1);
+                        jockeyWinsMap.put(runner.getJockey(), 0);
+                        runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+
+                        if (runner.getResult().equalsIgnoreCase("won")) {
+                            jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                        }
+
+                    } else {
+
+                        jockeyRidesMap.put(runner.getJockey(), jockeyRidesMap.get(runner.getJockey()) + 1);
+                        runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+
+                        if (runner.getResult().equalsIgnoreCase("won")) {
+                            jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                        }
                     }
 
-                } else {
+                    if (!trainerRunnersMap.containsKey(runner.getTrainer())) {
 
-                    jockeyRidesMap.put(runner.getJockey(), jockeyRidesMap.get(runner.getJockey()) + 1);
-                    runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+                        trainerRunnersMap.put(runner.getTrainer(), 1);
+                        trainerWinsMap.put(runner.getTrainer(), 0);
+                        runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
 
-                    if (runner.getResult().equalsIgnoreCase("won")) {
-                        jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                        if (runner.getResult().equalsIgnoreCase("won")) {
+                            trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
+                        }
+
+                    } else {
+
+                        trainerRunnersMap.put(runner.getTrainer(), trainerRunnersMap.get(runner.getTrainer()) + 1);
+                        runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
+
+                        if (runner.getResult().equalsIgnoreCase("won")) {
+                            trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
+                        }
                     }
                 }
 
-                if (!trainerRunnersMap.containsKey(runner.getTrainer())) {
 
-                    trainerRunnersMap.put(runner.getTrainer(), 1);
-                    trainerWinsMap.put(runner.getTrainer(), 0);
-                    runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
-
-                    if (runner.getResult().equalsIgnoreCase("won")) {
-                        trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
-                    }
-
-                } else {
-
-                    trainerRunnersMap.put(runner.getTrainer(), trainerRunnersMap.get(runner.getTrainer()) + 1);
-                    runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
-
-                    if (runner.getResult().equalsIgnoreCase("won")) {
-                        trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
-                    }
-                }
             }
         }
 
