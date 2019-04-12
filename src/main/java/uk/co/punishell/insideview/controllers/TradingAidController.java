@@ -48,13 +48,13 @@ public class TradingAidController {
         Elements raceInfo = doc.getElementsByClass("race_infoback");
         Elements racebody = doc.getElementsByClass("racebody");
 
-        TraidingAidCommand traidingAidCommand = new TraidingAidCommand();
+        TraidingAidCommand tradingAidCommand = new TraidingAidCommand();
 
         if (raceInfo != null &&
             raceInfo.size() > 0 &&
             raceInfo.size() == racebody.size()) {
 
-            List<JSHRaceCommand> races = traidingAidCommand.getRaces();
+            List<JSHRaceCommand> races = tradingAidCommand.getRaces();
 
             for (int i = 0; i < raceInfo.size(); i++) {
 
@@ -69,14 +69,17 @@ public class TradingAidController {
 
             races = jshTradingAidAssembler.assembleRaceData(races);
 
-            traidingAidCommand.setRaces(races);
+            tradingAidCommand.setRaces(races);
 
         } else {
-            // TODO
-            // implement "No races available" message
+            if (raceInfo == null || raceInfo.size() != racebody.size()) {
+                tradingAidCommand.setErrorMessage("Error reading data from JSH.");
+            } else if (raceInfo.size() == 0) {
+                tradingAidCommand.setErrorMessage("No race data available at the moment. Try again later.");
+            }
         }
 
-        model.addAttribute("jshData", traidingAidCommand);
+        model.addAttribute("jshData", tradingAidCommand);
 
         return "tradingAid";
     }
