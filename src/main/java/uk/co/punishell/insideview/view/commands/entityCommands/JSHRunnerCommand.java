@@ -32,7 +32,7 @@ public class JSHRunnerCommand {
     private int cpr;
     private int nptips;
     private int naps;
-    private boolean[] stars;
+    private int stars;
 
     private String jockey;
     private int jockeyWins;

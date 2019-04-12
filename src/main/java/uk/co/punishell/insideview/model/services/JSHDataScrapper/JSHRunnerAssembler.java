@@ -101,8 +101,7 @@ public class JSHRunnerAssembler {
         return Integer.parseInt(row.getElementsByTag("td").get(22).text());
     }
 
-    private boolean[] getJshStars(Element row) {
-        boolean[] stars = {false, false, false, false, false};
+    private int getJshStars(Element row) {
         String starsString;
         String srcPrefix = "/images/";
         String srcSuffix = "t.gif";
@@ -111,14 +110,10 @@ public class JSHRunnerAssembler {
             String cellImgSrcValue = starsCell.attr("src");
             starsString = this.extractString(cellImgSrcValue, srcPrefix, srcSuffix);
 
-            for (int i = 0; i < Integer.parseInt(starsString); i++) {
-                stars[i] = true;
-            }
-
-            return stars;
+            return Integer.parseInt(starsString);
 
         } else {
-            return stars;
+            return 0;
         }
     }
 

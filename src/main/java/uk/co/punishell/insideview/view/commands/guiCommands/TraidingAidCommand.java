@@ -14,4 +14,5 @@ import java.util.List;
 public class TraidingAidCommand {
 
     private List<JSHRaceCommand> races = new ArrayList<>();
+    private String errorMessage;
 }

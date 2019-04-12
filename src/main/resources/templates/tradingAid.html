@@ -141,9 +141,7 @@
                                     <td th:text="${runner.cpr}">0</td>
                                     <td th:text="${runner.nptips}">0</td>
                                     <td th:text="${runner.naps}">0</td>
-                                    <td><th:block th:each="star : ${runner.stars}" th:if="${star}">
-                                        <i class="fa fa-star"></i>
-                                    </th:block></td>
+                                    <td><th:block th:if="${runner.stars}"><img th:src="@{'/images/' + ${runner.stars} + '-star.gif'}"/></th:block></td>
                                 </tr>
                             </tbody>
                         </th:block>
@@ -202,7 +200,7 @@
                                 <td th:text="${runner.cpr}">0</td>
                                 <td th:text="${runner.nptips}">0</td>
                                 <td th:text="${runner.naps}">0</td>
-                                <td><th:block th:each="star : ${runner.stars}" th:if="${star}"><i class="fa fa-star"></i></th:block></td>
+                                <td><th:block th:if="${runner.stars}"><img th:src="@{'/images/' + ${runner.stars} + '-star.gif'}"/></th:block></td>
                                 <td th:text="${runner.jockey}">Jockey Name</td>
                                 <td th:text="${runner.jockeyWins}">0</td>
                                 <td th:text="${runner.jockeyRideNo}">0</td>
