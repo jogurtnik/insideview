@@ -143,12 +143,12 @@ $(document).ready(function() {
                         cells[cellIndex].style.backgroundColor = '#3ED578';
                         cells[0].style.backgroundColor = '#3ED578';
                         cells[14].style.backgroundColor = '#3ED578';
-                        cells[20].style.backgroundColor = '#3ED578';
+                        cells[21].style.backgroundColor = '#3ED578';
                     } else if (cellValue == 'Placed') {
                         cells[cellIndex].style.backgroundColor = '#f2dac1';
                         cells[0].style.backgroundColor = '#f2dac1';
                         cells[14].style.backgroundColor = '#f2dac1';
-                        cells[20].style.backgroundColor = '#f2dac1';
+                        cells[21].style.backgroundColor = '#f2dac1';
                     }
                 } else if (cellIndex === 10 || cellIndex === 18) {
 
