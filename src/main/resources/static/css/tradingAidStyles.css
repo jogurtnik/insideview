@@ -26,7 +26,6 @@ th, td {
     color: black;
     border: 1px solid #dddddd;
     width: 100%;
-    display: none;
 }
 
 table#raceTable thead {

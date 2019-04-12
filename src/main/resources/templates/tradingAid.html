@@ -79,7 +79,7 @@
                 <p class="alert-error" th:text="${jshData.errorMessage != null}? ${jshData.errorMessage}"></p>
                 <div class="row" id="raceData" th:if="${jshData.errorMessage == null}">
                     <button onclick="toggleTables()">Toggle tables</button>
-                    <table id="raceTable">
+                    <table id="raceTable" style="display: table;">
                         <thead>
                         <tr>
                             <th class="horse-info">Horse</th>
@@ -148,7 +148,7 @@
                         </th:block>
                     </table>
 
-                    <table id="raceTableMin">
+                    <table id="raceTableMin" style="display: none;">
                         <thead>
                         <tr>
                             <th class="horse-info">Horse</th>
