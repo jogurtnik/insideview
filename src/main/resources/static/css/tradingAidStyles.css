@@ -57,11 +57,13 @@ thead {
 }
 
 table#raceTable tbody > tr:hover{
-   background-color: #c3dfff;
+   /*background-color: #c3dfff;*/
+    border: 2px solid black;
 }
 
 table#raceTableMin tbody > tr:hover{
-    background-color: #c3dfff;
+    /*background-color: #c3dfff;*/
+    border: 2px solid black;
 }
 
 .trimmed {
