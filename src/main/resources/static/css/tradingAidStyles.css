@@ -81,3 +81,7 @@ table#raceTableMin tbody > tr:hover{
     text-align: left;
     cursor: default;
 }
+
+.compact-data {
+    width: 3em;
+}
