@@ -16,12 +16,14 @@ th, td {
 }
 
 #raceTable {
+    color: black;
     border: 1px solid #dddddd;
     width: 100%;
     table-layout: fixed;
 }
 
 #raceTableMin {
+    color: black;
     border: 1px solid #dddddd;
     width: 100%;
     display: none;
