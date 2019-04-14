@@ -20,12 +20,14 @@ th, td {
     border: 1px solid #dddddd;
     width: 100%;
     table-layout: fixed;
+    overflow-x: auto;
 }
 
 #raceTableMin {
     color: black;
     border: 1px solid #dddddd;
     width: 100%;
+    overflow-x: auto;
 }
 
 table#raceTable thead {
@@ -49,10 +51,6 @@ thead {
 .horse-info {
     text-align: left;
     width: 10%;
-}
-
-.small-table-cell {
-    width: fit-content;
 }
 
 table#raceTable tbody > tr:hover{
@@ -79,8 +77,34 @@ table#raceTableMin tbody > tr:hover{
     font-size: 100%;
     text-align: left;
     cursor: default;
+    border: 1px solid #292929;
 }
 
 .compact-data {
     width: 3em;
+}
+
+
+.bordered-left {
+    border-left: 1px solid #292929;
+}
+
+.bordered-right {
+    border-right: 1px solid #292929;
+}
+
+.bordered-bottom {
+    border-bottom: 1px solid #292929;
+}
+
+.bordered-top {
+    border-top: 1px solid #292929;
+}
+
+.bolded-font {
+    font-weight: bold;
+}
+
+.centered {
+    text-align: center;
 }
