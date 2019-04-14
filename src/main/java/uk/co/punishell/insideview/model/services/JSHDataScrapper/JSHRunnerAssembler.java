@@ -2,7 +2,6 @@ package uk.co.punishell.insideview.model.services.JSHDataScrapper;
 
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.view.commands.entityCommands.JSHRunnerCommand;
 
@@ -84,10 +83,10 @@ public class JSHRunnerAssembler {
 
     private int getJshCpr(Element row) {
 
-        Elements ratingElements = row.getElementsByClass("rating");
+        Element ratingElement = row.getElementsByTag("td").get(20);
 
-        if (!ratingElements.isEmpty()) {
-            return Integer.parseInt(ratingElements.get(0).text());
+        if (ratingElement != null) {
+            return Integer.parseInt(ratingElement.text());
         } else {
             return 0;
         }

@@ -26,43 +26,63 @@ public class JSHTradingAidAssembler {
                 // exclude non-runners form the count
                 if (!runner.getHorseName().contains("NR")) {
 
-                    if (!jockeyRidesMap.containsKey(runner.getJockey())) {
+                    String jockey = runner.getJockey();
+                    String trainer = runner.getTrainer();
 
-                        jockeyRidesMap.put(runner.getJockey(), 1);
-                        jockeyWinsMap.put(runner.getJockey(), 0);
-                        runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+
+                    if (!jockeyRidesMap.containsKey(jockey)) {
+
+                        int rides = 1;
+                        int jockeyWins = 0;
+
+                        jockeyRidesMap.put(jockey, rides);
+                        jockeyWinsMap.put(jockey, jockeyWins);
+                        runner.setJockeyRideNo(rides);
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
-                            jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                            jockeyWinsMap.put(jockey, ++jockeyWins);
+                            runner.setJockeyWins(jockeyWinsMap.get(jockey));
                         }
 
                     } else {
 
-                        jockeyRidesMap.put(runner.getJockey(), jockeyRidesMap.get(runner.getJockey()) + 1);
-                        runner.setJockeyRideNo(jockeyRidesMap.get(runner.getJockey()));
+                        int rides = jockeyRidesMap.get(jockey);
+                        int jockeyWins = jockeyWinsMap.get(jockey);
+
+                        jockeyRidesMap.put(jockey, ++rides);
+                        runner.setJockeyRideNo(rides);
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
-                            jockeyWinsMap.put(runner.getJockey(), jockeyWinsMap.get(runner.getJockey()) + 1);
+                            jockeyWinsMap.put(jockey, ++jockeyWins);
+                            runner.setJockeyWins(jockeyWins);
                         }
                     }
 
-                    if (!trainerRunnersMap.containsKey(runner.getTrainer())) {
+                    if (!trainerRunnersMap.containsKey(trainer)) {
 
-                        trainerRunnersMap.put(runner.getTrainer(), 1);
-                        trainerWinsMap.put(runner.getTrainer(), 0);
-                        runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
+                        int runners = 1;
+                        int trainerWins = 0;
+
+                        trainerRunnersMap.put(trainer, runners);
+                        trainerWinsMap.put(trainer, trainerWins);
+                        runner.setTrainerRunnerNo(runners);
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
-                            trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
+                            trainerWinsMap.put(trainer, ++trainerWins);
+                            runner.setTrainerWins(trainerWins);
                         }
 
                     } else {
 
-                        trainerRunnersMap.put(runner.getTrainer(), trainerRunnersMap.get(runner.getTrainer()) + 1);
-                        runner.setTrainerRunnerNo(trainerRunnersMap.get(runner.getTrainer()));
+                        int runners = trainerRunnersMap.get(trainer);
+                        int trainerWins = trainerWinsMap.get(trainer);
+
+                        trainerRunnersMap.put(trainer, ++runners);
+                        runner.setTrainerRunnerNo(runners);
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
-                            trainerWinsMap.put(runner.getTrainer(), trainerWinsMap.get(runner.getTrainer()) + 1);
+                            trainerWinsMap.put(trainer, ++trainerWins);
+                            runner.setTrainerWins(trainerWins);
                         }
                     }
                 }
@@ -80,9 +100,7 @@ public class JSHTradingAidAssembler {
                     String trainer = runner.getTrainer();
 
                     runner.setJockeyRides(jockeyRidesMap.get(jockey));
-                    runner.setJockeyWins(jockeyWinsMap.get(jockey));
                     runner.setTrainerRunners(trainerRunnersMap.get(trainer));
-                    runner.setTrainerWins(trainerWinsMap.get(trainer));
                 }
             }
         }
