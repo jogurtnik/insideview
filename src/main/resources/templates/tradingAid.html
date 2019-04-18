@@ -210,7 +210,7 @@
                                 <td class="centered"  th:text="${runner.mov9to60}">0.00</td>
                                 <td class="bolded-font centered"  th:text="${runnerStat.count}"></td>
                                 <td th:text="${runner.headGear}">Gear</td>
-                                <td th:text="${runner.trainer}">Trainer Name</td>
+                                <td class="horse-info" th:text="${runner.trainer}">Trainer Name</td>
                                 <td class="centered"  th:text="${runner.trainerWins}">0</td>
                                 <td class="centered"  th:text="${runner.trainerRunnerNo}">0</td>
                                 <td class="bolded-font centered"  th:text="${runner.trainerRunners}">0</td>
@@ -227,12 +227,18 @@
 
 </div>
 <th:block th:replace="fragments/navigation :: scriptsCommon">
+    <!-- JQuery -->
+    <script src="../static/js/jquery.min.js"
+            th:src="@{/js/jquery.min.js}"></script>
     <!-- Bootstrap -->
     <script src="../static/js/bootstrap.min.js"
             th:src="@{/js/bootstrap.min.js}"></script>
     <!-- Custom Theme Scripts -->
     <script src="../static/js/custom.js"
             th:src="@{/js/custom.js}"></script>
+    <!-- JS Cookie -->
+    <script src="../static/js/utils/js.cookie.js"
+            th:src="@{/js/utils/js.cookie.js}"></script>
 </th:block>
 
     <script src="../static/js/datatables/tradingAid.dataTables.styles.js"
