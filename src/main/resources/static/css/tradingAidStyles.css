@@ -55,12 +55,12 @@ thead {
 
 table#raceTable tbody > tr:hover{
    /*background-color: #c3dfff;*/
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 table#raceTableMin tbody > tr:hover{
     /*background-color: #c3dfff;*/
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .trimmed {
@@ -77,7 +77,6 @@ table#raceTableMin tbody > tr:hover{
     font-size: 100%;
     text-align: left;
     cursor: default;
-    border: 1px solid #292929;
 }
 
 .compact-data {

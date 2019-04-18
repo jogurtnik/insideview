@@ -3,9 +3,9 @@ package uk.co.punishell.insideview.model.database.services;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class RaceServiceImplTest {
+
+
 
     @Before
     public void setUp() throws Exception {

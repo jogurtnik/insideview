@@ -189,31 +189,31 @@
 
                             <tbody>
                             <tr th:each="runner : ${race.runners}">
-                                <td class="horse-info bordered-bottom bordered-left" th:text="${runner.horseName}">Horse Name</td>
-                                <td class="bordered-bottom" th:text="${runner.price9}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.mov9to11}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.price60}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.mov60}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.price1}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.mov1}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.mean}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.mov3to1}">0.00</td>
-                                <td class="bordered-bottom" th:text="${runner.result}">Result</td>
-                                <td class="bordered-bottom" th:text="${runner.cpr}">0</td>
-                                <td class="bordered-bottom" th:text="${runner.nptips}">0</td>
-                                <td class="bordered-bottom" th:text="${runner.naps}">0</td>
-                                <td class="bordered-bottom"><th:block th:if="${runner.stars}"><img th:src="@{'/images/' + ${runner.stars} + '-star.gif'}"/></th:block></td>
-                                <td class="horse-info bordered-bottom bordered-left" th:text="${runner.jockey}">Jockey Name</td>
-                                <td class="bordered-bottom bordered-left centered" th:text="${runner.jockeyWins}">0</td>
-                                <td class="bordered-bottom bordered-left centered" th:text="${runner.jockeyRideNo}">0</td>
-                                <td class="bordered-bottom bordered-left bolded-font centered" th:text="${runner.jockeyRides}">0</td>
-                                <td class="bordered-bottom bordered-left centered"  th:text="${runner.mov9to60}">0.00</td>
-                                <td class="bordered-bottom bordered-left bolded-font centered"  th:text="${runnerStat.count}"></td>
-                                <td class="bordered-bottom bordered-left"  th:text="${runner.headGear}">Gear</td>
-                                <td class="horse-info bordered-bottom bordered-left"th:text="${runner.trainer}">Trainer Name</td>
-                                <td class="bordered-bottom bordered-left centered"  th:text="${runner.trainerWins}">0</td>
-                                <td class="bordered-bottom bordered-left centered"  th:text="${runner.trainerRunnerNo}">0</td>
-                                <td class="bordered-bottom bordered-left bordered-right bolded-font centered"  th:text="${runner.trainerRunners}">0</td>
+                                <td class="horse-info" th:text="${runner.horseName}">Horse Name</td>
+                                <td th:text="${runner.price9}">0.00</td>
+                                <td th:text="${runner.mov9to11}">0.00</td>
+                                <td th:text="${runner.price60}">0.00</td>
+                                <td th:text="${runner.mov60}">0.00</td>
+                                <td th:text="${runner.price1}">0.00</td>
+                                <td th:text="${runner.mov1}">0.00</td>
+                                <td th:text="${runner.mean}">0.00</td>
+                                <td th:text="${runner.mov3to1}">0.00</td>
+                                <td th:text="${runner.result}">Result</td>
+                                <td th:text="${runner.cpr}">0</td>
+                                <td th:text="${runner.nptips}">0</td>
+                                <td th:text="${runner.naps}">0</td>
+                                <td ><th:block th:if="${runner.stars}"><img th:src="@{'/images/' + ${runner.stars} + '-star.gif'}"/></th:block></td>
+                                <td class="horse-info" th:text="${runner.jockey}">Jockey Name</td>
+                                <td th:text="${runner.jockeyWins}">0</td>
+                                <td th:text="${runner.jockeyRideNo}">0</td>
+                                <td class="bolded-font centered" th:text="${runner.jockeyRides}">0</td>
+                                <td class="centered"  th:text="${runner.mov9to60}">0.00</td>
+                                <td class="bolded-font centered"  th:text="${runnerStat.count}"></td>
+                                <td th:text="${runner.headGear}">Gear</td>
+                                <td th:text="${runner.trainer}">Trainer Name</td>
+                                <td class="centered"  th:text="${runner.trainerWins}">0</td>
+                                <td class="centered"  th:text="${runner.trainerRunnerNo}">0</td>
+                                <td class="bolded-font centered"  th:text="${runner.trainerRunners}">0</td>
                             </tr>
                             </tbody>
                         </th:block>

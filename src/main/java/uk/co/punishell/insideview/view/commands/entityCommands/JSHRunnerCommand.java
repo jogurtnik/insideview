@@ -43,5 +43,5 @@ public class JSHRunnerCommand {
     private int trainerRunnerNo;
     private int trainerRunners;
     private String headGear;
-    private double mov9to60;
+    private int mov9to60;
 }

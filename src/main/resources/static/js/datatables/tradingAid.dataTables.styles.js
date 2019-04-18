@@ -157,6 +157,10 @@ $(document).ready(function() {
                     if (cellValue < 0) {
                         cells[cellIndex].style.color = '#ff0033'
                     }
+
+                    if (cellIndex === 18 && cellValue > 0) {
+                        cells[cellIndex].style.fontWeight = 'bold';
+                    }
                 }
             }
         }

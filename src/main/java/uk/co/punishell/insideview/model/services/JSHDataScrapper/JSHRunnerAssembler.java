@@ -5,7 +5,6 @@ import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 import uk.co.punishell.insideview.view.commands.entityCommands.JSHRunnerCommand;
 
-import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,12 +43,13 @@ public class JSHRunnerAssembler {
         runner.setTrainer(this.getJshTrainer(tableRow));
         runner.setHeadGear(this.getJshHeadGear(tableRow));
 
+        // get movement between 9am and 60min prices in percent
         if ((Double.compare(runner.getPrice9(), 0)) != 0) {
-            double mov9to60 = (runner.getPrice9() - runner.getPrice60())/runner.getPrice9();
-            DecimalFormat df2 = new DecimalFormat(".##");
-            runner.setMov9to60(Double.parseDouble(df2.format(mov9to60)));
+            double mov9to60Double = ((runner.getPrice9() - runner.getPrice60())/runner.getPrice9()) * 100;
+            int mov9to60Integer = (int) Math.round(mov9to60Double);
+            runner.setMov9to60(mov9to60Integer);
         } else {
-            runner.setMov9to60(0.00);
+            runner.setMov9to60(0);
         }
 
         return runner;
