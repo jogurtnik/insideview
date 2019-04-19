@@ -63,20 +63,19 @@ table#raceTableMin tbody > tr:hover{
     border: 1px solid black;
 }
 
-.trimmed {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0;
-    padding-right: 0;
-    width: max-content;
-}
-
 .raceInfo {
     background-color: #d6ebfe;
     height: 30px;
     font-size: 100%;
     text-align: left;
     cursor: default;
+}
+
+.sticky-th {
+    background-color: #555b5e;
+    position: -webkit-sticky;
+    position: sticky;
+    top: -1px;
 }
 
 .compact-data {
