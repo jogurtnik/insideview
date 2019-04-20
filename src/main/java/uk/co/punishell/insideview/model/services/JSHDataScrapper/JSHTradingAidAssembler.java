@@ -29,7 +29,6 @@ public class JSHTradingAidAssembler {
                     String jockey = runner.getJockey();
                     String trainer = runner.getTrainer();
 
-
                     if (!jockeyRidesMap.containsKey(jockey)) {
 
                         int rides = 1;
@@ -41,7 +40,7 @@ public class JSHTradingAidAssembler {
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
                             jockeyWinsMap.put(jockey, ++jockeyWins);
-                            runner.setJockeyWins(jockeyWinsMap.get(jockey));
+                            runner.setJockeyWins(jockeyWins);
                         }
 
                     } else {
@@ -54,6 +53,8 @@ public class JSHTradingAidAssembler {
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
                             jockeyWinsMap.put(jockey, ++jockeyWins);
+                            runner.setJockeyWins(jockeyWins);
+                        } else {
                             runner.setJockeyWins(jockeyWins);
                         }
                     }
@@ -82,6 +83,8 @@ public class JSHTradingAidAssembler {
 
                         if (runner.getResult().equalsIgnoreCase("won")) {
                             trainerWinsMap.put(trainer, ++trainerWins);
+                            runner.setTrainerWins(trainerWins);
+                        } else {
                             runner.setTrainerWins(trainerWins);
                         }
                     }
