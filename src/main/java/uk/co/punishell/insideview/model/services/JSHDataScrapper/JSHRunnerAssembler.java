@@ -102,7 +102,8 @@ public class JSHRunnerAssembler {
 
     private int getJshStars(Element row) {
         String starsString;
-        String srcPrefix = "/images/";
+        String srcPrefix = "/JustStartHere_files/";
+        //String srcPrefix = "/images/";
         String srcSuffix = "t.gif";
         Element starsCell = row.select(".star").first();
         if (starsCell != null) {

@@ -1,6 +1,7 @@
 package uk.co.punishell.insideview.controllers;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -14,6 +15,7 @@ import uk.co.punishell.insideview.model.services.JSHDataScrapper.WebpageScrapper
 import uk.co.punishell.insideview.view.commands.entityCommands.JSHRaceCommand;
 import uk.co.punishell.insideview.view.commands.guiCommands.TraidingAidCommand;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -38,12 +40,15 @@ public class TradingAidController {
     @GetMapping("tradingAid")
     public String getTradingAid(Model model) throws IOException {
 
+        // define login form input elements
         Map<String, String> data = new HashMap<>();
         data.put("op", "login");
         data.put("usr_login", "gavinb");
         data.put("usr_password", "passw0rd");
 
-        Document doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrl);
+        File input = new File("JustStartHere.html");
+        Document doc = Jsoup.parse(input, "UTF-8", "http://juststarthere.co.uk/");
+        // Document doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrl);
 
         Elements raceInfo = doc.getElementsByClass("race_infoback");
         Elements racebody = doc.getElementsByClass("racebody");

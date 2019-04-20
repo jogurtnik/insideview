@@ -1,31 +1,37 @@
+// import * as Cookies from "../utils/js.cookie";
+
 $(document).ready(function() {
-    // make all links with data-confirm prompt the user first.
-    $('[data-confirm]').on("click", function (e) {
-        e.preventDefault();
-        var msg = $(this).data("confirm");
-        if(confirm(msg)==true) {
-            var url = this.href;
-            if(url.length>0) window.location = url;
-            return true;
-        }
-        return false;
-    });
 
     // on certain links save the scroll postion.
-    $('.saveScrollPostion').on("click", function (e) {
+    $('.saveScrollPosition').on("click", function (e) {
         e.preventDefault();
-        var currentYOffset = window.pageYOffset;  // save current page postion.
+        let currentYOffset = window.pageYOffset;  // save current page postion.
         Cookies.set('jumpToScrollPostion', currentYOffset);
+
+        let raceTable = document.getElementById("raceTable").style.display;
+        let raceTableMin = document.getElementById("raceTableMin").style.display;
+
+        Cookies.set('raceTableStatus', raceTable);
+        Cookies.set('raceTableMinStatus', raceTableMin);
+
         if(!$(this).attr("data-confirm")) {  // if there is no data-confirm on this link then trigger the click. else we have issues.
-            var url = this.href;
+            let url = this.href;
             window.location = url;
             //$(this).trigger('click');  // continue with click event.
+            location.reload(true);
         }
     });
 
     // check if we should jump to position.
     if(Cookies.get('jumpToScrollPostion') !== "undefined") {
-        var jumpTo = Cookies.get('jumpToScrollPostion');
+
+        let raceTable = document.getElementById("raceTable");
+        let raceTableMin = document.getElementById("raceTableMin");
+
+        raceTable.style.display = Cookies.get('raceTableStatus');
+        raceTableMin.style.display = Cookies.get('raceTableMinStatus');
+
+        let jumpTo = Cookies.get('jumpToScrollPostion');
         window.scrollTo(0, jumpTo);
         Cookies.remove('jumpToScrollPostion');  // and delete cookie so we don't jump again.
     }

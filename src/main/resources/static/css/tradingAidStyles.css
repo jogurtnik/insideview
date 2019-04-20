@@ -78,6 +78,12 @@ table#raceTableMin tbody > tr:hover{
     top: -1px;
 }
 
+.sticky-general {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+
 .compact-data {
     width: 3em;
 }

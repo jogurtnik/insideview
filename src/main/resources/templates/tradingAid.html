@@ -48,9 +48,6 @@
         <link href="../static/css/select/select2.min.css" rel="stylesheet"
               th:href="@{/css/select/select2.min.css}">
 
-        <!-- jQuery -->
-        <script src="../static/js/jquery.min.js"
-                th:src="@{/vendors/js/jquery.min.js}"></script>
     </th:block>
 
 </head>
@@ -78,7 +75,16 @@
                 <!--/*@thymesVar id="jshData" type="uk.co.punishell.insideview.view.commands.guiCommands.TraidingAidCommand"*/-->
                 <p class="alert-error" th:text="${jshData.errorMessage != null}? ${jshData.errorMessage}"></p>
                 <div class="row" id="raceData" th:if="${jshData.errorMessage == null}">
-                    <button onclick="toggleTables()">Toggle tables</button>
+                    <div class="sticky-general">
+                    <a onclick="toggleTables()" class="btn btn-app">
+                        <i class="fa fa-table"></i>
+                        Toggle tables
+                    </a>
+                    <a class="btn btn-app saveScrollPosition">
+                        <i class="fa fa-refresh"></i>
+                        Refresh
+                    </a>
+                    </div>
                     <table id="raceTable" style="display: table;">
                         <thead>
                         <tr>
@@ -226,7 +232,7 @@
 
 </div>
 <th:block th:replace="fragments/navigation :: scriptsCommon">
-    <!-- JQuery -->
+    <!-- jQuery -->
     <script src="../static/js/jquery.min.js"
             th:src="@{/js/jquery.min.js}"></script>
     <!-- Bootstrap -->
@@ -242,6 +248,8 @@
 
     <script src="../static/js/datatables/tradingAid.dataTables.styles.js"
             th:src="@{/js/datatables/tradingAid.dataTables.styles.js}"></script>
+    <script src="../static/js/trading-aid/customizable-behaviour.js"
+            th:src="@{/js/trading-aid/customizable-behaviour.js}"></script>
 </div>
 </body>
 </html>
