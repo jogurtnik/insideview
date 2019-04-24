@@ -22,7 +22,7 @@ $(document).ready(function() {
                     if (cellValue > 5) {
                         cells[cellIndex].style.backgroundColor = '#99ccff';
 
-                    } else if (cellValue >= 2 && cellValue <= 5) {
+                    } else if (cellValue >= 2.5 && cellValue <= 5) {
                         cells[cellIndex].style.backgroundColor = '#ccffcc';
 
                     } else if (cellValue > 0 && cellValue < 2.5) {
@@ -101,7 +101,7 @@ $(document).ready(function() {
                     if (cellValue > 5) {
                         cells[cellIndex].style.backgroundColor = '#99ccff';
 
-                    } else if (cellValue >= 2 && cellValue <= 5) {
+                    } else if (cellValue >= 2.5 && cellValue <= 5) {
                         cells[cellIndex].style.backgroundColor = '#ccffcc';
 
                     } else if (cellValue > 0 && cellValue < 2.5) {

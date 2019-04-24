@@ -9,6 +9,7 @@ table {
     border-spacing: 2px;
     border-color: grey;
     padding: 0;
+    white-space: nowrap;
 }
 
 th, td {
