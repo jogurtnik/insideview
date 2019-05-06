@@ -49,6 +49,8 @@ public class TradingAidController {
         Elements raceInfo = doc.getElementsByClass("race_infoback");
         Elements racebody = doc.getElementsByClass("racebody");
 
+        log.debug("Loaded Races: " + raceInfo.size());
+
         TraidingAidCommand tradingAidCommand = new TraidingAidCommand();
 
         if (raceInfo != null &&
