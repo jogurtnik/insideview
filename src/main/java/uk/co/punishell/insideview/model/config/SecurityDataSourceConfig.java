@@ -14,6 +14,7 @@ import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
+import java.util.Objects;
 
 @Slf4j
 @Configuration
@@ -49,10 +50,10 @@ public class SecurityDataSourceConfig {
         securityDataSource.setPassword(dataSourceProperties.getPassword());
 
         // set connection pool props
-        securityDataSource.setInitialPoolSize(Integer.parseInt(env.getProperty("connection.pool.initialPoolSize")));
-        securityDataSource.setMinPoolSize(Integer.parseInt(env.getProperty("connection.pool.minPoolSize")));
-        securityDataSource.setMaxPoolSize(Integer.parseInt(env.getProperty("connection.pool.maxPoolSize")));
-        securityDataSource.setMaxIdleTime(Integer.parseInt(env.getProperty("connection.pool.maxIdleTime")));
+        securityDataSource.setInitialPoolSize(Integer.parseInt(Objects.requireNonNull(env.getProperty("connection.pool.initialPoolSize"))));
+        securityDataSource.setMinPoolSize(Integer.parseInt(Objects.requireNonNull(env.getProperty("connection.pool.minPoolSize"))));
+        securityDataSource.setMaxPoolSize(Integer.parseInt(Objects.requireNonNull(env.getProperty("connection.pool.maxPoolSize"))));
+        securityDataSource.setMaxIdleTime(Integer.parseInt(Objects.requireNonNull(env.getProperty("connection.pool.maxIdleTime"))));
 
         return securityDataSource;
     }

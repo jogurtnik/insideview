@@ -1,3 +1,7 @@
+body#trading-aid {
+    background: #FFFFFF;
+}
+
 div#raceData {
     text-align: left;
     width: 100%;
@@ -55,7 +59,7 @@ thead {
 }
 
 table#raceTable tbody > tr:hover{
-   /*background-color: #c3dfff;*/
+    /*background-color: #c3dfff;*/
     border: 1px solid black;
 }
 
@@ -83,6 +87,7 @@ table#raceTableMin tbody > tr:hover{
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .compact-data {
@@ -112,4 +117,8 @@ table#raceTableMin tbody > tr:hover{
 
 .centered {
     text-align: center;
+}
+
+.stars {
+    width: 8em;
 }

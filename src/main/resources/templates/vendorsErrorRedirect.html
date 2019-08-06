@@ -9,7 +9,7 @@
     <link rel="icon" href="../favicon.ico" type="image/ico"
           th:href="@{/images/favicon.ico}"/>
 
-    <title>400 Bad Gateway</title>
+    <title>Vendors Error</title>
 
     <!-- Bootstrap -->
     <link href="../static/css/bootstrap.css" rel="stylesheet"
@@ -37,14 +37,22 @@
         <div th:replace="fragments/navigation :: topNavigationMenu"></div>
 
 
-        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.FileUploadException" */ -->
+        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.VendorsException" */ -->
         <div class="right_col" role="main">
 
-            <h1>400: BAD GATEWAY</h1>
+            <h1>Vendors Error</h1>
 
             <!--/*@thymesVar id="message" type="java.lang.String"*/-->
             <p th:text="${message}">ERROR_MESSAGE_STRING</p>
+            <p>The application will try to reconnect in 5 seconds...</p>
         </div>
+
+        <script>
+            let redirect = function() {
+                window.location.href = "/tradingAid";
+            };
+            setTimeout(redirect, 5000);
+        </script>
 
     </div>
 
@@ -53,10 +61,10 @@
 <script src="../static/js/jquery.min.js"
         th:src="@{/js/jquery.min.js}"></script>
 <!-- Bootstrap -->
-<script src="../static/js/bootstrap.min.js"
+<script src="../static/js/bootstrap.js"
         th:src="@{/js/bootstrap.min.js}"></script>
 <!-- Custom Theme Scripts -->
-<script src="../static/js/custom.min.js"
+<script src="../static/js/custom.js"
         th:src="@{/js/custom.min.js}"></script>
 </body>
 </html>

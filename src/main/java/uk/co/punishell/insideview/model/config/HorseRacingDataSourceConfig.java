@@ -47,7 +47,7 @@ public class HorseRacingDataSourceConfig {
                 builder
                         .dataSource(dataSource)
                         .packages("uk.co.punishell.insideview.model.database.entities")
-                        .persistenceUnit("horseracingdb")
+                        .persistenceUnit("horse_racing")
                         .properties(properties)
                         .build();
 

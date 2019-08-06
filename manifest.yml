@@ -1,6 +1,6 @@
 applications:
   - name: smart-edge-systems-app
-    buildpack: https://github.com/cloudfoundry/java-buildpack.git#v4.16
+    buildpacks: https://github.com/cloudfoundry/java-buildpack.git#v4.16
     path: target/insideview-0.0.1-SNAPSHOT.jar
     memory: 2g
     env:
