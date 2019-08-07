@@ -15,7 +15,6 @@ public class RunnerServiceImpl implements RunnerService {
 
     private final RunnerRepository runnerRepository;
     private final HorseService horseService;
-    private final String tm = "horseRacingTransactionManager";
 
     public RunnerServiceImpl(RunnerRepository runnerRepository,
                              HorseService horseService) {
@@ -25,7 +24,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Set<Runner> getRunners() {
 
         Set<Runner> runners = new HashSet<>();
@@ -36,7 +35,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Runner findById(Long id) {
 
         Optional<Runner> runnerOptional = runnerRepository.findById(id);
@@ -50,7 +49,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Runner save(Runner runner) {
 
         Horse savedHorse = horseService.save(runner.getHorse());
@@ -68,7 +67,7 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public List<Runner> saveAll(List<Runner> runners) {
 
         List<Runner> savedRunners = new ArrayList<>();
@@ -79,14 +78,14 @@ public class RunnerServiceImpl implements RunnerService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public void delete(Runner runner) {
 
         runnerRepository.delete(runner);
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public void deleteById(Long id) {
 
         runnerRepository.deleteById(id);

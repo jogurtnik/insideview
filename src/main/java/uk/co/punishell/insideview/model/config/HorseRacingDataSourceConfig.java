@@ -6,6 +6,7 @@ import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -33,7 +34,8 @@ public class HorseRacingDataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean(name = "horseRacingEntityManagerFactory")
+    @Bean
+    @Primary
     public LocalContainerEntityManagerFactoryBean horseRacingEntityManagerFactory(
             EntityManagerFactoryBuilder builder,
             @Qualifier("horseRacingDataSource") DataSource dataSource) {
@@ -53,9 +55,9 @@ public class HorseRacingDataSourceConfig {
 
     }
 
-    @Bean(name = "horseRacingTransactionManager")
-    public PlatformTransactionManager horseRacingTransactionManager(
-            @Qualifier("horseRacingEntityManagerFactory") EntityManagerFactory horseRacingEntityManagerFactory) {
+    @Bean
+    @Primary
+    public PlatformTransactionManager horseRacingTransactionManager(EntityManagerFactory horseRacingEntityManagerFactory) {
 
         return new JpaTransactionManager(horseRacingEntityManagerFactory);
     }

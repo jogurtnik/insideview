@@ -27,24 +27,30 @@ function init_DataTables() {
         {
             extend: "print",
             className: "btn-sm"
-        },
+        }
     ];
 
-    $('#dataTableRace').DataTable({
-
+    let raceDataTableProps = {
         dom: domCommand,
         buttons: buttonsMap,
 
         rowCallback: raceCellsColorFormatting
+    };
 
-    });
-
-    $('#dataTableRunners').DataTable({
+    let runnerDataTableProps = {
         "ordering": false,
         dom: domCommand,
         buttons: buttonsMap,
         rowCallback: runnerCellsColorFormatting
+    };
+
+    $('.dataTableRace').each(function () {
+        $(this).DataTable(raceDataTableProps);
     });
+
+    // $('#dataTableRace').DataTable(raceDataTableProps);
+
+    $('#dataTableRunners').DataTable(runnerDataTableProps);
 
     function raceCellsColorFormatting(row, data) {
 

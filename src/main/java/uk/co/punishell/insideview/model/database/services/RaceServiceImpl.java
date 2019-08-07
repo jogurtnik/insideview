@@ -20,7 +20,6 @@ public class RaceServiceImpl implements RaceService {
 
     private final RaceRepository raceRepository;
     private final RunnerService runnerService;
-    private final String tm = "horseRacingTransactionManager";
 
     @Autowired
     public RaceServiceImpl(RaceRepository raceRepository,
@@ -31,7 +30,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Set<Race> getRaces() {
 
         Set<Race> races = new HashSet<>();
@@ -42,7 +41,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Race findById(Long id) {
 
         Optional<Race> raceOptional = raceRepository.findById(id);
@@ -55,7 +54,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Set<Race> findByDate(LocalDate date) {
 
         Set<Race> races = raceRepository.findByLocalDate(date);
@@ -68,7 +67,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Race save(Race race) {
 
         long startTime = System.currentTimeMillis();
@@ -102,7 +101,7 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public Set<Race> saveAll(List<Race> races) {
 
         Set<Race> savedRaces = new HashSet<>();
@@ -113,14 +112,14 @@ public class RaceServiceImpl implements RaceService {
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public void delete(Race race) {
 
         raceRepository.delete(race);
     }
 
     @Override
-    @Transactional(tm)
+    @Transactional
     public void deleteById(Long id) {
 
         raceRepository.deleteById(id);
