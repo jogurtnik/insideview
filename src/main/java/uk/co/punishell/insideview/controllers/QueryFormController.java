@@ -43,7 +43,7 @@ public class QueryFormController {
                                HttpSession session) throws BindingFormException {
 
         if (bindingResult.hasErrors()) {
-            throw new BindingFormException("At least one of the number fields in the query form was blank instead of zero.");
+            throw new BindingFormException("There has been unidentified issue while processing the query form.");
         }
 
         RaceSearchResult raceSearchResult = raceSearchEngine.search(raceSearch);
