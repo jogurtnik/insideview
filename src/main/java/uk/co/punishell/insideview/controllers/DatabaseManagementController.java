@@ -61,7 +61,7 @@ public class DatabaseManagementController {
                     validatedFiles.add(f);
                 }
             } catch (IOException e) {
-                throw new FileUploadException("File is not in compatible MS Excel format.");
+                throw new FileUploadException("File is not in compatible with MS Excel format.");
             }
 
         }
@@ -91,7 +91,7 @@ public class DatabaseManagementController {
 
             races.stream().forEach(race -> existingDatesSet.add(race.getLocalDate()));
             List<LocalDate> existingDates = new ArrayList<>();
-            existingDatesSet.stream().forEach(date -> existingDates.add(date));
+            existingDates.addAll(existingDatesSet);
             Collections.sort(existingDates);
 
             List<LocalDate> missingDates = new ArrayList<>();
@@ -151,7 +151,7 @@ public class DatabaseManagementController {
                     throw new FileUploadException("File is empty or the path to the file is invalid.");
                 }
             } else {
-                throw new FileUploadException("You failed to upload because the file was empty.");
+                throw new FileUploadException("You failed to upload the data because the file was empty.");
             }
 
         }

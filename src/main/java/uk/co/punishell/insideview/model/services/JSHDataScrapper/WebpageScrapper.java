@@ -18,9 +18,7 @@ public class WebpageScrapper {
 
     public Document getWebpage(String url) throws IOException {
 
-        Document document = Jsoup.connect(url).get();
-
-        return document;
+        return Jsoup.connect(url).get();
     }
 
     public Document loginAndGetWebpage(String loginUrl, Map<String, String> loginFormData, String targetUrl)
@@ -41,9 +39,7 @@ public class WebpageScrapper {
                 .followRedirects(followRedirects)
                 .execute();
 
-        Document document = res.parse();
-
-        return document;
+        return res.parse();
     }
 
     public int getConnectionTimeout() {

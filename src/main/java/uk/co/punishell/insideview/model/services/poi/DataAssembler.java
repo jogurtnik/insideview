@@ -50,7 +50,7 @@ public class DataAssembler {
         // iteration will start from second row
         int rowIndex = 1;
 
-        Sheet sheet = new WorkbookFactory().create(file).getSheetAt(dataFormat.getDefaultSheetNumber());
+        Sheet sheet = WorkbookFactory.create(file).getSheetAt(dataFormat.getDefaultSheetNumber());
 
         Iterator<Row> iterator = sheet.rowIterator();
 

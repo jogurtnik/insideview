@@ -20,7 +20,6 @@ public class RaceSpecification implements Specification<Race> {
         this.criteria = criteria;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public Predicate toPredicate(Root<Race> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 

@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
+import uk.co.punishell.insideview.model.exceptions.BindingFormException;
 import uk.co.punishell.insideview.model.exceptions.FileUploadException;
 import uk.co.punishell.insideview.model.exceptions.VendorsException;
 
@@ -11,10 +12,10 @@ import uk.co.punishell.insideview.model.exceptions.VendorsException;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(BindingFormException.class)
     public ModelAndView handleBindingError(Exception exception) {
 
-        log.error("External Error");
+        log.error("BINDING FORM EXCEPTION");
         log.error(exception.getMessage());
         exception.printStackTrace();
 
@@ -42,7 +43,8 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(FileUploadException.class)
     public ModelAndView handleFileUploadError(Exception exception) {
 
-        log.error("FILE UPLOAD ERROR! " + exception.getMessage());
+        log.error("FILE UPLOAD ERROR! ");
+        log.error(exception.getMessage());
 
         ModelAndView modelAndView = new ModelAndView();
 

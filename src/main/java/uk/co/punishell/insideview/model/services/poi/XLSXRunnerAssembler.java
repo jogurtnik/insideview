@@ -58,10 +58,8 @@ public class XLSXRunnerAssembler {
         int stars = xlsxRunnerDataReader.getStars(row);
         int naps = xlsxRunnerDataReader.getNaps(row);
 
-        Runner runner = new Runner(horse, status, price9, price10, price11, mov9to11, price60, mov60, price30, mov30,
-                                   price15, mov15, price5, mov5, price3, mov3, price2, mov2, price1, mov1, mean, mov3to1,
-                                   winner, placed, cpr, nptips, stars, naps);
-
-        return runner;
+        return new Runner(horse, status, price9, price10, price11, mov9to11, price60, mov60, price30, mov30,
+                price15, mov15, price5, mov5, price3, mov3, price2, mov2, price1, mov1, mean, mov3to1,
+                winner, placed, cpr, nptips, stars, naps);
     }
 }

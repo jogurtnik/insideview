@@ -134,10 +134,7 @@ public class XLSXRunnerDataReader {
 
         if (row.getCell(26) != null) {
 
-            if (row.getCell(26).getStringCellValue().contains("Winner")) {
-
-                return true;
-            }
+            return row.getCell(26).getStringCellValue().contains("Winner");
         }
 
         return false;
@@ -145,11 +142,7 @@ public class XLSXRunnerDataReader {
 
     public boolean isPlaced(Row row) {
 
-        if (row.getCell(26) == null) {
-            return false;
-        }
-
-        return true;
+        return row.getCell(26) != null;
     }
 
     public int getCpr(Row row) {

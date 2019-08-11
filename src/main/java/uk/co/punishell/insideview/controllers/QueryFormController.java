@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import uk.co.punishell.insideview.model.database.services.RaceSearchEngine;
 import uk.co.punishell.insideview.model.database.services.RunnerSearchEngine;
+import uk.co.punishell.insideview.model.exceptions.BindingFormException;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearch;
 import uk.co.punishell.insideview.view.commands.guiCommands.RaceSearchResult;
 import uk.co.punishell.insideview.view.commands.guiCommands.RunnerSeachResult;
@@ -31,7 +32,7 @@ public class QueryFormController {
     }
 
     @GetMapping({"query", "query.html"})
-    public String getQueryPage(HttpSession session) {
+    public String getQueryPage() {
 
         return "query";
     }
@@ -55,14 +56,23 @@ public class QueryFormController {
     @PostMapping("performRunnerQuery")
     public String performRunnerQuery(@ModelAttribute("runnerSearch") @Valid RunnerSearch runnerSearch,
                                      BindingResult bindingResult,
-                                     HttpSession session) throws Exception {
+                                     HttpSession session) throws BindingFormException {
         if (bindingResult.hasErrors()) {
-            throw new Exception("At least one of the number fields in the query form was blank instead of zero.");
+            throw new BindingFormException("There has been unidentified issue while processing the query form.");
         }
 
         RunnerSeachResult runnerSeachResult = runnerSearchEngine.search(runnerSearch);
 
         session.setAttribute("runnerSearchResult", runnerSeachResult);
+
+        return "redirect:/query";
+    }
+
+    @RequestMapping({"clearRaceAndRunnerForms", "/clearRaceAndRunnerForms"})
+    public String clearRaceAndRunnerForms(HttpSession session) {
+
+        session.setAttribute("raceSearch", new RaceSearch());
+        session.setAttribute("runnerSearch", new RunnerSearch());
 
         return "redirect:/query";
     }
@@ -75,8 +85,7 @@ public class QueryFormController {
     }
 
     @RequestMapping({"clearRaceResults", "/clearRaceResults"})
-    public String clearRaceResutls(@ModelAttribute("raceSearchResult") RaceSearchResult raceSearchResult,
-                                   HttpSession session) {
+    public String clearRaceResults(HttpSession session) {
         session.setAttribute("raceSearchResult", null);
         return "redirect:/query";
     }

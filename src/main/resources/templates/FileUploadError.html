@@ -42,9 +42,24 @@
         <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.FileUploadException" */ -->
         <div class="right_col" role="main">
 
-            <h1>FILE UPLOAD ERROR</h1>
+            <h1>File upload error</h1>
 
-            <p th:text="'ERROR MESSAGE: ' + ${exception.getMessage()}">ERROR_MESSAGE_STRING</p>
+            <p th:text="${exception.getMessage()}">ERROR_MESSAGE_STRING</p>
+
+            <p>You will be redirected in 5 seconds...</p>
+
+            <script>
+                let redirect = function() {
+                    window.location.href = "/databaseManagement";
+                };
+                setTimeout(redirect, 5000);
+            </script>
+            <div onclick="redirect()" class="fa-hover">
+                <a href="#">
+                    Take me there now
+                    <i class="fa fa-long-arrow-right"></i>
+                </a>
+            </div>
         </div>
 
     </div>

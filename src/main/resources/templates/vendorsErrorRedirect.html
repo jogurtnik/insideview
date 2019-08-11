@@ -45,14 +45,23 @@
             <!--/*@thymesVar id="message" type="java.lang.String"*/-->
             <p th:text="${message}">ERROR_MESSAGE_STRING</p>
             <p>The application will try to reconnect in 5 seconds...</p>
+
+            // Redirection script
+            <script>
+                let redirect = function() {
+                    window.location.href = "/tradingAid";
+                };
+                setTimeout(redirect, 5000);
+            </script>
+            <div onclick="redirect()" class="fa-hover">
+                <a href="#">
+                    Take me there now
+                    <i class="fa fa-long-arrow-right"></i>
+                </a>
+            </div>
         </div>
 
-        <script>
-            let redirect = function() {
-                window.location.href = "/tradingAid";
-            };
-            setTimeout(redirect, 5000);
-        </script>
+
 
     </div>
 

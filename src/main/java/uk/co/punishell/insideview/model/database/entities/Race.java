@@ -70,9 +70,7 @@ public class Race extends BaseEntity implements Comparable<Race> {
         if (getLocalDate().isEqual(race.getLocalDate())) {
             if (getTime().equals(race.getTime())) {
                 if (getCountry().equalsIgnoreCase(race.getCountry())) {
-                    if (getCity().equalsIgnoreCase(race.getCity())) {
-                        return true;
-                    } else return false;
+                    return getCity().equalsIgnoreCase(race.getCity());
                 } else return false;
             } else return false;
         } else return false;
