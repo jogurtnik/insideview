@@ -12,6 +12,19 @@ import uk.co.punishell.insideview.model.exceptions.VendorsException;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
+    @ExceptionHandler(Exception.class)
+    public ModelAndView handleUnknownException(Exception exception) {
+        log.error(">> UNEXPECTED EXCEPTION <<<");
+        log.error(exception.getMessage());
+        exception.printStackTrace();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
     @ExceptionHandler(BindingFormException.class)
     public ModelAndView handleBindingError(Exception exception) {
 

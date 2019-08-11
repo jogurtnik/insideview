@@ -40,13 +40,16 @@
         <div th:replace="fragments/navigation :: topNavigationMenu"></div>
 
 
-        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.FileUploadException" */ -->
+        <!-- /* @thymesVar id="exception" type="java.lang.Exception" */ -->
         <div class="right_col" role="main">
 
-            <h1>404: NOT FOUND</h1>
+            <h3>The error occurred.</h3>
 
             <!--/*@thymesVar id="message" type="java.lang.String"*/-->
-            <p th:text="${message}">ERROR_MESSAGE_STRING</p>
+            <p>Unclassified exception occurred during application runtime. Please notify the developer.</p>
+            <p> Sending the stacktrace provided below is all that is needed for debugging.</p>
+
+            <p th:text="${exception.printStackTrace()}"></p>
         </div>
 
     </div>
@@ -58,7 +61,7 @@
             th:src="@{/js/jquery.min.js}"></script>
     <!-- Bootstrap -->
     <script src="../static/js/bootstrap.js"
-            th:src="@{/js/bootstrap.min.js}"></script>
+            th:src="@{/js/bootstrap.js}"></script>
     <!-- Custom Theme Scripts -->
     <script src="../static/js/custom.js"
             th:src="@{/js/custom.js}"></script>
