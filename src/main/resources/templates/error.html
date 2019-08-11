@@ -49,7 +49,20 @@
             <p>Unclassified exception occurred during application runtime. Please notify the developer.</p>
             <p> Sending the stacktrace provided below is all that is needed for debugging.</p>
 
-            <p th:text="${exception.printStackTrace()}"></p>
+            <script>
+                function copyStackTrace() {
+                    var copyText = document.getElementById("stackTrace");
+                    copyText.select();
+                    document.execCommand("copy");
+                }
+            </script>
+            <div onclick="copyStackTrace()" class="fa-hover">
+                <a href="#">
+                    Copy to clipboard
+                    <i class="fa fa-copy"></i>
+                </a>
+            </div>
+            <p id="stackTrace" th:text="${exception.printStackTrace()}"></p>
         </div>
 
     </div>
