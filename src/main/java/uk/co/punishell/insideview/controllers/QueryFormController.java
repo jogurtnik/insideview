@@ -40,10 +40,10 @@ public class QueryFormController {
     @PostMapping("performRaceQuery")
     public String performRaceQuery(@ModelAttribute("raceSearch") @Valid RaceSearch raceSearch,
                                BindingResult bindingResult,
-                               HttpSession session) throws Exception {
+                               HttpSession session) throws BindingFormException {
 
         if (bindingResult.hasErrors()) {
-            throw new Exception("At least one of the number fields in the query form was blank instead of zero.");
+            throw new BindingFormException("At least one of the number fields in the query form was blank instead of zero.");
         }
 
         RaceSearchResult raceSearchResult = raceSearchEngine.search(raceSearch);
