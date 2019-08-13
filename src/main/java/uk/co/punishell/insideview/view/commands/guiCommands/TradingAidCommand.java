@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class TraidingAidCommand {
+public class TradingAidCommand {
 
     private List<JSHRaceCommand> races = new ArrayList<>();
     private String errorMessage;

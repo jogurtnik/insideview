@@ -62,7 +62,9 @@
                     <i class="fa fa-copy"></i>
                 </a>
             </div>
-            <p id="stackTrace" th:text="${exception.printStackTrace()}"></p>
+            <th:block th:if="${exception != null}">
+                <p id="stackTrace" th:text="${exception.printStackTrace()}"></p>
+            </th:block>
         </div>
 
     </div>
