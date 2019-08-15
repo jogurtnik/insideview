@@ -14,7 +14,7 @@
 
         <!-- Bootstrap -->
         <link href="../static/css/bootstrap.css" rel="stylesheet"
-              th:href="@{/css/bootstrap.min.css}"/>
+              th:href="@{/css/bootstrap.css}"/>
         <!-- Font Awesome -->
         <link href="../static/css/font-awesome.min.css" rel="stylesheet"
               th:href="@{/css/font-awesome.min.css}"/>
@@ -40,7 +40,7 @@
         <div th:replace="fragments/navigation :: topNavigationMenu"></div>
 
 
-        <!-- /* @thymesVar id="exception" type="java.lang.Exception" */ -->
+
         <div class="right_col" role="main">
 
             <h3>The error occurred.</h3>
@@ -49,6 +49,14 @@
             <p>Unclassified exception occurred during application runtime. Please notify the developer.</p>
             <p> Sending the stacktrace provided below is all that is needed for debugging.</p>
 
+
+            <div onclick="copyStackTrace()" class="fa-hover">
+                <a href="#">
+                    Copy to clipboard
+                    <i class="fa fa-copy"></i>
+                </a>
+            </div>
+
             <script>
                 function copyStackTrace() {
                     var copyText = document.getElementById("stackTrace");
@@ -56,15 +64,10 @@
                     document.execCommand("copy");
                 }
             </script>
-            <div onclick="copyStackTrace()" class="fa-hover">
-                <a href="#">
-                    Copy to clipboard
-                    <i class="fa fa-copy"></i>
-                </a>
-            </div>
-            <th:block th:if="${exception != null}">
-                <p id="stackTrace" th:text="${exception.printStackTrace()}"></p>
-            </th:block>
+
+            <!-- /* @thymesVar id="exception" type="java.lang.Exception" */ -->
+            <p id="stackTrace" th:text="${exception.stackTrace}">
+            </p>
         </div>
 
     </div>

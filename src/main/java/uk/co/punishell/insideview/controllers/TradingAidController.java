@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import uk.co.punishell.insideview.model.exceptions.VendorsException;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHRaceAssembler;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHTradingAidAssembler;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.WebpageScrapper;
@@ -57,7 +56,6 @@ public class TradingAidController {
 
         TradingAidCommand jshData = getJshData();
 
-        log.debug("INSIDE EXPORT_TO_EXCEL METHOD");
         log.debug(jshData.getRaces().get(0).getGeneralInfo());
 
         // create a new file
@@ -174,7 +172,7 @@ public class TradingAidController {
 
     }
 
-    private TradingAidCommand getJshData() throws IOException {
+    private TradingAidCommand getJshData() {
 
         // define login form input elements
         Map<String, String> data = new HashMap<>();
@@ -183,11 +181,7 @@ public class TradingAidController {
         data.put("usr_password", "passw0rd");
 
         Document doc;
-        try {
-            doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrl);
-        } catch (VendorsException e) {
-            throw new VendorsException("Unfortunately the application wasn't able to retrieve data from the vendors.");
-        }
+        doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrl);
 
 
         Elements raceInfo = doc.getElementsByClass("race_infoback");

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import uk.co.punishell.insideview.model.exceptions.BindingFormException;
 import uk.co.punishell.insideview.model.exceptions.FileUploadException;
-import uk.co.punishell.insideview.model.exceptions.VendorsException;
+import uk.co.punishell.insideview.model.exceptions.VendorsConnectionException;
 
 @Slf4j
 @ControllerAdvice
@@ -14,12 +14,23 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ModelAndView handleUnknownException(Exception exception) {
-        log.error(">> UNEXPECTED EXCEPTION <<<");
         log.error(exception.getMessage());
         exception.printStackTrace();
 
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
+    @ExceptionHandler(VendorsConnectionException.class)
+    public ModelAndView handleJshConnectionTimeoutException (Exception exception) {
+        log.error(exception.getMessage());
+        exception.printStackTrace();
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("vendorsErrorRedirect");
         modelAndView.addObject("exception", exception);
 
         return modelAndView;
@@ -34,20 +45,7 @@ public class ControllerExceptionHandler {
 
         ModelAndView modelAndView = new ModelAndView();
 
-        modelAndView.setViewName("bindingError");
-        modelAndView.addObject("exception", exception);
-
-        return modelAndView;
-    }
-
-    @ExceptionHandler(VendorsException.class)
-    public ModelAndView handleVendorsException(Exception exception) {
-        ModelAndView modelAndView = new ModelAndView();
-
-        log.error("VENDORS ERROR ");
-        exception.printStackTrace();
-
-        modelAndView.setViewName("vendorsErrorRedirect");
+        modelAndView.setViewName("formProcessingError");
         modelAndView.addObject("exception", exception);
 
         return modelAndView;

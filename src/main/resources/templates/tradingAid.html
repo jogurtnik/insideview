@@ -55,7 +55,7 @@
 <!--/*@thymesVar id="jshData" type="uk.co.punishell.insideview.view.commands.guiCommands.TradingAidCommand"*/-->
 <p class="alert-error" th:text="${jshData.errorMessage != null}? ${jshData.errorMessage}"></p>
 <div class="row" id="raceData" th:if="${jshData.errorMessage == null}">
-    <div>
+    <div class="top-right">
         <a th:href="@{'exportToExcel'}" class="btn btn-app">
             <i class="fa fa-file-excel-o"></i>
             Export to Excel

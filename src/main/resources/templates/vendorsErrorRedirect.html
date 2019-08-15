@@ -37,16 +37,15 @@
         <div th:replace="fragments/navigation :: topNavigationMenu"></div>
 
 
-        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.VendorsException" */ -->
+        <!-- /* @thymesVar id="exception" type="uk.co.punishell.insideview.model.exceptions.VendorsConnectionException" */ -->
         <div class="right_col" role="main">
 
             <h1>Vendors Error</h1>
 
             <!--/*@thymesVar id="message" type="java.lang.String"*/-->
-            <p th:text="${message}">ERROR_MESSAGE_STRING</p>
+            <p th:text="${exception.message}">ERROR_MESSAGE_STRING</p>
             <p>The application will try to reconnect in 5 seconds...</p>
 
-            // Redirection script
             <script>
                 let redirect = function() {
                     window.location.href = "/tradingAid";
@@ -71,7 +70,7 @@
         th:src="@{/js/jquery.min.js}"></script>
 <!-- Bootstrap -->
 <script src="../static/js/bootstrap.js"
-        th:src="@{/js/bootstrap.min.js}"></script>
+        th:src="@{/js/bootstrap.js}"></script>
 <!-- Custom Theme Scripts -->
 <script src="../static/js/custom.js"
         th:src="@{/js/custom.min.js}"></script>
