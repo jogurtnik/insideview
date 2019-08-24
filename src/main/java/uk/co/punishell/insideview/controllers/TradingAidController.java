@@ -4,9 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.ComparisonOperator;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -73,7 +71,7 @@ public class TradingAidController {
         TradingAidCommand jshData = getJshData();
 
         // create a new file
-        FileOutputStream outExcel = new FileOutputStream("workbook.xls");
+        FileOutputStream outExcel = new FileOutputStream("workbook");
         // create a new workbook
         HSSFWorkbook workbook = new HSSFWorkbook();
         // create a new sheet
@@ -81,15 +79,8 @@ public class TradingAidController {
 
         sheet.setDefaultColumnWidth(7);
 
-        // TODO create style for header cells
-        HSSFCellStyle style = workbook.createCellStyle();
-        Font font = workbook.createFont();
-        font.setFontName("Arial");
-        font.setBold(true);
-        style.setFont(font);
-
         // create header row
-        Row header = sheet.createRow(0);
+        HSSFRow header = sheet.createRow(0);
         header.createCell(0).setCellValue("Horse");
         header.createCell(1).setCellValue("9am");
         header.createCell(2).setCellValue("MovAM");
@@ -129,9 +120,10 @@ public class TradingAidController {
         int rowIndex = 1;
         for (JSHRaceCommand race : jshData.getRaces()) {
 
-            Row row = sheet.createRow(rowIndex);
-            row.createCell(0).setCellValue(race.getGeneralInfo());
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, 24));
+            HSSFRow row = sheet.createRow(rowIndex);
+            HSSFCell cell = row.createCell(0);
+            cell.setCellValue(race.getGeneralInfo());
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, 34));
 
             rowIndex++;
 
@@ -182,8 +174,6 @@ public class TradingAidController {
         for (int i = 0; i < 34; i++) {
             sheet.autoSizeColumn(i);
         }
-
-        header.setRowStyle(style);
 
         // Movement formatting
         HSSFSheetConditionalFormatting conditionalFormattingLayer = sheet.getSheetConditionalFormatting();
@@ -298,7 +288,7 @@ public class TradingAidController {
         Date today = new Date();
         response.setHeader("Content-disposition", "attachment; filename=" + "trading-aid-" + dateFormat.format(today) + ".xls");
 
-        FileInputStream inputStream = new FileInputStream(new File("workbook.xls"));
+        FileInputStream inputStream = new FileInputStream(new File("workbook"));
 
         OutputStream outputStream = response.getOutputStream();
 
