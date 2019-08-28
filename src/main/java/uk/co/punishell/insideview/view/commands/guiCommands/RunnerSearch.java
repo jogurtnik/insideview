@@ -1,18 +1,33 @@
 package uk.co.punishell.insideview.view.commands.guiCommands;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
-@NoArgsConstructor
 public class RunnerSearch extends Criteria {
+
+    public RunnerSearch() {
+        this.movementsColorsMap.put("blueMovementMin", 5.01);
+
+        this.movementsColorsMap.put("greenMovementMin",2.5);
+        this.movementsColorsMap.put("greenMovementMax", 5.0);
+
+        this.movementsColorsMap.put("yellowMovementMin", 0.01);
+        this.movementsColorsMap.put("yellowMovementMax", 2.49);
+
+        this.movementsColorsMap.put("orangeMovementMin", -2.49);
+        this.movementsColorsMap.put("orangeMovementMax", -0.01);
+
+        this.movementsColorsMap.put("pinkMovementMax", -2.5);
+    }
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate localDateSince = LocalDate.MIN;
@@ -22,6 +37,10 @@ public class RunnerSearch extends Criteria {
 
     private String[] weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private List<String> selectedWeekDays = new ArrayList<>();
+
+    Map<String, Double> movementsColorsMap = new HashMap<>();
+
+    private String[] colors = {"", "blue", "green", "yellow", "orange", "pink"};
 
     private double price9Min = 0;
     private double price9Max = 0;
@@ -34,6 +53,10 @@ public class RunnerSearch extends Criteria {
 
     private double mov9to11Min = 0;
     private double mov9to11Max = 0;
+
+    private String mov9to11Color = "";
+    private int mov9to11CountPerRace = 0;
+    private int mov9to11FavPos = 0;
 
     private double price60Min = 0;
     private double price60Max = 0;
@@ -82,6 +105,15 @@ public class RunnerSearch extends Criteria {
 
     private double mov3to1Min = 0;
     private double mov3to1Max = 0;
+
+    private String allDayMovsColor = "";
+    private String lastThreeMovsColor = "";
+    private int allDayMovsCount = 0;
+    private int allDayMovsCountPerRace = 0;
+    private int lastThreeMovsCount = 0;
+    private int lastThreeMovsCountPerRace = 0;
+
+    private int favouritePlaceAmongColors = 0;
 
     private String result = "all";
 

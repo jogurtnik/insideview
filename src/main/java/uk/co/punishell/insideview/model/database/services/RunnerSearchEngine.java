@@ -243,9 +243,309 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
                     queryResult.remove(runner);
                 }
             }
+
+            // remove runners which are not meeting all day movements spec
+            String allDayMovsColor = criteria.getAllDayMovsColor();
+            if (!allDayMovsColor.isEmpty()) {
+                if (this.countAllDayMovements(runner, criteria) != criteria.getAllDayMovsCount()) {
+                    queryResult.remove(runner);
+                }
+            }
+
+            String mov9to11Color = criteria.getMov9to11Color();
+            int mov9to11CountPerRace = criteria.getMov9to11CountPerRace();
+            if (!mov9to11Color.isEmpty()) {
+                if (mov9to11CountPerRace != 0) {
+                    List<Runner> movers = new ArrayList<>();
+                    int count = 0;
+                    double runnerMov9to11 = runner.getMov9to11();
+                    for (Runner raceRunner : raceRunners) {
+                        double raceRunnerMov9to11 = raceRunner.getMov9to11();
+                        if (mov9to11Color.equalsIgnoreCase("blue")) {
+                            double blueMovementMin = criteria.getMovementsColorsMap().get("blueMovementMin");
+                            if (!(runnerMov9to11 >= blueMovementMin)) {
+                                queryResult.remove(runner);
+                            } else if (raceRunnerMov9to11 >= blueMovementMin) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        } else if (mov9to11Color.equalsIgnoreCase("green")) {
+                            double greenMovementMin = criteria.getMovementsColorsMap().get("greenMovementMin");
+                            double greenMovementMax = criteria.getMovementsColorsMap().get("greenMovementMax");
+                            if (!(runnerMov9to11 <= greenMovementMax && runnerMov9to11 >= greenMovementMin)) {
+                                queryResult.remove(runner);
+                            } else if (raceRunnerMov9to11 <= greenMovementMax && raceRunnerMov9to11 >= greenMovementMin) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        } else if (mov9to11Color.equalsIgnoreCase("yellow")) {
+                            double yellowMovementMin = criteria.getMovementsColorsMap().get("yellowMovementMax");
+                            double yellowMovementMax = criteria.getMovementsColorsMap().get("yellowMovementMin");
+                            if (!(runnerMov9to11 <= yellowMovementMax && runnerMov9to11 >= yellowMovementMin)) {
+                                queryResult.remove(runner);
+                            }  else if (raceRunnerMov9to11 <= yellowMovementMin && raceRunnerMov9to11 >= yellowMovementMax) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        } else if (mov9to11Color.equalsIgnoreCase("orange")) {
+                            double orangeMovementMin = criteria.getMovementsColorsMap().get("orangeMovementMax");
+                            double orangeMovementMax = criteria.getMovementsColorsMap().get("orangeMovementMin");
+                            if (!(runnerMov9to11 <= orangeMovementMax && runnerMov9to11 >= orangeMovementMin)) {
+                                queryResult.remove(runner);
+                            } else if (raceRunnerMov9to11 <= orangeMovementMax && raceRunnerMov9to11 >= orangeMovementMin) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        } else if (mov9to11Color.equalsIgnoreCase("pink")) {
+                            double pinkMovementMax = criteria.getMovementsColorsMap().get("pinkMovementMax");
+                            if (!(runnerMov9to11 <= pinkMovementMax)) {
+                                queryResult.remove(runner);
+                            } else if (raceRunnerMov9to11 <= pinkMovementMax) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        }
+                    }
+                    if (count != mov9to11CountPerRace) {
+                        queryResult.remove(runner);
+                    } else {
+                        Collections.sort(movers);
+                        int mov9to11FavPos = criteria.getMov9to11FavPos();
+                        if (mov9to11FavPos != 0) {
+                            if (!movers.get(mov9to11FavPos).equals(runner)) {
+                                queryResult.remove(runner);
+                            }
+                        }
+                    }
+                } else {
+                    queryResult.remove(runner);
+                }
+            }
+
+            String lastThreeMovsColor = criteria.getLastThreeMovsColor();
+            if (!lastThreeMovsColor.isEmpty()) {
+                int count = 0;
+                if (countLastThreeMovs(runner, criteria) != criteria.getLastThreeMovsCount()) {
+                    queryResult.remove(runner);
+                } else {
+                    if (criteria.getLastThreeMovsCountPerRace() != 0) {
+                        for (Runner raceRunner : raceRunners) {
+                            if (countLastThreeMovs(raceRunner, criteria) == criteria.getLastThreeMovsCount()) {
+                                count++;
+                            }
+                        }
+                        if (count != criteria.getLastThreeMovsCountPerRace()) {
+                            queryResult.remove(runner);
+                        }
+                    }
+                }
+            }
+
         }
 
         return queryResult;
+    }
+
+    private int countLastThreeMovs(Runner runner, RunnerSearch criteria) {
+        int count = 0;
+        String color = criteria.getLastThreeMovsColor();
+
+        if (color.equalsIgnoreCase("blue")) {
+            double blueMovementMin = criteria.getMovementsColorsMap().get("blueMovementMin");
+            if (runner.getMov1() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMean() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov3to1() >= blueMovementMin) {
+                count++;
+            }
+            return count;
+        } else if (color.equalsIgnoreCase("green")) {
+            double greenMovementMin = criteria.getMovementsColorsMap().get("greenMovementMin");
+            double greenMovementMax = criteria.getMovementsColorsMap().get("greenMovementMax");
+            if (runner.getMov1() >= greenMovementMin && runner.getMov1() <= greenMovementMax) {
+                count++;
+            }
+            if (runner.getMean() >= greenMovementMin && runner.getMean() <= greenMovementMax) {
+                count++;
+            }
+            if (runner.getMov3to1() >= greenMovementMin && runner.getMov3to1() <= greenMovementMax) {
+                count++;
+            }
+            log.debug(runner.getHorse().getName() + " has " + count + " greens");
+            return count;
+        } else if (color.equalsIgnoreCase("yellow")) {
+            double yellowMovementMin = criteria.getMovementsColorsMap().get("yellowMovementMin");
+            double yellowMovementMax = criteria.getMovementsColorsMap().get("yellowMovementMax");
+            if (runner.getMov1() >= yellowMovementMin && runner.getMov1() <= yellowMovementMax) {
+                count++;
+            }
+            if (runner.getMean() >= yellowMovementMin && runner.getMean() <= yellowMovementMax) {
+                count++;
+            }
+            if (runner.getMov3to1() >= yellowMovementMin && runner.getMov3to1() <= yellowMovementMax) {
+                count++;
+            }
+            return count;
+        } else if (color.equalsIgnoreCase("orange")) {
+            double orangeMovementMin = criteria.getMovementsColorsMap().get("orangeMovementMin");
+            double orangeMovementMax = criteria.getMovementsColorsMap().get("orangeMovementMax");
+            if (runner.getMov1() >= orangeMovementMin && runner.getMov1() <= orangeMovementMax) {
+                count++;
+            }
+            if (runner.getMean() >= orangeMovementMin && runner.getMean() <= orangeMovementMax) {
+                count++;
+            }
+            if (runner.getMov3to1() >= orangeMovementMin && runner.getMov3to1() <= orangeMovementMax) {
+                count++;
+            }
+        } else if (color.equalsIgnoreCase("pink")) {
+            double pinkMovementMax = criteria.getMovementsColorsMap().get("pinkMovementMax");
+            if (runner.getMov1() <= pinkMovementMax) {
+                count++;
+            }
+            if (runner.getMean() <= pinkMovementMax) {
+                count++;
+            }
+            if (runner.getMov3to1() <= pinkMovementMax) {
+                count++;
+            }
+            return count;
+        }
+        return count;
+    }
+
+    private int countAllDayMovements(Runner runner, RunnerSearch criteria) {
+        int count = 0;
+        String color = criteria.getAllDayMovsColor();
+
+        if (color.equalsIgnoreCase("blue")) {
+            double blueMovementMin = criteria.getMovementsColorsMap().get("blueMovementMin");
+            if (runner.getMov60() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov30() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov15() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov5() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov3() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov2() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov1() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMean() >= blueMovementMin) {
+                count++;
+            }
+            if (runner.getMov3to1() >= blueMovementMin) {
+                count++;
+            }
+        return count;
+        } else if (color.equalsIgnoreCase("green")) {
+            double greenMovementMin = criteria.getMovementsColorsMap().get("greenMovementMin");
+            double greenMovementMax = criteria.getMovementsColorsMap().get("greenMovementMax");
+                if (runner.getMov60() >= greenMovementMin && runner.getMov60() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov30() >= greenMovementMin && runner.getMov30() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov15() >= greenMovementMin && runner.getMov15() <= greenMovementMax ) {
+                    count++;
+                }
+                if (runner.getMov5() >= greenMovementMin && runner.getMov5() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3() >= greenMovementMin && runner.getMov3() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov2() >= greenMovementMin && runner.getMov2() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov1() >= greenMovementMin && runner.getMov1() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMean() >= greenMovementMin && runner.getMean() <= greenMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3to1() >= greenMovementMin && runner.getMov3to1() <= greenMovementMax) {
+                    count++;
+                }
+            return count;
+        } else if (color.equalsIgnoreCase("yellow")) {
+            double yellowMovementMin = criteria.getMovementsColorsMap().get("yellowMovementMin");
+            double yellowMovementMax = criteria.getMovementsColorsMap().get("yellowMovementMax");
+                if (runner.getMov60() >= yellowMovementMin && runner.getMov60() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov30() >= yellowMovementMin && runner.getMov30() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov15() >= yellowMovementMin && runner.getMov15() <= yellowMovementMax ) {
+                    count++;
+                }
+                if (runner.getMov5() >= yellowMovementMin && runner.getMov5() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3() >= yellowMovementMin && runner.getMov3() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov2() >= yellowMovementMin && runner.getMov2() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov1() >= yellowMovementMin && runner.getMov1() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMean() >= yellowMovementMin && runner.getMean() <= yellowMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3to1() >= yellowMovementMin && runner.getMov3to1() <= yellowMovementMax) {
+                    count++;
+                }
+            return count;
+        } else if (color.equalsIgnoreCase("pink")) {
+            double pinkMovementMax = criteria.getMovementsColorsMap().get("pinkMovementMax");
+                if (runner.getMov60() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov30() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov15() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov5() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov2() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov1() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMean() <= pinkMovementMax) {
+                    count++;
+                }
+                if (runner.getMov3to1() <= pinkMovementMax) {
+                    count++;
+                }
+            return count;
+        }
+
+        return count;
     }
 
     private List<Runner> mergeSortRunnersByDate(List<Runner> list) {

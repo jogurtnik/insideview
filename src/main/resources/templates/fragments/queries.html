@@ -303,7 +303,7 @@
                                                th:value="${runnerSearch.runnersCountMax}"/>
                                     </div>
                                 </div>
-                            </div>
+                                </div>
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price9">Price at 9:</label>
                                     <div id="price9">
@@ -321,7 +321,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price10">Price at 10:</label>
                                     <div id="price10">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -354,7 +354,7 @@
                                                    th:value="${runnerSearch.price11Max}"/>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="mov9to11"
                                            data-toggle="tooltip" data-placement="right" title="Movement 9-11">Mov 9-11:</label>
@@ -373,7 +373,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price60">Price at 60:</label>
                                     <div id="price60">
                                         <div class="col-md-4 col-sm-4 col-xs-12">
@@ -584,7 +584,7 @@
                                                    th:value="${runnerSearch.mov2Max}"/>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label class="control-label col-md-4 col-sm-4 col-xs-12" for="price1">Price at 1:</label>
                                     <div id="price1">
@@ -655,6 +655,102 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="movAmColor"
+                                            data-toggle="tooltip" data-placement="right" title="Colour of 9-11 Movement">MovAM Colour</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select id="movAmColor" class="form-control"
+                                                th:field="${runnerSearch.mov9to11Color}">
+                                            <option
+                                                    th:each="color : ${runnerSearch.colors}"
+                                                    th:value="${color}"
+                                                    th:text="${color}" >Select colour</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="MovAmCountPerRace"
+                                            data-toggle="tooltip" data-placement="right" title="Count of selected movers per race">MovAM Count/R</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="movAmCountPerRace" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                               th:field="${runnerSearch.mov9to11CountPerRace}"
+                                               th:value="${runnerSearch.mov9to11CountPerRace}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-6 col-sm-6 col-xs-12" for="movAmFavPos"
+                                           data-toggle="tooltip" data-placement="right" title="Favourite place among movers">MovAM Fav</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input id="movAmFavPos" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                               th:field="${runnerSearch.mov9to11FavPos}"
+                                               th:value="${runnerSearch.mov9to11FavPos}"/>
+                                    </div>
+                                </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="allDayMovsColors"
+                                       data-toggle="tooltip" data-placement="right" title="Colour of all the movements">All Movs Colour</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="allDayMovsColors" class="form-control"
+                                            th:field="${runnerSearch.allDayMovsColor}">
+                                        <option
+                                                th:each="color : ${runnerSearch.colors}"
+                                                th:value="${color}"
+                                                th:text="${color}" >Select colour</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="allDayMovsCount"
+                                       data-toggle="tooltip" data-placement="right" title="Count of selected moves for a runner">All Movs Count</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="allDayMovsCount" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                           th:field="${runnerSearch.allDayMovsCount}"
+                                           th:value="${runnerSearch.allDayMovsCount}"/>
+                                </div>
+                            </div>
+                            <!--<div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="allDayMovsCountPerRace"
+                                       data-toggle="tooltip" data-placement="right" title="Count of selected movers per race">All Movs Count/R</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="allDayMovsCountPerRace" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                           data-toggle="tooltip" data-placement="top" title="minimum"
+                                           th:field="${runnerSearch.allDayMovsCountPerRace}"
+                                           th:value="${runnerSearch.allDayMovsCountPerRace}"/>
+                                </div>
+                            </div>-->
+                            <div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastThreeMovsColors"
+                                       data-toggle="tooltip" data-placement="right" title="Colour of last 3 movements">L3 Movs Colour</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <select id="lastThreeMovsColors" class="form-control"
+                                            th:field="${runnerSearch.lastThreeMovsColor}">
+                                        <option
+                                                th:each="color : ${runnerSearch.colors}"
+                                                th:value="${color}"
+                                                th:text="${color}" >Select colour</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastThreeMovsCount"
+                                       data-toggle="tooltip" data-placement="right" title="Count of selected moves">L3 Movs Count</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="lastThreeMovsCount" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                           th:field="${runnerSearch.lastThreeMovsCount}"
+                                           th:value="${runnerSearch.lastThreeMovsCount}"/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-6 col-sm-6 col-xs-12" for="lastThreeMovsCountPerRace"
+                                       data-toggle="tooltip" data-placement="right" title="Count of selected movers per race">L3 Movs Count/R</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="lastThreeMovsCountPerRace" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                           th:field="${runnerSearch.lastThreeMovsCountPerRace}"
+                                           th:value="${runnerSearch.lastThreeMovsCountPerRace}"/>
+                                </div>
+                            </div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
