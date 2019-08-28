@@ -38,7 +38,7 @@ public class RunnerSearch extends Criteria {
     private String[] weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
     private List<String> selectedWeekDays = new ArrayList<>();
 
-    Map<String, Double> movementsColorsMap = new HashMap<>();
+    private Map<String, Double> movementsColorsMap = new HashMap<>();
 
     private String[] colors = {"", "blue", "green", "yellow", "orange", "pink"};
 

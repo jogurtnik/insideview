@@ -208,6 +208,59 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceMov9to11Color"
+                                               data-toggle="tooltip" data-placement="right" title="Colour of 9-11 Movement">MovAM Colour</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="raceMov9to11Color" class="form-control"
+                                                    th:field="${raceSearch.mov9to11Color}">
+                                                <option
+                                                        th:each="color : ${raceSearch.colors}"
+                                                        th:value="${color}"
+                                                        th:text="${color}" >Select colour</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceMov9to11CountPerRace"
+                                               data-toggle="tooltip" data-placement="right" title="Count of 9-11 movers per race">MovAM Count</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="raceMov9to11CountPerRace" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${raceSearch.mov9to11CountPerRace}"
+                                                   th:value="${raceSearch.mov9to11CountPerRace}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceLastThreeMovsColors"
+                                               data-toggle="tooltip" data-placement="right" title="Colour of last 3 movements">L3 Movs Colour</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select id="raceLastThreeMovsColors" class="form-control"
+                                                    th:field="${raceSearch.lastThreeMovsColor}">
+                                                <option
+                                                        th:each="color : ${raceSearch.colors}"
+                                                        th:value="${color}"
+                                                        th:text="${color}" >Select colour</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceLastThreeMovsCount"
+                                               data-toggle="tooltip" data-placement="right" title="Count of selected moves">L3 Movs Count</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="raceLastThreeMovsCount" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${raceSearch.lastThreeMovsCount}"
+                                                   th:value="${raceSearch.lastThreeMovsCount}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-4 col-sm-4 col-xs-12" for="raceLastThreeMovsCountPerRace"
+                                               data-toggle="tooltip" data-placement="right" title="Count of selected movers per race">L3 Movs Count/R</label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input id="raceLastThreeMovsCountPerRace" class="form-control col-md-2 col-xs-12" type="number" value="0"
+                                                   th:field="${raceSearch.lastThreeMovsCountPerRace}"
+                                                   th:value="${raceSearch.lastThreeMovsCountPerRace}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
                                         <label class="control-label col-md-4 col-sm-4 col-xs-12" for="submitRaceQDiv">Query: </label>
                                         <div id="submitRaceQDiv" class="col-md-6 col-sm-6 col-xs-12">
                                             <button type="submit" class="btn btn-success col-md-8 col-sm-8 col-xs-12">Races</button>

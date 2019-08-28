@@ -1,18 +1,33 @@
 package uk.co.punishell.insideview.view.commands.guiCommands;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Setter
 @Getter
-@NoArgsConstructor
 public class RaceSearch extends Criteria {
+
+    public RaceSearch() {
+        this.movementsColorsMap.put("blueMovementMin", 5.01);
+
+        this.movementsColorsMap.put("greenMovementMin",2.5);
+        this.movementsColorsMap.put("greenMovementMax", 5.0);
+
+        this.movementsColorsMap.put("yellowMovementMin", 0.01);
+        this.movementsColorsMap.put("yellowMovementMax", 2.49);
+
+        this.movementsColorsMap.put("orangeMovementMin", -2.49);
+        this.movementsColorsMap.put("orangeMovementMax", -0.01);
+
+        this.movementsColorsMap.put("pinkMovementMax", -2.5);
+    }
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private LocalDate localDateSince = LocalDate.MIN;
@@ -22,6 +37,10 @@ public class RaceSearch extends Criteria {
 
     private String country;
     private String[] countries = {"All", "GB", "IE"};
+
+    private Map<String, Double> movementsColorsMap = new HashMap<>();
+
+    private String[] colors = {"", "blue", "green", "yellow", "orange", "pink"};
 
     private double trackLengthMin = 0;
     private double trackLengthMax = 0;
@@ -39,4 +58,11 @@ public class RaceSearch extends Criteria {
 
     private int fiveStarsCountMin = 0;
     private int fiveStarsCountMax = 0;
+
+    private String mov9to11Color = "";
+    private int mov9to11CountPerRace = 0;
+
+    private String lastThreeMovsColor = "";
+    private int lastThreeMovsCount = 0;
+    private int lastThreeMovsCountPerRace = 0;
 }
