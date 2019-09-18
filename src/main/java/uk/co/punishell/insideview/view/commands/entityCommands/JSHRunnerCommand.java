@@ -44,4 +44,7 @@ public class JSHRunnerCommand {
     private int trainerRunners;
     private String headGear;
     private int mov9to60;
+    private int distance;
+    private int course;
+    private int distanceAndCourse;
 }

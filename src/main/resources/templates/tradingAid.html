@@ -163,6 +163,9 @@
                 <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Rides total">Rs</th>
                 <th class="centered sticky-th">Mov9-60</th>
                 <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Favourite position">FP</th>
+                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course">C</th>
+                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Distance">D</th>
+                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course & Distance">CD</th>
                 <th class="sticky-th">HG</th>
                 <th class="horse-info sticky-th">Trainer</th>
                 <th class="compact-data centered sticky-th">Wins</th>
@@ -175,7 +178,7 @@
 
                 <tbody>
                 <tr>
-                    <td colspan="26" class="raceInfo" th:text="${race.generalInfo}">00:00 City COUNTRY, race-length race-types MARKET, TYPE Prices</td>
+                    <td colspan="29" class="raceInfo" th:text="${race.generalInfo}">00:00 City COUNTRY, race-length race-types MARKET, TYPE Prices</td>
                 </tr>
                 </tbody>
 
@@ -200,7 +203,10 @@
                     <td th:text="${runner.jockeyRideNo}">0</td>
                     <td class="bolded-font centered" th:text="${runner.jockeyRides}">0</td>
                     <td class="centered"  th:text="${runner.mov9to60}">0.00</td>
-                    <td class="bolded-font centered"  th:text="${runnerStat.count}"></td>
+                    <td class="bolded-font centered" th:text="${runnerStat.count}"></td>
+                    <td class="centered" th:text="${runner.course}"></td>
+                    <td class="centered" th:text="${runner.distance}"></td>
+                    <td class="centered" th:text="${runner.distanceAndCourse}"></td>
                     <td th:text="${runner.headGear}">Gear</td>
                     <td class="horse-info" th:text="${runner.trainer}">Trainer Name</td>
                     <td class="centered"  th:text="${runner.trainerWins}">0</td>

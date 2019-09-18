@@ -3,9 +3,10 @@ package uk.co.punishell.insideview.controllers;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.ComparisonOperator;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.jsoup.Connection;
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -27,10 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -46,7 +44,8 @@ public class TradingAidController {
     private JSHTradingAidAssembler jshTradingAidAssembler;
 
     private final String JSHLoginUrl = "https://juststarthere.co.uk/cgi-bin/just.pl";
-    private final String JSHDataTargetUrl = "https://juststarthere.co.uk/allwinback.html";
+    private final String JSHDataTargetUrlAllWinBack = "https://juststarthere.co.uk/allwinback.html";
+    private final String JshDataTargetUrlRacecard = "https://juststarthere.co.uk/cgi-bin/just.pl?op=cherrypick&type=3";
 
     @GetMapping("tradingAid")
     public String getTradingAid(Model model) throws VendorsConnectionException {
@@ -111,11 +110,14 @@ public class TradingAidController {
         header.createCell(27).setCellValue("Rs");
         header.createCell(28).setCellValue("Mov9-60");
         header.createCell(29).setCellValue("FP");
-        header.createCell(30).setCellValue("HG");
-        header.createCell(31).setCellValue("Trainer");
-        header.createCell(32).setCellValue("Wins");
-        header.createCell(33).setCellValue("R");
-        header.createCell(34).setCellValue("Rs");
+        header.createCell(30).setCellValue("C");
+        header.createCell(31).setCellValue("D");
+        header.createCell(32).setCellValue("CD");
+        header.createCell(33).setCellValue("HG");
+        header.createCell(34).setCellValue("Trainer");
+        header.createCell(35).setCellValue("Wins");
+        header.createCell(36).setCellValue("R");
+        header.createCell(37).setCellValue("Rs");
 
         int rowIndex = 1;
         for (JSHRaceCommand race : jshData.getRaces()) {
@@ -123,7 +125,7 @@ public class TradingAidController {
             HSSFRow row = sheet.createRow(rowIndex);
             HSSFCell cell = row.createCell(0);
             cell.setCellValue(race.getGeneralInfo());
-            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, 34));
+            sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0, 37));
 
             rowIndex++;
 
@@ -160,18 +162,21 @@ public class TradingAidController {
                 row.createCell(27).setCellValue(runner.getJockeyRides());
                 row.createCell(28).setCellValue(runner.getMov9to60());
                 row.createCell(29).setCellValue(runnerFavPos++);
-                row.createCell(30).setCellValue(runner.getHeadGear());
-                row.createCell(31).setCellValue(runner.getTrainer());
-                row.createCell(32).setCellValue(runner.getTrainerWins());
-                row.createCell(33).setCellValue(runner.getTrainerRunnerNo());
-                row.createCell(34).setCellValue(runner.getTrainerRunners());
+                row.createCell(30).setCellValue(runner.getCourse());
+                row.createCell(31).setCellValue(runner.getDistance());
+                row.createCell(32).setCellValue(runner.getDistanceAndCourse());
+                row.createCell(33).setCellValue(runner.getHeadGear());
+                row.createCell(34).setCellValue(runner.getTrainer());
+                row.createCell(35).setCellValue(runner.getTrainerWins());
+                row.createCell(36).setCellValue(runner.getTrainerRunnerNo());
+                row.createCell(37).setCellValue(runner.getTrainerRunners());
 
                 rowIndex++;
             }
 
         }
 
-        for (int i = 0; i < 34; i++) {
+        for (int i = 0; i < 37; i++) {
             sheet.autoSizeColumn(i);
         }
 
@@ -273,7 +278,7 @@ public class TradingAidController {
                 // Jockey
                 new CellRangeAddress(1, lastRowNum, 24, 24),
                 // Trainer
-                new CellRangeAddress(1, lastRowNum, 31, 31)
+                new CellRangeAddress(1, lastRowNum, 34, 34)
 
         };
 
@@ -313,8 +318,7 @@ public class TradingAidController {
         data.put("usr_password", "passw0rd");
 
         Document doc;
-        doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrl);
-
+        doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrlAllWinBack);
 
         Elements raceInfo = doc.getElementsByClass("race_infoback");
         Elements raceBody = doc.getElementsByClass("racebody");
@@ -341,6 +345,69 @@ public class TradingAidController {
             races = jshTradingAidAssembler.assembleRaceData(races);
 
             tradingAidCommand.setRaces(races);
+
+            BufferedInputStream in;
+            FileOutputStream fileOutputStream;
+            Workbook workbook;
+
+            try {
+
+                Connection.Response res = Jsoup.connect(JSHLoginUrl)
+                        .timeout(30*1000)
+                        .method(Connection.Method.POST)
+                        .data(data)
+                        .followRedirects(true)
+                        .execute();
+
+                Map<String, String> loginCookies;
+
+                loginCookies = res.cookies();
+
+                res = Jsoup.connect(JshDataTargetUrlRacecard)
+                        .timeout(30*1000)
+                        .cookies(loginCookies)
+                        .ignoreContentType(true)
+                        .execute();
+
+                fileOutputStream = new FileOutputStream(new File("racecard.xlsx"));
+
+                fileOutputStream.write(res.bodyAsBytes());
+                fileOutputStream.close();
+                workbook = WorkbookFactory.create(new FileInputStream(new File("racecard.xlsx")));
+                Sheet sheet = workbook.getSheetAt(0);
+
+                Iterator<Row> rowIterator = sheet.rowIterator();
+                rowIterator.next();
+                Row row;
+                HashMap<String, Integer[]> runnersDataMap = new HashMap<>();
+                while (rowIterator.hasNext()) {
+
+                    row = rowIterator.next();
+
+                    String horseName = row.getCell(6).getStringCellValue();
+
+                    Integer[] runnersData = {(int) row.getCell(13).getNumericCellValue(),
+                                             (int) row.getCell(14).getNumericCellValue(),
+                                             (int) row.getCell(15).getNumericCellValue()};
+
+                    runnersDataMap.put(horseName, runnersData);
+
+                }
+
+                tradingAidCommand.getRaces().parallelStream().forEach(race -> {
+                    race.getRunners().parallelStream().forEach(runner -> {
+                        Integer[] runnersData = runnersDataMap.get(runner.getHorseName());
+                        if (runnersData != null) {
+                            runner.setCourse(runnersData[0]);
+                            runner.setDistance(runnersData[1]);
+                            runner.setDistanceAndCourse(runnersData[2]);
+                        }
+                    });
+                });
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } else {
             if (raceInfo == null || raceInfo.size() != raceBody.size()) {

@@ -18,14 +18,11 @@ public class WebpageScrapper {
     private int connectionTimeout = 30*1000;
     private boolean followRedirects = true;
 
-    public Document getWebpage(String url) throws IOException {
-
-        return Jsoup.connect(url).get();
-    }
 
     public Document loginAndGetWebpage(String loginUrl, Map<String, String> loginFormData, String targetUrl) {
 
         try {
+
             Connection.Response res = Jsoup.connect(loginUrl)
                     .timeout(connectionTimeout)
                     .method(Connection.Method.POST)
@@ -33,15 +30,18 @@ public class WebpageScrapper {
                     .followRedirects(followRedirects)
                     .execute();
 
-            Map<String, String> loginCookies = res.cookies();
+            Map<String, String> loginCookies;
+
+            loginCookies = res.cookies();
 
             res = Jsoup.connect(targetUrl)
-                    .timeout(connectionTimeout)
-                    .cookies(loginCookies)
-                    .followRedirects(followRedirects)
-                    .execute();
+                        .timeout(connectionTimeout)
+                        .cookies(loginCookies)
+                        .followRedirects(followRedirects)
+                        .execute();
 
             return res.parse();
+
         }  catch (IOException e) {
             if (e instanceof SocketTimeoutException) {
                 throw new VendorsConnectionException("Unfortunately the the attempt to communicate with data vendor has reach the timeout of 30 seconds.");
