@@ -54,23 +54,27 @@
 <body id="trading-aid">
 <!--/*@thymesVar id="jshData" type="uk.co.punishell.insideview.view.commands.guiCommands.TradingAidCommand"*/-->
 <p class="alert-error" th:text="${jshData.errorMessage != null}? ${jshData.errorMessage}"></p>
+
+<div id="top-nav-bar" class="navbar navbar-fixed-top">
+    <div class="navbar-collapse">
+        <div class="pull-left">
+            <a onclick="toggleTables()" class="btn btn-app">
+                <i class="fa fa-table"></i>
+                <div id="toggle-text"></div>
+            </a>
+            <a th:href="@{'exportToExcel'}" class="btn btn-app">
+                <i class="fa fa-file-excel-o"></i>
+                Export to Excel
+            </a>
+            <a class="btn btn-app saveScrollPosition">
+                <i class="fa fa-refresh"></i>
+                Refresh
+            </a>
+        </div>
+    </div>
+</div>
+
 <div class="row" id="raceData" th:if="${jshData.errorMessage == null}">
-    <div class="top-right">
-        <a th:href="@{'exportToExcel'}" class="btn btn-app">
-            <i class="fa fa-file-excel-o"></i>
-            Export to Excel
-        </a>
-    </div>
-    <div class="sticky-general">
-        <a onclick="toggleTables()" class="btn btn-app">
-            <i class="fa fa-table"></i>
-            Toggle tables
-        </a>
-        <a class="btn btn-app saveScrollPosition">
-            <i class="fa fa-refresh"></i>
-            Refresh
-        </a>
-    </div>
     <div class="col-md-12 col-sm-12 col-xs-12">
         <table id="raceTable" style="display: table;">
             <thead>
@@ -135,7 +139,6 @@
                     <td th:text="${runner.nptips}">0</td>
                     <td th:text="${runner.naps}">0</td>
                     <td><th:block th:if="${runner.stars}"><img th:src="@{'/images/' + ${runner.stars} + '-star.gif'}"/></th:block></td>
-                </tr>
                 </tbody>
             </th:block>
         </table>
@@ -163,9 +166,9 @@
                 <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Rides total">Rs</th>
                 <th class="centered sticky-th">Mov9-60</th>
                 <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Favourite position">FP</th>
-                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course">C</th>
+                <!--<th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course">C</th>
                 <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Distance">D</th>
-                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course & Distance">CD</th>
+                <th class="compact-data centered sticky-th" data-toggle="tooltip" data-placement="top" title="Course & Distance">CD</th>-->
                 <th class="sticky-th">HG</th>
                 <th class="horse-info sticky-th">Trainer</th>
                 <th class="compact-data centered sticky-th">Wins</th>
@@ -204,9 +207,9 @@
                     <td class="bolded-font centered" th:text="${runner.jockeyRides}">0</td>
                     <td class="centered"  th:text="${runner.mov9to60}">0.00</td>
                     <td class="bolded-font centered" th:text="${runnerStat.count}"></td>
-                    <td class="centered" th:text="${runner.course}"></td>
+                    <!--<td class="centered" th:text="${runner.course}"></td>
                     <td class="centered" th:text="${runner.distance}"></td>
-                    <td class="centered" th:text="${runner.distanceAndCourse}"></td>
+                    <td class="centered" th:text="${runner.distanceAndCourse}"></td>-->
                     <td th:text="${runner.headGear}">Gear</td>
                     <td class="horse-info" th:text="${runner.trainer}">Trainer Name</td>
                     <td class="centered"  th:text="${runner.trainerWins}">0</td>

@@ -2,6 +2,8 @@
 
 $(document).ready(function() {
 
+    document.getElementById("toggle-text").innerHTML = "Fundamentals";
+
     // define refresh function
     let refresh = function() {
 
@@ -40,6 +42,8 @@ $(document).ready(function() {
     // check if raceTable should be hidden or shown
     if (Cookies.get('raceTableStatus') !== "undefined") {
 
+        document.getElementById("toggle-text").innerHTML = "Fundamentals";
+
         let raceTable = document.getElementById("raceTable");
         raceTable.style.display = Cookies.get('raceTableStatus');
         Cookies.remove('raceTableStatus');
@@ -47,6 +51,8 @@ $(document).ready(function() {
 
     // check if compact raceTable should be hidden or shown
     if (Cookies.get('raceTableMinStatus') !== "undefined") {
+
+        document.getElementById("toggle-text").innerHTML = "Prices";
 
         let raceTableMin = document.getElementById("raceTableMin");
         raceTableMin.style.display = Cookies.get('raceTableMinStatus');

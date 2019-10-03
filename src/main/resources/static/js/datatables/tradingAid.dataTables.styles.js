@@ -175,13 +175,16 @@ function toggleTables() {
 
     let raceTable = document.getElementById("raceTable");
     let raceTableMin = document.getElementById("raceTableMin");
+    let displayedText = document.getElementById("toggle-text");
 
     if (raceTable.style.display === "table") {
         raceTable.style.display = "none";
         raceTableMin.style.display = "table";
+        displayedText.innerText = "Prices"
     } else {
         raceTable.style.display = "table";
         raceTableMin.style.display = "none";
+        displayedText.innerText = "Fundamentals"
     }
 }
 

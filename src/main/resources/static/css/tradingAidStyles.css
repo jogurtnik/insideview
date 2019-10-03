@@ -2,9 +2,21 @@ body#trading-aid {
     background: #FFFFFF;
 }
 
+#top-nav-bar {
+    background-color: #e9e9e9;
+    width: 100%;
+}
+
+#top-nav-bar h3 {
+    color: whitesmoke;
+}
+
 div#raceData {
     text-align: left;
-    width: 100%;
+    width: 98%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 80px;
 }
 
 table {
@@ -37,13 +49,13 @@ th, td {
 
 table#raceTable thead {
     color: white;
-    background-color: #555b5e;
+    /*background-color: #555b5e;*/
     font-size: 80%;
 }
 
 table#raceTableMin thead {
     color: white;
-    background-color: #555b5e;
+    /*background-color: #555b5e;*/
     font-size: 80%;
 }
 
@@ -80,7 +92,8 @@ table#raceTableMin tbody > tr:hover{
     background-color: #555b5e;
     position: -webkit-sticky;
     position: sticky;
-    top: -1px;
+    top: 70px;
+    z-index: 1;
 }
 
 .sticky-general {

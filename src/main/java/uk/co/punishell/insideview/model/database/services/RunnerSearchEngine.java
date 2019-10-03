@@ -253,72 +253,103 @@ public class RunnerSearchEngine implements SearchEngine<RunnerSearch, RunnerSeac
             }
 
             String mov9to11Color = criteria.getMov9to11Color();
+            double runnerMov9to11 = runner.getMov9to11();
             int mov9to11CountPerRace = criteria.getMov9to11CountPerRace();
+            List<Runner> movers = new ArrayList<>();
             if (!mov9to11Color.isEmpty()) {
-                if (mov9to11CountPerRace != 0) {
-                    List<Runner> movers = new ArrayList<>();
-                    int count = 0;
-                    double runnerMov9to11 = runner.getMov9to11();
-                    for (Runner raceRunner : raceRunners) {
-                        double raceRunnerMov9to11 = raceRunner.getMov9to11();
-                        if (mov9to11Color.equalsIgnoreCase("blue")) {
-                            double blueMovementMin = criteria.getMovementsColorsMap().get("blueMovementMin");
-                            if (!(runnerMov9to11 >= blueMovementMin)) {
-                                queryResult.remove(runner);
-                            } else if (raceRunnerMov9to11 >= blueMovementMin) {
-                                count++;
-                                movers.add(raceRunner);
-                            }
-                        } else if (mov9to11Color.equalsIgnoreCase("green")) {
-                            double greenMovementMin = criteria.getMovementsColorsMap().get("greenMovementMin");
-                            double greenMovementMax = criteria.getMovementsColorsMap().get("greenMovementMax");
-                            if (!(runnerMov9to11 <= greenMovementMax && runnerMov9to11 >= greenMovementMin)) {
-                                queryResult.remove(runner);
-                            } else if (raceRunnerMov9to11 <= greenMovementMax && raceRunnerMov9to11 >= greenMovementMin) {
-                                count++;
-                                movers.add(raceRunner);
-                            }
-                        } else if (mov9to11Color.equalsIgnoreCase("yellow")) {
-                            double yellowMovementMin = criteria.getMovementsColorsMap().get("yellowMovementMax");
-                            double yellowMovementMax = criteria.getMovementsColorsMap().get("yellowMovementMin");
-                            if (!(runnerMov9to11 <= yellowMovementMax && runnerMov9to11 >= yellowMovementMin)) {
-                                queryResult.remove(runner);
-                            }  else if (raceRunnerMov9to11 <= yellowMovementMin && raceRunnerMov9to11 >= yellowMovementMax) {
-                                count++;
-                                movers.add(raceRunner);
-                            }
-                        } else if (mov9to11Color.equalsIgnoreCase("orange")) {
-                            double orangeMovementMin = criteria.getMovementsColorsMap().get("orangeMovementMax");
-                            double orangeMovementMax = criteria.getMovementsColorsMap().get("orangeMovementMin");
-                            if (!(runnerMov9to11 <= orangeMovementMax && runnerMov9to11 >= orangeMovementMin)) {
-                                queryResult.remove(runner);
-                            } else if (raceRunnerMov9to11 <= orangeMovementMax && raceRunnerMov9to11 >= orangeMovementMin) {
-                                count++;
-                                movers.add(raceRunner);
-                            }
-                        } else if (mov9to11Color.equalsIgnoreCase("pink")) {
-                            double pinkMovementMax = criteria.getMovementsColorsMap().get("pinkMovementMax");
-                            if (!(runnerMov9to11 <= pinkMovementMax)) {
-                                queryResult.remove(runner);
-                            } else if (raceRunnerMov9to11 <= pinkMovementMax) {
-                                count++;
-                                movers.add(raceRunner);
-                            }
-                        }
-                    }
-                    if (count != mov9to11CountPerRace) {
+                int count = 0;
+                double min;
+                double max;
+                if (mov9to11Color.equalsIgnoreCase("blue")) {
+                    min = criteria.getMovementsColorsMap().get("blueMovementMin");
+                    if (Double.compare(runnerMov9to11, min) < 0) {
                         queryResult.remove(runner);
                     } else {
-                        Collections.sort(movers);
-                        int mov9to11FavPos = criteria.getMov9to11FavPos();
-                        if (mov9to11FavPos != 0) {
-                            if (!movers.get(mov9to11FavPos).equals(runner)) {
-                                queryResult.remove(runner);
+                        for (Runner raceRunner : raceRunners) {
+                            if (Double.compare(raceRunner.getMov9to11(), min) >= 0) {
+                                count++;
+                                movers.add(raceRunner);
                             }
                         }
+                        if (count != mov9to11CountPerRace) {
+                            queryResult.remove(runner);
+                        }
                     }
-                } else {
-                    queryResult.remove(runner);
+                } else if (mov9to11Color.equalsIgnoreCase("green")) {
+                    min = criteria.getMovementsColorsMap().get("greenMovementMin");
+                    max = criteria.getMovementsColorsMap().get("greenMovementMax");
+                    if (Double.compare(runnerMov9to11, min) < 0 ||
+                        Double.compare(runnerMov9to11, max) > 0) {
+                            queryResult.remove(runner);
+                    } else {
+                        for (Runner raceRunner : raceRunners) {
+                            if (Double.compare(raceRunner.getMov9to11(), min) >= 0 &&
+                                Double.compare(raceRunner.getMov9to11(), max) <= 0) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        }
+                        if (count != mov9to11CountPerRace) {
+                            queryResult.remove(runner);
+                        }
+                    }
+                } else if (mov9to11Color.equalsIgnoreCase("yellow")) {
+                    min = criteria.getMovementsColorsMap().get("yellowMovementMin");
+                    max = criteria.getMovementsColorsMap().get("yellowMovementMax");
+                    if (Double.compare(runnerMov9to11, min) < 0 ||
+                        Double.compare(runnerMov9to11, max) > 0) {
+                            queryResult.remove(runner);
+                    } else {
+                        for (Runner raceRunner : raceRunners) {
+                            if (Double.compare(raceRunner.getMov9to11(), min) >= 0 &&
+                                Double.compare(raceRunner.getMov9to11(), max) <= 0) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        }
+                        if (count != mov9to11CountPerRace) {
+                            queryResult.remove(runner);
+                        }
+                    }
+                } else if (mov9to11Color.equalsIgnoreCase("orange")) {
+                    min = criteria.getMovementsColorsMap().get("orangeMovementMin");
+                    max = criteria.getMovementsColorsMap().get("orangeMovementMax");
+                    if (Double.compare(runnerMov9to11, min) < 0 ||
+                        Double.compare(runnerMov9to11, max) > 0) {
+                            queryResult.remove(runner);
+                    } else {
+                        for (Runner raceRunner : raceRunners) {
+                            if (Double.compare(raceRunner.getMov9to11(), min) >= 0 &&
+                                Double.compare(raceRunner.getMov9to11(), max) <= 0) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        }
+                        if (count != mov9to11CountPerRace) {
+                            queryResult.remove(runner);
+                        }
+                    }
+                } else if (mov9to11Color.equalsIgnoreCase("pink")) {
+                    max = criteria.getMovementsColorsMap().get("pinkMovementMax");
+                    if (Double.compare(runnerMov9to11, max) > 0) {
+                        queryResult.remove(runner);
+                    } else {
+                        for (Runner raceRunner : raceRunners) {
+                            if (Double.compare(raceRunner.getMov9to11(), max) <= 0) {
+                                count++;
+                                movers.add(raceRunner);
+                            }
+                        }
+                        if (count != mov9to11CountPerRace) {
+                            queryResult.remove(runner);
+                        }
+                    }
+                }
+                int mov9to11FavPos = criteria.getMov9to11FavPos();
+                if (mov9to11FavPos != 0 && mov9to11FavPos <= movers.size()) {
+                    if (!movers.get(mov9to11FavPos - 1).equals(runner)) {
+                        queryResult.remove(runner);
+                    }
                 }
             }
 
