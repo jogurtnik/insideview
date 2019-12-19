@@ -1,4 +1,14 @@
+let showModal = function() {
+    let modal = document.getElementsByClassName("info-modal")[0];
+    modal.style.display = "block";
+    modal.style.paddingRight = "15px";
+    modal.classList.add("in");
+    console.log("Show modal event fired");
+};
+
 $(document).ready(function() {
+
+    $('show-modal').on("click", showModal);
 
     // get default table with detailed race data
     let raceTable = document.getElementById('raceTable');

@@ -2,7 +2,8 @@
 
 $(document).ready(function() {
 
-    document.getElementById("toggle-text").innerHTML = "Fundamentals";
+    let raceTable = document.getElementById("raceTable").style.display;
+    let raceTableMin = document.getElementById("raceTableMin").style.display;
 
     // define refresh function
     let refresh = function() {
@@ -10,8 +11,8 @@ $(document).ready(function() {
         let currentYOffset = window.pageYOffset;  // save current page postion.
         Cookies.set('jumpToScrollPosition', currentYOffset);
 
-        let raceTable = document.getElementById("raceTable").style.display;
-        let raceTableMin = document.getElementById("raceTableMin").style.display;
+        raceTable = document.getElementById("raceTable").style.display;
+        raceTableMin = document.getElementById("raceTableMin").style.display;
 
         Cookies.set('raceTableStatus', raceTable);
         Cookies.set('raceTableMinStatus', raceTableMin);
@@ -30,7 +31,7 @@ $(document).ready(function() {
     $('.saveScrollPosition').on("click", refresh);
 
     // check if is saved body class to define expanded or collapsed navigation menu
-    if (Cookies.get('bodyClass').toString() !== "undefined") {
+    if (Cookies.get('bodyClass') !== "undefined") {
 
         let body = document.getElementsByTagName('body')[0];
         let bodyClass = Cookies.get('bodyClass');
@@ -41,8 +42,6 @@ $(document).ready(function() {
 
     // check if raceTable should be hidden or shown
     if (Cookies.get('raceTableStatus') !== "undefined") {
-
-        document.getElementById("toggle-text").innerHTML = "Fundamentals";
 
         let raceTable = document.getElementById("raceTable");
         raceTable.style.display = Cookies.get('raceTableStatus');
@@ -66,6 +65,12 @@ $(document).ready(function() {
         let jumpTo = Cookies.get('jumpToScrollPosition');
         window.scrollTo(0, jumpTo);
         Cookies.remove('jumpToScrollPosition');  // and delete cookie so we don't jump again.
+    }
+
+    if (document.getElementById("raceTable").style.display === "table") {
+        document.getElementById("toggle-text").innerHTML = "Fundamentals";
+    } else {
+        document.getElementById("toggle-text").innerHTML = "Prices";
     }
 
     // refresh the web page every 60 seconds

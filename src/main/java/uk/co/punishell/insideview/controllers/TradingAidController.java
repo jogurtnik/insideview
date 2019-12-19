@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import uk.co.punishell.insideview.model.config.JSHCredentials;
+import uk.co.punishell.insideview.model.config.JSHLoginProps;
 import uk.co.punishell.insideview.model.exceptions.VendorsConnectionException;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHRaceAssembler;
 import uk.co.punishell.insideview.model.services.JSHDataScrapper.JSHTradingAidAssembler;
@@ -35,6 +37,9 @@ import java.util.*;
 public class TradingAidController {
 
     @Autowired
+    JSHLoginProps jshLoginProps;
+
+    @Autowired
     private WebpageScrapper scrapper;
 
     @Autowired
@@ -42,6 +47,9 @@ public class TradingAidController {
 
     @Autowired
     private JSHTradingAidAssembler jshTradingAidAssembler;
+
+    @Autowired
+    private JSHCredentials jshCredentials;
 
     private final String JSHLoginUrl = "https://juststarthere.co.uk/cgi-bin/just.pl";
     private final String JSHDataTargetUrlAllWinBack = "https://juststarthere.co.uk/allwinback.html";
@@ -311,11 +319,13 @@ public class TradingAidController {
 
     private TradingAidCommand getJshData() {
 
+
+
         // define login form input elements
         Map<String, String> data = new HashMap<>();
         data.put("op", "login");
-        data.put("usr_login", "gavinb");
-        data.put("usr_password", "passw0rd");
+        data.put("usr_login", jshCredentials.getLogin());
+        data.put("usr_password", jshCredentials.getPassword());
 
         Document doc;
         doc = scrapper.loginAndGetWebpage(JSHLoginUrl, data, JSHDataTargetUrlAllWinBack);
